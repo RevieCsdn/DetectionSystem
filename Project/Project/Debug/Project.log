@@ -1,0 +1,9 @@
+﻿  Refreshwindow.cpp
+  MainFrame.cpp
+  LNIApp.cpp
+c:\program files (x86)\windows kits\8.1\include\um\dbghelp.h(1544): warning C4091: “typedef ”: 没有声明变量时忽略“”的左侧
+c:\program files (x86)\windows kits\8.1\include\um\dbghelp.h(3190): warning C4091: “typedef ”: 没有声明变量时忽略“”的左侧
+c:\users\hwww\desktop\detecting\project\project\mylog.h(18): warning C4091: “static ”: 没有声明变量时忽略“MyLog::LOG_LEVEL”的左侧
+  ImageModel.cpp
+  正在生成代码...
+bumpDetectorD.lib(bumpDetector.dll) : fatal error LNK1112: 模块计算机类型“x64”与目标计算机类型“X86”冲突

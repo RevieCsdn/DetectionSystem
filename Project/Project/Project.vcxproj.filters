@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Util">
+      <UniqueIdentifier>{27ad4238-e9bd-419c-9f04-8ad2c49d7115}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserInterface">
+      <UniqueIdentifier>{aef6f72e-5636-43ab-8e6b-d2bbad56b334}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="json">
+      <UniqueIdentifier>{08b7654c-7b78-490a-b1dc-90df0a0c5848}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BO">
+      <UniqueIdentifier>{b4fcce7c-09ef-406e-8512-fd515937f89b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SuperDog">
+      <UniqueIdentifier>{ade16e1d-837e-4991-ba26-cc5fc58e7c7c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LNIApp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MyLog.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrame.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageModel.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AlgorithmLog.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\AutomaticDetetionThread.h">
+      <Filter>UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\ControlPanel.h">
+      <Filter>UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\DetectionSetDlg.h">
+      <Filter>UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\ListPanel.h">
+      <Filter>UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\Refreshwindow.h">
+      <Filter>UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\ResultDlgPanel.h">
+      <Filter>UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\SocketCenter.h">
+      <Filter>UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\UIEvent.h">
+      <Filter>UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\VerifyDlg.h">
+      <Filter>UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\bumpDetector.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\PreDefine.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Profile.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\UtilObject.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\004-foreignMaterialInspect.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\lizi.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="BO\DataElement.h">
+      <Filter>BO</Filter>
+    </ClInclude>
+    <ClInclude Include="SuperDog\errorprinter.h">
+      <Filter>SuperDog</Filter>
+    </ClInclude>
+    <ClInclude Include="SuperDog\SuperDog.h">
+      <Filter>SuperDog</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\ImagePool.h">
+      <Filter>UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\ThreadPool.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\ForeignMaterialDetector.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="LNIApp.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MyLog.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrame.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageModel.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AlgorithmLog.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\AutomaticDetetionThread.cpp">
+      <Filter>UserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\ControlPanel.cpp">
+      <Filter>UserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\DetectionSetDlg.cpp">
+      <Filter>UserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\ListPanel.cpp">
+      <Filter>UserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\Refreshwindow.cpp">
+      <Filter>UserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\ResultDlgPanel.cpp">
+      <Filter>UserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\SocketCenter.cpp">
+      <Filter>UserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\VerifyDlg.cpp">
+      <Filter>UserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\Profile.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\UtilObject.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="BO\DataElement.cpp">
+      <Filter>BO</Filter>
+    </ClCompile>
+    <ClCompile Include="SuperDog\errorprinter.cpp">
+      <Filter>SuperDog</Filter>
+    </ClCompile>
+    <ClCompile Include="SuperDog\SuperDog.cpp">
+      <Filter>SuperDog</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\ImagePool.cpp">
+      <Filter>UserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\ThreadPool.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="PreDefine.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\build_lib\json\src\json_reader.cpp">
+      <Filter>json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\build_lib\json\src\json_value.cpp">
+      <Filter>json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\build_lib\json\src\json_writer.cpp">
+      <Filter>json</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

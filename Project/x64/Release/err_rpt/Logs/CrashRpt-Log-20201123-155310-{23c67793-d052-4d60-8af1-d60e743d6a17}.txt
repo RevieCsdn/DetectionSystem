@@ -1,0 +1,81 @@
+﻿Start collecting information about the crash...
+[taking_screenshot]
+Taking desktop screenshot
+Creating crash dump file...
+[creating_dump]
+Dumping info for module D:\MyFX\MyProject\Detecting_wulizi_dan_1021_multi-thread\Project\x64\Release\Project.exe
+Dumping info for module C:\Windows\System32\ntdll.dll
+Dumping info for module C:\Windows\System32\kernel32.dll
+Dumping info for module C:\Windows\System32\KERNELBASE.dll
+Dumping info for module C:\Windows\System32\apphelp.dll
+Dumping info for module C:\Windows\System32\rpcrt4.dll
+Dumping info for module C:\Windows\System32\user32.dll
+Dumping info for module C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.18362.1198_none_9e820b57e45ad92f\comctl32.dll
+Dumping info for module C:\Windows\System32\win32u.dll
+Dumping info for module C:\Windows\System32\gdi32.dll
+Dumping info for module C:\Windows\System32\msvcrt.dll
+Dumping info for module C:\Windows\System32\gdi32full.dll
+Dumping info for module C:\Windows\System32\combase.dll
+Dumping info for module C:\Windows\System32\msvcp_win.dll
+Dumping info for module C:\Windows\System32\wsock32.dll
+Dumping info for module C:\Windows\System32\ucrtbase.dll
+Dumping info for module C:\Windows\System32\ws2_32.dll
+Dumping info for module C:\Windows\System32\bcryptPrimitives.dll
+Dumping info for module C:\Windows\System32\comdlg32.dll
+Dumping info for module C:\Windows\System32\SHCore.dll
+Dumping info for module D:\MyFX\MyProject\Detecting_wulizi_dan_1021_multi-thread\Project\x64\Release\CrashRpt1403.dll
+Dumping info for module C:\Windows\System32\shlwapi.dll
+Dumping info for module C:\Windows\System32\shell32.dll
+Dumping info for module D:\MyFX\MyProject\Detecting_wulizi_dan_1021_multi-thread\Project\x64\Release\curl_ai_client_lib_v100.dll
+Dumping info for module C:\Windows\System32\cfgmgr32.dll
+Dumping info for module C:\Windows\System32\windows.storage.dll
+Dumping info for module C:\Windows\System32\sechost.dll
+Dumping info for module C:\Windows\System32\advapi32.dll
+Dumping info for module C:\Windows\System32\Wldap32.dll
+Dumping info for module C:\Windows\System32\profapi.dll
+Dumping info for module C:\Windows\System32\ole32.dll
+Dumping info for module C:\Windows\System32\powrprof.dll
+Dumping info for module C:\Windows\System32\umpdc.dll
+Dumping info for module C:\Windows\System32\kernel.appcore.dll
+Dumping info for module D:\MyFX\MyProject\Detecting_wulizi_dan_1021_multi-thread\Project\x64\Release\ForeignMaterialDetector.dll
+Dumping info for module C:\Windows\System32\cryptsp.dll
+Dumping info for module C:\Windows\System32\oleaut32.dll
+Dumping info for module C:\Windows\System32\winspool.drv
+Dumping info for module C:\Windows\System32\bcrypt.dll
+Dumping info for module C:\Windows\System32\version.dll
+Dumping info for module D:\MyFX\MyProject\Detecting_wulizi_dan_1021_multi-thread\Project\x64\Release\bmp2jpeg.dll
+Dumping info for module C:\Windows\System32\msvcp100.dll
+Dumping info for module C:\Windows\System32\msvcr100.dll
+Dumping info for module C:\Windows\System32\msvcp140.dll
+Dumping info for module C:\Windows\System32\VCRUNTIME140.dll
+Dumping info for module C:\Windows\System32\msimg32.dll
+Dumping info for module C:\Windows\System32\IPHLPAPI.DLL
+Dumping info for module C:\Windows\System32\propsys.dll
+Dumping info for module C:\Windows\System32\VCRUNTIME140_1.dll
+Dumping info for module D:\MyFX\MyProject\Detecting_wulizi_dan_1021_multi-thread\Project\x64\Release\opencv_world440.dll
+Dumping info for module D:\MyFX\MyProject\Detecting_wulizi_dan_1021_multi-thread\Project\x64\Release\tbb.dll
+Dumping info for module C:\Windows\System32\opengl32.dll
+Dumping info for module D:\MyFX\MyProject\Detecting_wulizi_dan_1021_multi-thread\Project\x64\Release\openjp2.dll
+Dumping info for module C:\Windows\System32\vcomp140.dll
+Dumping info for module D:\MyFX\MyProject\Detecting_wulizi_dan_1021_multi-thread\Project\x64\Release\libomp.dll
+Dumping info for module C:\Windows\System32\glu32.dll
+Dumping info for module C:\Windows\System32\DXCore.dll
+Dumping info for module C:\Windows\System32\imm32.dll
+Dumping info for module C:\Windows\System32\uxtheme.dll
+Dumping info for module D:\驱动精灵\DriverGenius\dghmpg64.dll
+Dumping info for module C:\Windows\System32\psapi.dll
+Dumping info for module C:\Windows\System32\userenv.dll
+Dumping info for module C:\Windows\System32\wtsapi32.dll
+Dumping info for module C:\Windows\System32\sspicli.dll
+Dumping info for module C:\Windows\System32\msctf.dll
+Dumping info for thread 0x5C44
+Dumping info for thread 0x2EF0
+Dumping info for thread 0x254C
+Dumping info for thread 0x5AC
+Finished creating dump.
+[copying_files]
+Copying file stdout.
+Finished copying files.
+[encoding_video]
+Desktop video recording disabled; skipping.
+[confirm_send_report]

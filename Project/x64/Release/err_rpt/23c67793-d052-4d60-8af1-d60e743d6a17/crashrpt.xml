@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<CrashRpt version="1403">
+    <CrashGUID>23c67793-d052-4d60-8af1-d60e743d6a17</CrashGUID>
+    <AppName>LNIApp</AppName>
+    <AppVersion>2.01</AppVersion>
+    <ImageName>D:\MyFX\MyProject\Detecting_wulizi_dan_1021_multi-thread\Project\x64\Release\Project.exe</ImageName>
+    <OperatingSystem>Windows 10 Home China Build 18363</OperatingSystem>
+    <OSIs64Bit>1</OSIs64Bit>
+    <GeoLocation>zh-cn</GeoLocation>
+    <SystemTimeUTC>2020-11-23T07:53:10Z</SystemTimeUTC>
+    <ExceptionAddress>0x7ff64e346599</ExceptionAddress>
+    <ExceptionModule>D:\MyFX\MyProject\Detecting_wulizi_dan_1021_multi-thread\Project\x64\Release\Project.exe</ExceptionModule>
+    <ExceptionModuleBase>0x7ff64e0d0000</ExceptionModuleBase>
+    <ExceptionModuleVersion>0.0.0.0</ExceptionModuleVersion>
+    <ExceptionType>0</ExceptionType>
+    <ExceptionCode>0</ExceptionCode>
+    <GUIResourceCount>17</GUIResourceCount>
+    <OpenHandleCount>179</OpenHandleCount>
+    <MemoryUsageKbytes>15300</MemoryUsageKbytes>
+    <ScreenshotInfo>
+        <VirtualScreen left="0" top="0" width="3840" height="1080" />
+        <Monitors>
+            <Monitor left="0" top="0" width="1920" height="1080" file="screenshot0.png" />
+            <Monitor left="1920" top="0" width="1920" height="1080" file="screenshot1.png" />
+        </Monitors>
+        <Windows />
+    </ScreenshotInfo>
+    <CustomProps />
+    <FileList>
+        <FileItem name="crashdump.dmp" description="Crash Minidump" />
+        <FileItem name="crashrpt.xml" description="Crash Description XML" />
+        <FileItem name="screenshot0.png" description="Desktop Screenshot" />
+        <FileItem name="screenshot1.png" description="Desktop Screenshot" />
+        <FileItem name="stdout" description="Log File2" />
+    </FileList>
+</CrashRpt>

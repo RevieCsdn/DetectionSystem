@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{28C40F52-3A16-42D2-9DFE-8C9285096C02}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Project</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>__WXMSW__;__WXDEBUG__;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\build_lib_1\opencv331\include;D:\build_lib_1\wxWidgets-3.1.0\lib\vc_lib\mswud;D:\build_lib_1\wxWidgets-3.1.0\include;D:\build_lib\CrashRpt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\Hwww\Desktop\Detecting\Project\dll;D:\build_lib_1\opencv331\x86\lib\Debug;D:\build_lib_1\wxWidgets-3.1.0\lib\vc_lib;D:\build_lib\CrashRpt\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>wxbase31ud_net.lib;wxmsw31ud_html.lib;wxbase31ud_xml.lib;wxmsw31ud_adv.lib;wxmsw31ud_aui.lib;wxmsw31ud_gl.lib;wxmsw31ud_media.lib;wxmsw31ud_propgrid.lib;wxmsw31ud_qa.lib;wxmsw31ud_ribbon.lib;wxmsw31ud_richtext.lib;wxmsw31ud_stc.lib;wxmsw31ud_xrc.lib;wxscintillad.lib;wxmsw31ud_core.lib;wxbase31ud.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;wxexpatd.lib;winmm.lib;comctl32.lib;rpcrt4.lib;wsock32.lib;odbc32.lib;opencv_core331d.lib;opencv_highgui331d.lib;opencv_imgproc331d.lib;opencv_imgcodecs331d.lib;opencv_features2d331d.lib;CrashRpt1403.lib;bumpDetectorD.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <LargeAddressAware>true</LargeAddressAware>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\build_lib\opencv410_2015\include;D:\build_lib\opencv410_2015\include\opencv2;D:\build_lib\wxWidgets-3.1.0-64\include\msvc;D:\build_lib\wxWidgets-3.1.0-64\include;D:\build_lib\CrashRpt\include;D:\build_lib\curl\include;D:\build_lib\json\include;D:\build_lib\MIL\Include;D:\build_lib\boost166\boost166;D:\build_lib\SuperDog;D:\build_lib\opencv430_2015\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/D "_AFXDLL" %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\dll\;D:\build_lib\opencv410_2015\x64\vc14\lib;D:\build_lib\wxWidgets-3.1.0-64\lib\vc_x64_lib;D:\build_lib\CrashRpt\lib\x64;D:\build_lib\curl\lib;D:\build_lib\MIL\LIB;D:\build_lib\boost166\boost166\lib;D:\build_lib\SuperDog\vs2015\X64;D:\build_lib\opencv430_2015\x64\vc14\lib;D:\build_lib\MIL\DLL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>wxbase31ud_net.lib;wxmsw31ud_html.lib;wxbase31ud_xml.lib;wxmsw31ud_adv.lib;wxmsw31ud_aui.lib;wxmsw31ud_gl.lib;wxmsw31ud_media.lib;wxmsw31ud_propgrid.lib;wxmsw31ud_qa.lib;wxmsw31ud_ribbon.lib;wxmsw31ud_richtext.lib;wxmsw31ud_stc.lib;wxmsw31ud_xrc.lib;wxscintillad.lib;wxmsw31ud_core.lib;wxbase31ud.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;wxexpatd.lib;winmm.lib;comctl32.lib;rpcrt4.lib;wsock32.lib;odbc32.lib;opencv_world410d.lib;CrashRpt1403.lib;libcurl.lib;curl_ai_client_lib_v100.lib;Mil.lib;milblob.lib;Milim.lib;004-foreignMaterialInspectD.lib;ForeignMaterialDetector.lib;bumpDetectorD.lib;libdog_windows_x64_3155851.lib;libdog_cpp_windows_x64_MDd_msc15.lib;opencv_aruco430.lib;opencv_aruco430d.lib;opencv_bgsegm430d.lib;opencv_bioinspired430d.lib;opencv_calib3d430d.lib;opencv_ccalib430d.lib;opencv_core430d.lib;opencv_cudaarithm430d.lib;opencv_cudabgsegm430d.lib;opencv_cudacodec430d.lib;opencv_cudafeatures2d430d.lib;opencv_cudafilters430d.lib;opencv_cudaimgproc430d.lib;opencv_cudalegacy430d.lib;opencv_cudaobjdetect430d.lib;opencv_cudaoptflow430d.lib;opencv_cudastereo430d.lib;opencv_cudawarping430d.lib;opencv_cudev430d.lib;opencv_datasets430d.lib;opencv_dnn430d.lib;opencv_dnn_objdetect430d.lib;opencv_dnn_superres430d.lib;opencv_dpm430d.lib;opencv_face430d.lib;opencv_features2d430d.lib;opencv_flann430d.lib;opencv_fuzzy430d.lib;opencv_gapi430d.lib;opencv_hfs430d.lib;opencv_highgui430d.lib;opencv_imgcodecs430d.lib;opencv_imgproc430d.lib;opencv_img_hash430d.lib;opencv_intensity_transform430d.lib;opencv_line_descriptor430d.lib;opencv_ml430d.lib;opencv_objdetect430d.lib;opencv_optflow430d.lib;opencv_phase_unwrapping430d.lib;opencv_photo430d.lib;opencv_plot430d.lib;opencv_quality430d.lib;opencv_rapid430d.lib;opencv_reg430d.lib;opencv_saliency430d.lib;opencv_shape430d.lib;opencv_stereo430d.lib;opencv_stitching430d.lib;opencv_structured_light430d.lib;opencv_superres430d.lib;opencv_surface_matching430d.lib;opencv_text430d.lib;opencv_tracking430d.lib;opencv_video430d.lib;opencv_videoio430d.lib;opencv_videostab430d.lib;opencv_xfeatures2d430d.lib;opencv_ximgproc430d.lib;opencv_xobjdetect430d.lib;opencv_xphoto430d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <LargeAddressAware>true</LargeAddressAware>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\build_lib\opencv440_2015\include;D:\build_lib\opencv440_2015\include\opencv2;D:\build_lib\wxWidgets-3.1.0-64\include\msvc;D:\build_lib\wxWidgets-3.1.0-64\include;D:\build_lib\CrashRpt\include;D:\build_lib\curl\include;D:\build_lib\json\include;D:\build_lib\MIL\Include;D:\build_lib\boost166\boost166;D:\build_lib\SuperDog;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <OpenMPSupport>true</OpenMPSupport>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\dll\;D:\build_lib\wxWidgets-3.1.0-64\lib\vc_x64_lib;D:\build_lib\CrashRpt\lib\x64;D:\build_lib\curl\lib;D:\build_lib\MIL\LIB;D:\build_lib\boost166\boost166\lib;D:\build_lib\SuperDog\vs2015\X64;D:\build_lib\opencv440_2015\x64\vc14\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>wxbase31u_net.lib;wxmsw31u_html.lib;wxbase31u_xml.lib;wxmsw31u_adv.lib;wxmsw31u_aui.lib;wxmsw31u_gl.lib;wxmsw31u_media.lib;wxmsw31u_propgrid.lib;wxmsw31u_qa.lib;wxmsw31u_ribbon.lib;wxmsw31u_richtext.lib;wxmsw31u_stc.lib;wxmsw31u_xrc.lib;wxscintilla.lib;wxmsw31u_core.lib;wxbase31u.lib;wxtiff.lib;wxjpeg.lib;wxpng.lib;wxzlib.lib;wxexpat.lib;winmm.lib;comctl32.lib;rpcrt4.lib;wsock32.lib;odbc32.lib;opencv_world440.lib;bumpDetector.lib;CrashRpt1403.lib;libcurl.lib;curl_ai_client_lib_v100.lib;Mil.lib;milblob.lib;Milim.lib;lizi.lib;libdog_windows_x64_3155851.lib;libdog_cpp_windows_x64_MD_msc15.lib;ForeignMaterialDetector.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <LargeAddressAware>true</LargeAddressAware>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="AlgorithmLog.h" />
+    <ClInclude Include="BO\DataElement.h" />
+    <ClInclude Include="ImageModel.h" />
+    <ClInclude Include="LNIApp.h" />
+    <ClInclude Include="MainFrame.h" />
+    <ClInclude Include="MyLog.h" />
+    <ClInclude Include="SuperDog\errorprinter.h" />
+    <ClInclude Include="SuperDog\SuperDog.h" />
+    <ClInclude Include="UserInterface\AutomaticDetetionThread.h" />
+    <ClInclude Include="UserInterface\ControlPanel.h" />
+    <ClInclude Include="UserInterface\DetectionSetDlg.h" />
+    <ClInclude Include="UserInterface\ImagePool.h" />
+    <ClInclude Include="UserInterface\ListPanel.h" />
+    <ClInclude Include="UserInterface\Refreshwindow.h" />
+    <ClInclude Include="UserInterface\ResultDlgPanel.h" />
+    <ClInclude Include="UserInterface\SocketCenter.h" />
+    <ClInclude Include="UserInterface\UIEvent.h" />
+    <ClInclude Include="UserInterface\VerifyDlg.h" />
+    <ClInclude Include="Util\004-foreignMaterialInspect.h" />
+    <ClInclude Include="Util\bumpDetector.h" />
+    <ClInclude Include="Util\ForeignMaterialDetector.h" />
+    <ClInclude Include="Util\lizi.h" />
+    <ClInclude Include="Util\PreDefine.h" />
+    <ClInclude Include="Util\Profile.h" />
+    <ClInclude Include="Util\ThreadPool.h" />
+    <ClInclude Include="Util\UtilObject.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\build_lib\json\src\json_reader.cpp" />
+    <ClCompile Include="..\..\..\..\..\build_lib\json\src\json_value.cpp" />
+    <ClCompile Include="..\..\..\..\..\build_lib\json\src\json_writer.cpp" />
+    <ClCompile Include="AlgorithmLog.cpp" />
+    <ClCompile Include="BO\DataElement.cpp" />
+    <ClCompile Include="ImageModel.cpp" />
+    <ClCompile Include="LNIApp.cpp" />
+    <ClCompile Include="MainFrame.cpp" />
+    <ClCompile Include="MyLog.cpp" />
+    <ClCompile Include="PreDefine.cpp" />
+    <ClCompile Include="SuperDog\errorprinter.cpp" />
+    <ClCompile Include="SuperDog\SuperDog.cpp" />
+    <ClCompile Include="UserInterface\AutomaticDetetionThread.cpp" />
+    <ClCompile Include="UserInterface\ControlPanel.cpp" />
+    <ClCompile Include="UserInterface\DetectionSetDlg.cpp" />
+    <ClCompile Include="UserInterface\ImagePool.cpp" />
+    <ClCompile Include="UserInterface\ListPanel.cpp" />
+    <ClCompile Include="UserInterface\Refreshwindow.cpp" />
+    <ClCompile Include="UserInterface\ResultDlgPanel.cpp" />
+    <ClCompile Include="UserInterface\SocketCenter.cpp" />
+    <ClCompile Include="UserInterface\VerifyDlg.cpp" />
+    <ClCompile Include="Util\Profile.cpp" />
+    <ClCompile Include="Util\ThreadPool.cpp" />
+    <ClCompile Include="Util\UtilObject.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
