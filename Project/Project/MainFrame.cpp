@@ -15,6 +15,7 @@ BEGIN_EVENT_TABLE(MainFrame, wxFrame)
 	EVT_MENU(ID_MENU_FILE_OPEN_EXCEL, MainFrame::OnOpenFileExcel)
 	EVT_MENU(ID_MENU_FILE_OPEN_NOW_EXCEL, MainFrame::OnOpenFileNowExcel)
 	EVT_MENU(ID_MENU_FILE_OPEN_RECORD_EXCEL, MainFrame::OnOpenFileRecordExcel)
+	EVT_MENU(ID_MENU_HISDATA, MainFrame::OnCleraHistoricalData)
 	//Control
 	EVT_BUTTON(ControlPanel::ID_BTN_CONNECT, MainFrame::OnConnectSocket)
 	EVT_BUTTON(ControlPanel::ID_BTN_CONNECT_AI, MainFrame::OnConnectAI)
@@ -59,6 +60,7 @@ MainFrame::MainFrame(wxWindow* parent, wxWindowID id /* = -1 */, const wxString&
  	m_gProfile->loadIni("Ini.ini");
 
 	m_gModel = NULL;
+	m_strPath = "";
 
 	CreateGUIControls();
 	Init();
@@ -151,6 +153,7 @@ void MainFrame::CreateGUIControls()
 	m_menu_set->Append(ID_MENU_PATH, _("自动检测设置"));
 	m_menu_set->Append(ID_MENU_PARAMETER, _("设置算法参数"));
 	m_menu_set->Append(ID_MENU_ADDR, _("设置读取/写入地址"));
+	m_menu_set->Append(ID_MENU_HISDATA, _("清空历史数据"));
 	m_menu_bar->Append(m_menu_set, _("设置"));
 
 	//Draw
@@ -328,15 +331,15 @@ void MainFrame::RefreshPreviousData()
 
 	
 	wxString l_loadPath = "./listData.dat";
-	string l_strPath = string(l_loadPath.mb_str());
+	string m_strPath = string(l_loadPath.mb_str());
 	if (_access(l_loadPath, 0) == -1)
 	{
 		m_listData = new ListData;
-		m_listData->OnSave(l_strPath);
+		m_listData->OnSave(m_strPath);
 	}
 	else
 	{
-		m_listData = ListData::OnLoad(l_strPath);
+		m_listData = ListData::OnLoad(m_strPath);
 	}
 	
 	//m_listData->ClearData();
@@ -505,6 +508,31 @@ void MainFrame::OnOpenFileNowExcel(wxCommandEvent &)
 void MainFrame::OnOpenFileRecordExcel(wxCommandEvent &)
 {
 	m_gModel->OnOpenFileRecordExcel();
+}
+
+void MainFrame::OnCleraHistoricalData(wxCommandEvent &)
+{
+	wxMessageDialog l_dlg(this, _("是否删除历史纪录?"), _("警告"), wxYES_NO);
+	l_dlg.SetYesNoLabels(_("确认"), _("取消"));
+	int l_status = l_dlg.ShowModal();
+	if (l_status == wxID_YES)
+	{
+		m_result_panel->SetEditOK(0);
+		m_result_panel->SetEditNG(0);
+		m_result_panel->SetEditRatio(0);
+		m_gModel->SetResultLabel(0, 0, 0);
+
+		m_listData->ClearData();
+		m_listData->ClearMapData();
+		m_listData->OnSave("listData.dat");
+		m_list_panel->SetRowIndex(0);
+		m_list_panel->ClearListData();
+	}
+
+	else if (l_status == wxID_NO)
+	{
+		return;
+	}
 }
 
 //Control

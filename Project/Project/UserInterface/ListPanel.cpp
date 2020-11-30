@@ -29,7 +29,7 @@ ListPanel::ListPanel(wxWindow *parent)
 	m_radio_num = 0;
 
 	m_save_path_img = "";
-
+	m_listRowIndex = 0;
 	wxBoxSizer *global_sizer = new wxBoxSizer(wxVERTICAL);
 
 	m_mylistctrl = new MyListCtrl(this, ID_LISTCTRL, wxPoint(128, 134), wxSize(121, 97), wxLC_REPORT | wxLC_SORT_ASCENDING);
@@ -86,10 +86,10 @@ ListPanel::~ListPanel()
 
 void ListPanel::AddData(wxString image_name, wxString image_result, wxString lizi_result, wxString image_NGnum, wxString image_path, wxString image_time)
 {
-	static int testi = 0;
+	//static int testi = 0;
 	wxArrayString cols_name;
 	wxString str = "";
-	str << testi;
+	str << m_listRowIndex;
 #ifdef __LIZI__
 	cols_name.Add(str);
 	cols_name.Add(image_name);
@@ -107,14 +107,14 @@ void ListPanel::AddData(wxString image_name, wxString image_result, wxString liz
 	cols_name.Add(image_time);
 #endif
 	
-	m_mylistctrl->InsertItem(testi, "dd");
-	m_mylistctrl->SetItemData(testi, testi);
+	m_mylistctrl->InsertItem(m_listRowIndex, "dd");
+	m_mylistctrl->SetItemData(m_listRowIndex, m_listRowIndex);
 	wxFont font(14, wxSWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Î¢ÈíÑÅºÚ"));
 	m_mylistctrl->SetFont(font);
 
 	for (unsigned int i = 0; i < cols_name.size(); i++)
 	{
-		m_mylistctrl->SetItem(testi, i, cols_name[i]);
+		m_mylistctrl->SetItem(m_listRowIndex, i, cols_name[i]);
 	}
 
 #ifdef __LIZI__
@@ -125,12 +125,12 @@ void ListPanel::AddData(wxString image_name, wxString image_result, wxString liz
 #else
 	if (strstr(image_result.c_str(), "NG"))
 	{
-		m_mylistctrl->SetItemTextColour(testi, wxColor(255, 0, 0));
+		m_mylistctrl->SetItemTextColour(m_listRowIndex, wxColor(255, 0, 0));
 	}
 #endif
 
 
-	testi++;
+	m_listRowIndex++;
 
 	wxString msg;
 #ifdef __LIZI__
@@ -212,6 +212,11 @@ void ListPanel::GetOkNgRadioData()
 	}
 
 	m_radio_num = (float)m_NG_num / ((float)m_OK_num + (float)m_NG_num);
+}
+
+void ListPanel::ClearListData()
+{
+	m_mylistctrl->DeleteAllItems();
 }
 
 void ListPanel::OnMouseLeftDouble(wxListEvent &event)

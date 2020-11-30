@@ -46,7 +46,7 @@ public:
 	void ModifyLiziResults(wxString file_name, bool result);
 
 	void GetOkNgRadioData();
-
+	void ClearListData();
 	inline void SetAIFlag(bool flag)
 	{
 		m_AI_flag = flag;
@@ -71,6 +71,10 @@ public:
 	{
 		m_save_path_img = path;
 	};
+	inline void SetRowIndex(int row)
+	{
+		m_listRowIndex = row;
+	};
 private:
 	enum
 	{
@@ -92,5 +96,7 @@ private:
 	double		m_radio_num;
 
 	wxString	m_save_path_img;
+	int m_listRowIndex;
+
 };
 

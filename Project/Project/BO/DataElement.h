@@ -220,7 +220,7 @@ public:
 	static ListData* OnLoad(string path);
 
 	void SetListInfo(std::vector<ImageInfo> vec);
-	std::vector<ImageInfo>&  GetListInfo();
+	std::vector<ImageInfo>& GetListInfo();
 	void ClearData();
 
 	void SetRedRectMap(std::map<string, list<wxRect>> rectMap);

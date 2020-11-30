@@ -11,9 +11,11 @@ public:
 	ResultDlgPanel(wxWindow* parent, Profile* file);
 	virtual ~ResultDlgPanel();
 
-	void	SetEditOK(int num);
-	void	SetEditNG(int num);
-	void	SetEditRatio(float num);
+	void SetEditOK(int num);
+	void SetEditNG(int num);
+	void SetEditRatio(float num);
+
+
 private:
 	wxWindow *m_frame;
 	

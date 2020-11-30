@@ -94,3 +94,5 @@ void ResultDlgPanel::SetEditRatio(float num)
 
 	m_edit_ratio->SetLabel(str);
 }
+
+

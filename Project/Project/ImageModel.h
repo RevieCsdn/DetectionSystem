@@ -102,10 +102,10 @@ public:
 
 	void SetProfile(Profile *profile);
 	void SetListData(ListData* data);
+	void SetResultLabel(float okNum,float ngNum,float ratio);
 
 	void SetDataorganization(DataOrganization *data, string name, string path);
 	void OnDataRecotery();
-	
 	void DeleteSocketThread();
 
 	void PlanOneAutoBtnFlag(bool flag);

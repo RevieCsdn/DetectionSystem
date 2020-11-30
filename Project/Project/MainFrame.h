@@ -44,6 +44,7 @@ private:
 		ID_MENU_PATH,
 		ID_MENU_PARAMETER,
 		ID_MENU_ADDR,
+		ID_MENU_HISDATA,
 		//DRAW
 		ID_MENU_DRAW_RECT,
 		ID_MENU_DRAW_SQUARE_RECT,
@@ -57,6 +58,8 @@ private:
 		ID_SHOW_PHOTO_PANEL,
 		ID_SHOW_MSG_PANEL,
 		ID_SHOW_CONTROL_PANEL,
+		//
+		
 	};
 //	wxWindow		*m_frame;
 
@@ -98,7 +101,7 @@ private:
 	bool			m_is_draw_rect;
 	//////////////////////////////////
 	ListData* m_listData;
-
+	string m_strPath;
 private:
 	void CreateGUIControls();
  	bool Init();
@@ -119,6 +122,7 @@ private:
 	void OnOpenFileExcel(wxCommandEvent &);
 	void OnOpenFileNowExcel(wxCommandEvent &);
 	void OnOpenFileRecordExcel(wxCommandEvent &);
+	void OnCleraHistoricalData(wxCommandEvent &);
 	//Control
 	void OnConnectSocket(wxCommandEvent &);
 	void OnConnectAI(wxCommandEvent &);

@@ -295,6 +295,13 @@ void ImageModel::SetListData(ListData* data)
 }
 
 
+void ImageModel::SetResultLabel(float okNum, float ngNum, float ratio)
+{
+	m_preOkNum = okNum;
+	m_preNgNum = ngNum;
+	m_preRatio = ratio;
+}
+
 //Menu
 //‘ÿ»ÎÕºœÒ
 bool ImageModel::OnLoadImage(cv::String image_path, string image_name)
