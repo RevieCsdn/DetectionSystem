@@ -170,6 +170,7 @@
     <ClInclude Include="UserInterface\DetectionSetDlg.h" />
     <ClInclude Include="UserInterface\ImagePool.h" />
     <ClInclude Include="UserInterface\ListPanel.h" />
+    <ClInclude Include="UserInterface\NoTestPanel.h" />
     <ClInclude Include="UserInterface\Refreshwindow.h" />
     <ClInclude Include="UserInterface\ResultDlgPanel.h" />
     <ClInclude Include="UserInterface\SocketCenter.h" />
@@ -202,6 +203,7 @@
     <ClCompile Include="UserInterface\DetectionSetDlg.cpp" />
     <ClCompile Include="UserInterface\ImagePool.cpp" />
     <ClCompile Include="UserInterface\ListPanel.cpp" />
+    <ClCompile Include="UserInterface\NoTestPanel.cpp" />
     <ClCompile Include="UserInterface\Refreshwindow.cpp" />
     <ClCompile Include="UserInterface\ResultDlgPanel.cpp" />
     <ClCompile Include="UserInterface\SocketCenter.cpp" />

@@ -16,7 +16,7 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <opencv2/opencv.hpp>
 #include "../MyLog.h"
-
+#include "../UserInterface/Refreshwindow.h"
 using namespace std;
 
 //BOOST_SERIALIZATION_SPLIT_FREE(cv::Mat)
@@ -239,4 +239,101 @@ private:
 		ar& m_imageInfoVec;
 		ar& m_redRectMap;
 	}
+};
+////////////////////////////////////////////////////////////////////////////
+BOOST_SERIALIZATION_SPLIT_FREE(RectPoint_t)
+namespace boost
+{
+	namespace serialization
+	{
+		template<class Archive>
+		void save(Archive & ar, const RectPoint_t& r, const unsigned int version)
+		{
+			ar& r.LeftUpPoint;
+			ar& r.RightDownPoint;
+		}
+
+		template<class Archive>
+		void load(Archive & ar, RectPoint_t& r, const unsigned int version)
+		{
+			ar& r.LeftUpPoint;
+			ar& r.RightDownPoint;
+		}
+	}
+}
+
+
+
+class NoTestElement
+{
+
+public:
+	NoTestElement();
+	virtual ~NoTestElement();
+
+	inline void SetImageName(string name)
+	{
+		m_imageName = name;
+	};
+
+	inline string GetImageName()
+	{
+		return m_imageName;
+	};
+
+	inline void SetRectPointVec(vector<RectPoint_t> vec)
+	{
+		m_rectPointVec = vec;
+	};
+	inline vector<RectPoint_t> GetRectPointVec()
+	{
+		return m_rectPointVec;
+	};
+
+private:
+	string m_imageName;
+	vector<RectPoint_t> m_rectPointVec;
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int file_version)
+	{
+		ar& m_imageName;
+		ar& m_rectPointVec;
+	}
+
+};
+
+class NoTestData
+{
+public:
+	NoTestData(string name = "", string path = "");
+	virtual ~NoTestData();
+
+	bool OnSave(string path = "");
+	static NoTestData* OnLoad(string name, string path);
+
+	inline void SetNoTestElementVec(vector<NoTestElement> vec)
+	{
+		m_noTestEleVec = vec;
+	};
+	inline vector<NoTestElement> GetNoTestElementVec()
+	{
+		return m_noTestEleVec;
+	};
+private:
+	string m_name;
+	string m_path;
+	vector<NoTestElement> m_noTestEleVec;
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive& ar, const unsigned int version)
+	{
+		ar& m_name;
+		ar& m_path;
+		ar& m_noTestEleVec;
+	}
+
 };

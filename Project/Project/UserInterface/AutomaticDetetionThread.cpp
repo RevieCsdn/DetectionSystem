@@ -487,6 +487,7 @@ void *AutomaticDetetionThread::Entry()
 				const char* cfilePath = wxs_filePath.c_str();
 				vector<string> vfiles;
 				this->getJustCurrentDir(cfilePath, vfiles);
+
 				//在获取一级子目录
 				for (vector<string>::iterator it = vfiles.begin(); it != vfiles.end(); it++)
 				{
@@ -501,9 +502,9 @@ void *AutomaticDetetionThread::Entry()
 					{
 						msg = wxString::Format("无法打开路径%s", wxs_temp_path);
 						MyLog::LogError(msg.c_str());
-						wxQueueEvent(m_frame->GetEventHandler(),
-							new wxCommandEvent(wxEVT_THREAD, ID_NO_PIC));
-						return 0;
+						//wxQueueEvent(m_frame->GetEventHandler(),
+						//	new wxCommandEvent(wxEVT_THREAD, ID_NO_PIC));
+						break;
 					}
 					else
 					{
@@ -517,14 +518,15 @@ void *AutomaticDetetionThread::Entry()
 					}
 					Sleep(10);
 					wxDir::GetAllFiles(wxs_temp_path, &img_list, "*.jpg", wxDIR_DEFAULT);
-
+					m_delayImage = img_list;
 					if (img_list.size() == 0)
 					{
-						wxMessageBox(_("该目录下未找到图片，请重新选择目录"), _("Error"));
-						m_b_run_flag = false;
-						wxQueueEvent(m_frame->GetEventHandler(),
-							new wxCommandEvent(wxEVT_THREAD, ID_NO_PIC));
-						return 0;
+						wxMessageBox(_("该目录下片子为空！"), _("Error"));
+						//m_b_run_flag = false;
+						//wxQueueEvent(m_frame->GetEventHandler(),
+						//	new wxCommandEvent(wxEVT_THREAD, ID_NO_PIC));
+						//continue;
+						break;
 					}
 
 					if (!m_b_run_flag)
@@ -687,11 +689,15 @@ void *AutomaticDetetionThread::Entry()
 						i_file_num++;
 					}
 
-					while (m_i_fin_file_num < i_file_num)
-					{
-						Sleep(1);
-					}
+					//while (m_i_fin_file_num < i_file_num)
+					//{
+					//	Sleep(1);
+					//}
 				}
+			}
+			if (m_delayImage.size() == 0)
+			{
+				Sleep(1);
 			}
 		}
 	}

@@ -83,6 +83,7 @@ Refreshwindow::Refreshwindow(wxWindow* parent, int MyScrolled_Width, int MyScrol
 	m_iSquare_Y = 0;
 	m_affirmdialog = NULL;
 	m_save_image_properties_model = {};
+	m_noTestImage = {};
 
 	m_draw_pen_state = 0;
 }
@@ -234,7 +235,7 @@ void Refreshwindow::OnMouseLeftUp(wxMouseEvent &event)
 {
 	if (m_is_draw_rect)
 	{
-		if (1 == m_draw_pen_state)
+		if (1 == m_draw_pen_state || NOTESTRECT == m_draw_pen_state)
 		{
 			int ViewStartX = 0;
 			int ViewStartY = 0;
@@ -301,40 +302,71 @@ void Refreshwindow::OnMouseLeftUp(wxMouseEvent &event)
 			}
 			else
 			{
-				this->OnDrawAffirmRect(wxPen(wxT("BLUE"), 1), *wxGREEN_BRUSH);
-
 				m_iStartX = this->CoordinateTransformation_W(m_iStartX, m_zoomX);
 				m_iStartY = this->CoordinateTransformation_H(m_iStartY, m_zoomY);
 				m_iEndX = this->CoordinateTransformation_W(m_iEndX, m_zoomX);
 				m_iEndY = this->CoordinateTransformation_H(m_iEndY, m_zoomY);
 
-				cv::Mat temp_mark_pic = m_temp_image(cv::Rect(m_iStartX, m_iStartY, m_iEndX - m_iStartX, m_iEndY - m_iStartY));
-				cv::Mat temp_model_pic = m_temp_image;
-
-				wxString temp_image_type = "";
-				temp_image_type = strstr(m_image_path.c_str(), "]");
-				if (NULL != temp_image_type)
+				if (NOTESTRECT == m_draw_pen_state)
 				{
-					temp_image_type = temp_image_type.substr(1, 4);
+					this->OnDrawAffirmRect(wxPen(wxT("CYAN"), 1), *wxGREEN_BRUSH);
+					wxString l_imageType = "";
+					l_imageType = strstr(m_image_path.c_str(), "]");
+					if (NULL != l_imageType)
+					{
+						l_imageType = l_imageType.substr(1, 4);
+					}
+					else
+					{
+						wxMessageBox("该图不能作为模板", "Warning");
+						return;
+					}
+					cv::Point l_leftUp = cv::Point(m_iStartX, m_iStartY);
+					cv::Point l_rightDown = cv::Point(m_iEndX, m_iEndY);
+					RectPoint_t l_rectPoint;
+					l_rectPoint.LeftUpPoint = l_leftUp;
+					l_rectPoint.RightDownPoint = l_rightDown;
+
+					m_noTestImage.ImageName = l_imageType;
+					m_noTestImage.RectPointVec.clear();
+					m_noTestImage.RectPointVec.push_back(l_rectPoint);
+
+					wxQueueEvent(m_frame->GetEventHandler(),
+						new wxCommandEvent(wxEVT_BUTTON, ID_NOTESTRECT_MODEL));
+
 				}
 				else
 				{
-					wxMessageBox("该图不能作为模板", "Warning");
-					return;
+					this->OnDrawAffirmRect(wxPen(wxT("BLUE"), 1), *wxGREEN_BRUSH);
+					cv::Mat temp_mark_pic = m_temp_image(cv::Rect(m_iStartX, m_iStartY, m_iEndX - m_iStartX, m_iEndY - m_iStartY));
+					cv::Mat temp_model_pic = m_temp_image;
+
+					wxString temp_image_type = "";
+					temp_image_type = strstr(m_image_path.c_str(), "]");
+					if (NULL != temp_image_type)
+					{
+						temp_image_type = temp_image_type.substr(1, 4);
+					}
+					else
+					{
+						wxMessageBox("该图不能作为模板", "Warning");
+						return;
+					}
+
+					m_save_image_properties_model.image_name = temp_image_type;
+					m_save_image_properties_model.image_mark.clear();
+					m_save_image_properties_model.image_mark.push_back(temp_mark_pic);
+					m_save_image_properties_model.image_point.clear();
+					m_save_image_properties_model.image_point.push_back(cv::Point(m_iStartX, m_iStartY));
+					m_save_image_properties_model.Model_image = temp_model_pic;
+
+					wxQueueEvent(m_frame->GetEventHandler(),
+						new wxCommandEvent(wxEVT_BUTTON, ID_REFRESH_ADD_MODEL));
 				}
-
-				m_save_image_properties_model.image_name = temp_image_type;
-				m_save_image_properties_model.image_mark.clear();
-				m_save_image_properties_model.image_mark.push_back(temp_mark_pic);
-				m_save_image_properties_model.image_point.clear();
-				m_save_image_properties_model.image_point.push_back(cv::Point(m_iStartX, m_iStartY));
-				m_save_image_properties_model.Model_image = temp_model_pic;
-
-				wxQueueEvent(m_frame->GetEventHandler(),
-					new wxCommandEvent(wxEVT_BUTTON, ID_REFRESH_ADD_MODEL));
-
+			
 				// 			cv::imwrite("mark.jpg", m_save_image_properties_model.image_mark);
 				// 			cv::imwrite("image.jpg", m_save_image_properties_model.Model_image);
+				//todo
 			}
 		}
 		else if(2 == m_draw_pen_state)
@@ -373,7 +405,7 @@ void Refreshwindow::OnMouseMove(wxMouseEvent &event)
 {
 	if (event.Dragging() && m_is_draw_rect)//Dragging 拖动事件
 	{
-		if (1 == m_draw_pen_state)
+		if (1 == m_draw_pen_state || NOTESTRECT == m_draw_pen_state)
 		{
 			wxMemoryDC dc;
 			dc.Clear();
@@ -381,7 +413,15 @@ void Refreshwindow::OnMouseMove(wxMouseEvent &event)
 			m_bitmap_buffer = wxBitmap(m_image_buffer);
 			dc.SelectObject(m_bitmap_buffer);
 
-			dc.SetPen(wxPen(wxT("RED"), 1));
+			if (m_draw_pen_state == NOTESTRECT)
+			{
+				dc.SetPen(wxPen(wxT("GREEN"), 1));
+			}
+			else
+			{
+				dc.SetPen(wxPen(wxT("RED"), 1));
+			}
+	
 			dc.SetBrush(*wxTRANSPARENT_BRUSH);
 
 			int ViewStartX;
@@ -518,7 +558,7 @@ void Refreshwindow::OnMouseRightUp(wxMouseEvent &event)
 					m_save_image_properties_model.image_point.clear();
 					m_save_image_properties_model.image_point.push_back(cv::Point(i_temp_Start_X, i_temp_Start_Y));
 					m_save_image_properties_model.Model_image = temp_model_pic;
-
+				
 					wxQueueEvent(m_frame->GetEventHandler(),
 						new wxCommandEvent(wxEVT_BUTTON, ID_REFRESH_ADD_MODEL));
 				}

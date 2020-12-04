@@ -10,6 +10,8 @@
 
 using namespace std;
 
+#define NOTESTRECT 3
+
 typedef struct Imageproperties
 {
 	string	image_name;
@@ -19,6 +21,23 @@ typedef struct Imageproperties
 	vector<cv::Point> image_point;
 	cv::Mat Model_image;
 }Image_Properties;
+
+typedef struct RectPoint
+{
+	cv::Point LeftUpPoint;
+	cv::Point RightDownPoint;
+
+}RectPoint_t;
+typedef struct NoTestImage
+{
+	string ImageName;
+	vector<RectPoint_t> RectPointVec;
+	//vector<cv::Mat> NoTestRect;
+	//vector<cv::Point> LeftUpPoint;
+	//vector<cv::Point> RightDownPoint;
+	//cv::Mat ModelImage;
+
+}NoTestImage_t;
 
 class AffirmDialog :public wxDialog
 {
@@ -60,6 +79,7 @@ public:
 
 	void DrawResult(vector<cv::Rect> result, cv::Mat image_data);
 	void OnDrawAffirmRect(wxPen pen, wxBrush brush);
+	
 	//坐标转换函数
 	double CoordinateTransformation_W(double x, double screen_x);
 	double CoordinateTransformation_H(double y, double screen_y);
@@ -102,9 +122,15 @@ public:
 	{
 		return m_save_image_properties_model;
 	};
+	inline NoTestImage_t GetNoTestImage()
+	{
+		return m_noTestImage;
+	};
+
 	enum
 	{
 		ID_REFRESH_ADD_MODEL = 300,
+		ID_NOTESTRECT_MODEL,
 	};
 	inline void SetDrawPenState(int val)
 	{
@@ -140,6 +166,7 @@ private:
 	wxRect			m_drawrectdata;
 	string			m_image_path;
 	Image_Properties m_save_image_properties_model;
+	NoTestImage_t m_noTestImage;
 
 	int				m_draw_pen_state;	//1是随便画 2是正方形
 private:

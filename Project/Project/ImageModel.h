@@ -25,6 +25,7 @@
 #include "./Util/ForeignMaterialDetector.h"
 #include "./Util/Profile.h"
 
+class NoTestDlg;
 using namespace  std;
 
 //class Profile;
@@ -87,6 +88,7 @@ private:
 
 	ModelPanelWindow			*m_model_panel;
 	ImagePool					*m_image_pool;
+	NoTestDlg* m_noTestDlg;
 	//static Profile* m_proFile;
 
 public:
@@ -108,7 +110,20 @@ public:
 	void OnDataRecotery();
 	void DeleteSocketThread();
 
+	void SetNoTestData(NoTestData* data, string name, string path);
+	void NoTestDataRecotery(const vector<NoTestElement>& eleVec);
+
+	void ClearPaperFileList();
 	void PlanOneAutoBtnFlag(bool flag);
+
+	inline void SetPreOkNum(int num)
+	{
+		m_preOkNum = num;
+	};
+	inline void SetPreNgNum(int num)
+	{
+		m_preNgNum = num;
+	};
 
 	inline void SetImageModelWindow(Refreshwindow *panel)
 	{
@@ -257,6 +272,8 @@ public:
 	wxString GetImageResult();
 
 	void SetDrawRect(bool flag, int pen_state);
+	void SetDrawNoTestRect(bool flag,int penState);
+
 public:
 	static string GetNowTime(int flag);
 	static void SaveImageData(wxImage image, string name, string image_name, wxString save_path);
@@ -287,6 +304,11 @@ public:
 	void OnAddModel();
 	void OnClearModel();
 	void OnSaveModel();
+
+	void OnAddNoTestModel();
+	void OnClearNoTestModel();
+	void OnSaveNoTestModel();
+
 	void OnNoPic();
 	void OnNGSingle();
 
@@ -317,6 +339,8 @@ private:
 //	list<file_struct>			m_list_file_struct;
 	bool						m_is_draw_rect;
 	static list<Image_Properties> m_list_image_model;
+	static vector<NoTestImage_t> m_noTestImageVec;
+
 //	list<lizi_paper>			m_list_lizi_result;
 //	paper_file					m_now_paper_file;//当前片子
 	static int					m_paper_file_num;//当前片子中有多少图片
@@ -364,8 +388,15 @@ private:
 	string						m_recipe_path;
 	list<Element*>				m_element_list;
 
+	string m_noTestRecName;
+	string m_noTestRecPath;
+
 	static string				AI_pic_name;
 	static wxMutex				*m_mutex;
+
+	static wxMutex m_mutexOk;
+	static wxMutex m_mutexNg;
+	static wxMutex m_mutexRatio;
 
 	static list<pic_data>		*m_list_pic_data;
 	static string				m_now_detection_file_name;

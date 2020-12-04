@@ -1,0 +1,162 @@
+OnDetection start:20201204\test\000796_S2J0BEI01NF\[000796]XU03_051352.jpg
+OnDetection start:20201204\test\000798_S2J0BCI0MH9\[000798]XU02_171751.jpg
+XU02: x:984 y:956
+[INFO]£ºprogram begin!
+[INFO] step1:begin!
+OnDetection start:20201204\test\000801_S2J0BEI01NR\[000801]XU03_051619.jpg
+[INFO] step1:get transform format success!
+[INFO] step2:begin!
+[INFO] step2:transform success!
+[INFO] step3:subtract image begin!
+OnDetection start:20201204\test\000802_S2J0BEI01NT\[000802]XU03_051646.jpg
+OnDetection start:20201204\test\000802_S2J0BEI01NT\[000802]XU04_051647.jpg
+OnDetection start:20201204\test\000810_S2J0BEI01KL\[000810]XU03_052056.jpg
+OnDetection start:20201204\test\000810_S2J0BEI01KL\[000810]XU04_052057.jpg
+OnDetection start:20201204\test\000815_S2J0BEI01KW\[000815]XU03_052332.jpg
+OnDetection stop:20201204\test\000802_S2J0BEI01NT\[000802]XU04_051647.jpg
+Task1 >> time:2.063s
+OnDetection stop:20201204\test\000796_S2J0BEI01NF\[000796]XU03_051352.jpg
+Task1 >> time:3.235s
+OnDetection stop:20201204\test\000801_S2J0BEI01NR\[000801]XU03_051619.jpg
+Task1 >> time:2.672s
+OnDetection start:20201204\test\000818_S2J0BCI0MJC\[000818]XU02_173445.jpg
+OnDetection stop:20201204\test\000810_S2J0BEI01KL\[000810]XU03_052056.jpg
+Task1 >> time:2.109s
+XU02: x:984 y:956
+[INFO]£ºprogram begin!
+[INFO] step1:begin!
+OnDetection start:20201204\test\000828_S2J0BCI0ML9\[000828]XU02_174131.jpg
+OnDetection stop:20201204\test\000810_S2J0BEI01KL\[000810]XU04_052057.jpg
+Task1 >> time:2.344s
+OnDetection stop:20201204\test\000802_S2J0BEI01NT\[000802]XU03_051646.jpg
+Task1 >> time:3.235s
+[INFO] step1:get transform format success!
+[INFO] step2:begin!
+XU02: x:984 y:956
+[INFO]£ºprogram begin!
+[INFO] step1:begin!
+OnDetection stop:20201204\test\000815_S2J0BEI01KW\[000815]XU03_052332.jpg
+Task1 >> time:2.235s
+[INFO] step2:transform success!
+[INFO] step3:subtract image begin!
+[INFO] step1:get transform format success!
+[INFO] step2:begin!
+OnDetection start:20201204\test\000837_S2J0BCI0MP1\[000837]XU03_174747.jpg
+[INFO] step2:transform success!
+[INFO] step3:subtract image begin!
+OnDetection start:20201204\test\000837_S2J0BCI0MP1\[000837]XU04_174748.jpg
+OnDetection start:20201204\test\000867_S2J0BCI0MML\[000867]XU01_180725.jpg
+OnDetection stop:20201204\test\000837_S2J0BCI0MP1\[000837]XU03_174747.jpg
+Task1 >> time:1.641s
+XU01: x:1134 y:973
+[INFO]£ºprogram begin!
+[INFO] step1:begin!
+OnDetection stop:20201204\test\000837_S2J0BCI0MP1\[000837]XU04_174748.jpg
+Task1 >> time:1.734s
+[INFO] step1:get transform format success!
+[INFO] step2:begin!
+[INFO] step2:transform success!
+[INFO] step3:subtract image begin!
+[INFO] step3:success!
+[INFO] step4:begin!
+[INFO] step4:success!
+[INFO] step5:begin!
+[INFO] step5:detect success!
+[INFO] step end: const 7.28746 seconds.
+20201204\test\000798_S2J0BCI0MH9\[000798]XU02_171751.jpg:  ForeignMaterialDetector:7.328S
+OnDetection stop:20201204\test\000798_S2J0BCI0MH9\[000798]XU02_171751.jpg
+Task1 >> time:7.828s
+[INFO] step3:success!
+[INFO] step4:begin!
+[INFO] step4:success!
+[INFO] step5:begin!
+[INFO] step5:detect success!
+[INFO] step end: const 7.27911 seconds.
+20201204\test\000818_S2J0BCI0MJC\[000818]XU02_173445.jpg:  ForeignMaterialDetector:7.344S
+[INFO] step3:success!
+[INFO] step4:begin!
+[INFO] step4:success!
+[INFO] step5:begin!
+[INFO] step5:detect success!
+[INFO] step end: const 7.42106 seconds.
+20201204\test\000828_S2J0BCI0ML9\[000828]XU02_174131.jpg:  ForeignMaterialDetector:7.469S
+OnDetection stop:20201204\test\000818_S2J0BCI0MJC\[000818]XU02_173445.jpg
+Task1 >> time:9.11s
+OnDetection stop:20201204\test\000828_S2J0BCI0ML9\[000828]XU02_174131.jpg
+Task1 >> time:9.047s
+[INFO] step3:success!
+[INFO] step4:begin!
+[INFO] step4:success!
+[INFO] step5:begin!
+[INFO] step5:detect success!
+[INFO] step end: const 6.71347 seconds.
+20201204\test\000867_S2J0BCI0MML\[000867]XU01_180725.jpg:  ForeignMaterialDetector:6.765S
+OnDetection stop:20201204\test\000867_S2J0BCI0MML\[000867]XU01_180725.jpg
+Task1 >> time:8.921s
+OnDetection start:20201204\test\000715_S2J0BEI01CM\[000715]XU03_042806.jpg
+OnDetection start:20201204\test\000718_S2J0BEI01CS\[000718]XU04_042928.jpg
+OnDetection start:20201204\test\000728_S2J0BEI01J5\[000728]XU04_043423.jpg
+OnDetection start:20201204\test\000729_S2J0BEI01J7\[000729]XU01_043459.jpg
+OnDetection stop:20201204\test\000718_S2J0BEI01CS\[000718]XU04_042928.jpg
+Task1 >> time:1.047s
+OnDetection stop:20201204\test\000715_S2J0BEI01CM\[000715]XU03_042806.jpg
+Task1 >> time:1.281s
+XU01: x:1134 y:973
+[INFO]£ºprogram begin!
+[INFO] step1:begin!
+OnDetection start:20201204\test\000729_S2J0BEI01J7\[000729]XU03_043459.jpg
+[INFO] step1:get transform format success!
+[INFO] step2:begin!
+[INFO] step2:transform success!
+[INFO] step3:subtract image begin!
+OnDetection start:20201204\test\000732_S2J0BEI01JF\[000732]XU04_043630.jpg
+OnDetection start:20201204\test\000735_S2J0BEI01JM\[000735]XU04_043801.jpg
+OnDetection stop:20201204\test\000729_S2J0BEI01J7\[000729]XU03_043459.jpg
+Task1 >> time:1.203s
+OnDetection start:20201204\test\000740_S2J0BEI01JX\[000740]XU04_044118.jpg
+OnDetection stop:20201204\test\000728_S2J0BEI01J5\[000728]XU04_043423.jpg
+Task1 >> time:2.312s
+OnDetection start:20201204\test\000744_S2J0BEI01K5\[000744]XU03_044328.jpg
+OnDetection start:20201204\test\000744_S2J0BEI01K5\[000744]XU04_044329.jpg
+OnDetection stop:20201204\test\000740_S2J0BEI01JX\[000740]XU04_044118.jpg
+Task1 >> time:1.89s
+OnDetection stop:20201204\test\000735_S2J0BEI01JM\[000735]XU04_043801.jpg
+Task1 >> time:2.14s
+OnDetection stop:20201204\test\000744_S2J0BEI01K5\[000744]XU03_044328.jpg
+Task1 >> time:1.484s
+OnDetection start:20201204\test\000746_S2J0BEI01K9\[000746]XU03_044426.jpg
+OnDetection stop:20201204\test\000732_S2J0BEI01JF\[000732]XU04_043630.jpg
+Task1 >> time:3.047s
+OnDetection start:20201204\test\000749_S2J0BCI0MFT\[000749]XU02_161550.jpg
+XU02: x:984 y:956
+[INFO]£ºprogram begin!
+[INFO] step1:begin!
+OnDetection start:20201204\test\000749_S2J0BCI0MFT\[000749]XU04_161551.jpg
+OnDetection stop:20201204\test\000744_S2J0BEI01K5\[000744]XU04_044329.jpg
+Task1 >> time:2.39s
+OnDetection stop:20201204\test\000746_S2J0BEI01K9\[000746]XU03_044426.jpg
+Task1 >> time:1.594s
+OnDetection stop:20201204\test\000749_S2J0BCI0MFT\[000749]XU04_161551.jpg
+Task1 >> time:1.407s
+[INFO] step1:get transform format success!
+[INFO] step2:begin!
+[INFO] step2:transform success!
+[INFO] step3:subtract image begin!
+[INFO] step3:success!
+[INFO] step4:begin!
+[INFO] step4:success!
+[INFO] step5:begin!
+[INFO] step5:detect success!
+[INFO] step end: const 6.36207 seconds.
+20201204\test\000729_S2J0BEI01J7\[000729]XU01_043459.jpg:  ForeignMaterialDetector:6.407S
+OnDetection stop:20201204\test\000729_S2J0BEI01J7\[000729]XU01_043459.jpg
+Task1 >> time:7.047s
+[INFO] step3:success!
+[INFO] step4:begin!
+[INFO] step4:success!
+[INFO] step5:begin!
+[INFO] step5:detect success!
+[INFO] step end: const 5.85817 seconds.
+20201204\test\000749_S2J0BCI0MFT\[000749]XU02_161550.jpg:  ForeignMaterialDetector:5.891S
+OnDetection stop:20201204\test\000749_S2J0BCI0MFT\[000749]XU02_161550.jpg
+Task1 >> time:21.516s

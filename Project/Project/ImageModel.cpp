@@ -1,5 +1,5 @@
 #include "ImageModel.h"
-
+#include "./UserInterface/NoTestPanel.h"
 
 ImageModel *ImageModel::m_instance = NULL;
 wxWindow			*ImageModel::m_frame;
@@ -13,6 +13,8 @@ map<string, list<wxRect>> ImageModel::m_map_red_rect;
 wxString			ImageModel::m_show_img_string;
 list<paper_file>	ImageModel::m_list_paper_file;
 list<Image_Properties> ImageModel::m_list_image_model;
+vector<NoTestImage_t> ImageModel::m_noTestImageVec;
+
 int					ImageModel::m_paper_file_num;
 int					ImageModel::m_save_ic_binaryValue;
 int					ImageModel::m_save_ic_backValue;
@@ -47,6 +49,9 @@ float ImageModel::m_preRatio;
 
 ListData* ImageModel::m_data;
 wxString ImageModel::m_imageResult;
+wxMutex ImageModel::m_mutexOk;
+wxMutex ImageModel::m_mutexNg;
+wxMutex ImageModel::m_mutexRatio;
 
 bool json_resolverxxx(char *indata, ai_result_type &outdata)
 {
@@ -136,6 +141,8 @@ ImageModel::ImageModel(wxWindow *frame)
 //	m_mutex = new wxMutex();
 	m_is_draw_rect = false;
 	m_model_panel = NULL;
+	m_noTestDlg = nullptr;
+
 	m_list_image_model.clear();
 //	m_list_lizi_result.clear();
 	m_element_list.clear();
@@ -186,6 +193,11 @@ ImageModel::~ImageModel()
 		delete m_model_panel;
 		m_model_panel = NULL;
 	}
+	if (m_noTestDlg)
+	{
+		delete m_noTestDlg;
+		m_noTestDlg = nullptr;
+	}
 
 	m_refresh_window = NULL;
 	m_profile = NULL;
@@ -228,6 +240,37 @@ void ImageModel::DeleteSocketThread()
 
 	m_connect_btn_status_flag = false;
 }
+
+void ImageModel::SetNoTestData(NoTestData* data, string name, string path)
+{
+	vector<NoTestElement> l_noTestEleVec = data->GetNoTestElementVec();
+	m_noTestRecName = name;
+	m_noTestRecPath = path;
+
+	this->NoTestDataRecotery(l_noTestEleVec);
+}
+
+void ImageModel::NoTestDataRecotery(const vector<NoTestElement>& eleVec)
+{
+	vector<NoTestImage_t> l_noTestImageVec;
+	for (NoTestElement ele: eleVec)
+	{
+		NoTestImage_t l_noTest;
+		l_noTest.ImageName = ele.GetImageName();
+		l_noTest.RectPointVec = ele.GetRectPointVec();
+		l_noTestImageVec.push_back(l_noTest);
+	}
+	m_noTestImageVec = l_noTestImageVec;
+
+	m_noTestDlg->GetModelPanel()->AddData(m_noTestImageVec);
+	m_noTestDlg->Show();
+}
+
+void ImageModel::ClearPaperFileList()
+{
+	m_list_paper_file.clear();
+}
+
 void ImageModel::SetProfile(Profile *profile)
 {
 	m_profile = profile;
@@ -851,6 +894,7 @@ void ImageModel::OnDetection(bool send_result_flag, cv::Mat cvSrcmat, string ima
 
 	curl_interface curl_if(m_save_ai_path.ToStdString().c_str(), 15);
 	int img_num = 0;
+
 	if (!vecter_result.empty())
 	{
 	//	DWORD  time_3 = GetTickCount();
@@ -1748,30 +1792,41 @@ void ImageModel::ChangeResult()
 {
 	int OK_num = 0;
 	int Ng_num = 0;
-	int Ratio_Num = 0;
+	float Ratio_Num = 0;
 	wxString msg = "";
 	msg = "开始计算OK或者NG片子数量";
 	MyLog::LogMessage(msg.c_str());
 
 	{
+		m_mutexOk.Lock();
 		OK_num += m_preOkNum;
-		Ng_num += m_preNgNum;
-	}
+		m_mutexOk.Unlock();
 
+		m_mutexNg.Lock();
+		Ng_num += m_preNgNum;
+		m_mutexNg.Unlock();
+
+	}
+	//todo1
 	for (list<paper_file>::iterator it = m_list_paper_file.begin(); it != m_list_paper_file.end(); it++)
 	{
 		if (it->paper_result/* && it->paper_lizi_result*/)
 		{
+			m_mutexOk.Lock();
 			OK_num += 1;
+			m_mutexOk.Unlock();
 		}
 		else
 		{
+			m_mutexNg.Lock();
 			Ng_num += 1;
+			m_mutexNg.Unlock();
 		}
 
 	}
-
+	m_mutexRatio.Lock();
 	Ratio_Num = (float)Ng_num / ((float)OK_num + (float)Ng_num);
+	m_mutexRatio.Unlock();
 
 	msg = "结果面板添加OK、NG、Ratio数据";
 	MyLog::LogMessage(msg.c_str());
@@ -1939,6 +1994,7 @@ int ImageModel::PostAnAllImage2AI(list<SplitRect> &list_split, ImageU1 &split_im
 		MyLog::LogError(msg.c_str());
 
 		return -2;
+
 	}
 
 	return -1;
@@ -1997,6 +2053,27 @@ void ImageModel::SetDrawRect(bool flag, int pen_state)
 	else
 	{
 		m_model_panel->Hide();
+	}
+}
+
+void ImageModel::SetDrawNoTestRect(bool flag,int penState)
+{
+	m_is_draw_rect = flag;
+	m_refresh_window->SetIsDrawRect(m_is_draw_rect);
+	m_refresh_window->SetDrawPenState(penState);
+	m_draw_pen_state = penState;
+
+	if (flag)
+	{
+		if (nullptr == m_noTestDlg)
+		{
+			m_noTestDlg = new NoTestDlg(m_frame);
+		}
+		m_noTestDlg->Show();
+	}
+	else
+	{
+		m_noTestDlg->Hide();
 	}
 }
 
@@ -2143,6 +2220,90 @@ void ImageModel::OnSaveModel()
 	{
 		delete (*it);
 	}
+}
+
+void ImageModel::OnAddNoTestModel()
+{
+	bool l_isSame = false;
+	NoTestImage_t l_noTest = m_refresh_window->GetNoTestImage();
+	for (NoTestImage_t& noTest: m_noTestImageVec)
+	{
+		if (l_noTest.ImageName == noTest.ImageName)
+		{
+			RectPoint_t l_rectPoint = l_noTest.RectPointVec[0];
+			noTest.RectPointVec.push_back(l_rectPoint);
+			l_isSame = true;
+			break;
+		}
+	}
+
+	if (!l_isSame)
+	{
+		m_noTestImageVec.push_back(l_noTest);
+	}
+
+	m_noTestDlg->GetModelPanel()->AddData(m_noTestImageVec);
+}
+
+void ImageModel::OnClearNoTestModel()
+{
+	if (nullptr == m_noTestDlg)
+	{
+		m_noTestDlg = new NoTestDlg(m_frame);
+	}
+
+	m_noTestDlg->DeleteAllModel();
+	m_noTestImageVec.clear();
+	//to do 
+
+}
+
+void ImageModel::OnSaveNoTestModel()
+{
+	if (!m_noTestImageVec.size())
+	{
+		wxMessageBox(_("模版为空，无法保存"));
+		return;
+	}
+
+	vector<NoTestElement> l_noTestEleVec;
+	for (NoTestImage_t noTest : m_noTestImageVec)
+	{
+		NoTestElement l_element;
+		l_element.SetImageName(noTest.ImageName);
+		l_element.SetRectPointVec(noTest.RectPointVec);
+		l_noTestEleVec.push_back(l_element);
+	}
+
+	NoTestData* l_noTestData = new NoTestData(m_noTestRecName, m_noTestRecPath);
+	l_noTestData->SetNoTestElementVec(l_noTestEleVec);
+
+	wxFileDialog l_dlg(m_frame, _("选择配方保存"), "./recipe", "", "dat files (*.dat) | *.dat", wxFD_OVERWRITE_PROMPT | wxFD_SAVE);
+
+	if (wxID_OK == l_dlg.ShowModal())
+	{
+		string l_path = "";
+		l_path = l_dlg.GetPath().c_str();
+
+		if (true == l_noTestData->OnSave(l_path))
+		{
+			wxMessageBox("配方保存成功");
+		}
+		else
+		{
+			wxMessageBox("配方保存失败，请清空配方后重新操作");
+		}
+
+	}
+
+	l_dlg.Destroy();
+	if (l_noTestData != nullptr)
+	{
+		delete l_noTestData;
+		l_noTestData = nullptr;
+	}
+
+
 }
 
 void ImageModel::OnNoPic()

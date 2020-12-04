@@ -114,3 +114,47 @@ void ListData::ClearMapData()
 {
 	m_redRectMap.clear();
 }
+
+/////////////////////////////////////////////////
+
+NoTestElement::NoTestElement()
+{
+}
+
+NoTestElement::~NoTestElement()
+{
+}
+
+
+//
+NoTestData::NoTestData(string name, string path)
+	:m_name(name),m_path(path)
+{
+}
+
+NoTestData::~NoTestData()
+{
+}
+
+bool NoTestData::OnSave(string path)
+{
+	std::ofstream ofs(path, std::ios::binary);
+	boost::archive::binary_oarchive oa(ofs);
+	oa << *this;
+	ofs.close();
+
+	return true;
+}
+
+NoTestData* NoTestData::OnLoad(string name,string path)
+{
+	NoTestData *l_noTestData = new NoTestData;
+	std::ifstream ifs(path, std::ios::binary);
+	boost::archive::binary_iarchive ia(ifs);
+	ia >> *l_noTestData;
+	ifs.close();
+
+	return l_noTestData;
+}
+
+

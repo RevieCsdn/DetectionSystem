@@ -5,11 +5,15 @@ BEGIN_EVENT_TABLE(MainFrame, wxFrame)
 	//Menu
 	EVT_MENU(ID_MENU_LOAD, MainFrame::OnLoadPhoto)
 	EVT_MENU(ID_MENU_READ_RECIPE, MainFrame::OnReadRecipe)
+	EVT_MENU(ID_MENU_READ_NOTESTRECIPE, MainFrame::OnReadNoTestRecipe)
+
 	EVT_MENU(ID_MENU_PATH, MainFrame::OnSetDetectionPath)
 	EVT_MENU(ID_MENU_PARAMETER, MainFrame::OnSetParemeter)
 	EVT_MENU(ID_MENU_ADDR, MainFrame::OnSetAddr)
 	EVT_MENU(ID_MENU_DRAW_RECT, MainFrame::OnDrawRect)
 	EVT_MENU(ID_MENU_DRAW_SQUARE_RECT, MainFrame::OnDrawSquareRect)
+	EVT_MENU(ID_MENU_DRAW_NOTEST_RECT, MainFrame::OnNoTestRect)
+
 	EVT_MENU(ID_MENU_FILE_OPEN_ALGORITHM_IMG, MainFrame::OnOpenFileAlgorithmImg)
 	EVT_MENU(ID_MENU_FILE_OPEN_AI_IMG, MainFrame::OnOpenFileAIImg)
 	EVT_MENU(ID_MENU_FILE_OPEN_EXCEL, MainFrame::OnOpenFileExcel)
@@ -25,6 +29,10 @@ BEGIN_EVENT_TABLE(MainFrame, wxFrame)
 	EVT_BUTTON(Refreshwindow::ID_REFRESH_ADD_MODEL, MainFrame::OnAddModel)
 	EVT_BUTTON(ModelPanelWindow::ID_BTN_CLEAR, MainFrame::OnClearModel)
 	EVT_BUTTON(ModelPanelWindow::ID_BIN_SAVE, MainFrame::OnSaveModel)
+
+	EVT_BUTTON(Refreshwindow::ID_NOTESTRECT_MODEL, MainFrame::OnAddNoTestModel)
+	EVT_BUTTON(NoTestDlg::ID_BTN_NOTESTCLEAR, MainFrame::OnClearNoTestModel)
+	EVT_BUTTON(NoTestDlg::ID_BIN_NOTESTSAVE, MainFrame::OnSavNoTesteModel)
 
 	EVT_THREAD(SocketCenter::ID_READ_AND_DECTION, MainFrame::OnReadAndDection)
 	EVT_THREAD(ImageModel::ID_SEND_READ_SINGLE, MainFrame::OnSendReadSingle)
@@ -146,7 +154,8 @@ void MainFrame::CreateGUIControls()
 	m_menu_load = new wxMenu;
 	m_menu_load->Append(ID_MENU_LOAD, _("载入图像"));
 	m_menu_load->Append(ID_MENU_READ_RECIPE, _("读取配方"));
-	m_menu_bar->Append(m_menu_load, ("载入"));
+	m_menu_load->Append(ID_MENU_READ_NOTESTRECIPE, _("读取不检测配方"));
+	m_menu_bar->Append(m_menu_load, _("载入"));
 
 	//CHANGE
 	m_menu_set = new wxMenu;
@@ -160,6 +169,7 @@ void MainFrame::CreateGUIControls()
 	m_menu_draw = new wxMenu;
 	m_menu_draw->AppendCheckItem(ID_MENU_DRAW_RECT, _("模板"));
 	m_menu_draw->AppendCheckItem(ID_MENU_DRAW_SQUARE_RECT, _("正方形模板"));
+	m_menu_draw->AppendCheckItem(ID_MENU_DRAW_NOTEST_RECT, _("不检测模板"));
 	m_menu_draw->Check(ID_MENU_DRAW_RECT, false);
 	m_menu_draw->Check(ID_MENU_DRAW_SQUARE_RECT, false);
 	m_menu_bar->Append(m_menu_draw, _("制作模板"));
@@ -434,6 +444,33 @@ void MainFrame::OnReadRecipe(wxCommandEvent &event)
 	msg = "配方读取成功";
 	MyLog::LogMessage(msg.mb_str());
 }
+
+void MainFrame::OnReadNoTestRecipe(wxCommandEvent &event)
+{
+	string l_noTestRecipeName;
+	string l_noTestRecipePath;
+
+	wxFileDialog l_dlg(this, _("选择配方"), "./recipe", "", "dat files (*.dat) | *.dat", wxFD_FILE_MUST_EXIST | wxFD_OPEN);
+	if (wxID_OK == l_dlg.ShowModal())
+	{
+		l_noTestRecipeName = l_dlg.GetFilename().c_str();
+		l_noTestRecipePath = l_dlg.GetPath().c_str();
+	}
+	else
+	{
+		l_dlg.Destroy();
+		return;
+	}
+	l_dlg.Destroy();
+
+	this->OnClearNoTestModel(event);
+
+	NoTestData *l_noTestData = NoTestData::OnLoad(l_noTestRecipeName, l_noTestRecipePath);
+	m_gModel->SetNoTestData(l_noTestData, l_noTestRecipeName, l_noTestRecipePath);
+
+
+}
+
 //修改IP 端口 路径
 void MainFrame::OnSetDetectionPath(wxCommandEvent &)
 {
@@ -485,6 +522,21 @@ void MainFrame::OnDrawSquareRect(wxCommandEvent &event)
 	}
 }
 
+void MainFrame::OnNoTestRect(wxCommandEvent &event)
+{
+	if (event.GetSelection())
+	{
+		m_is_draw_rect = true;
+		m_gModel->SetDrawNoTestRect(m_is_draw_rect, NOTESTRECT);
+	}
+	else
+	{
+		m_is_draw_rect = false;
+		m_gModel->SetDrawNoTestRect(m_is_draw_rect, NOTESTRECT);
+	}
+
+}
+
 void MainFrame::OnOpenFileAlgorithmImg(wxCommandEvent &)
 {
 	m_gModel->OnOpenFileAlgorithmImg();
@@ -520,6 +572,10 @@ void MainFrame::OnCleraHistoricalData(wxCommandEvent &)
 		m_result_panel->SetEditOK(0);
 		m_result_panel->SetEditNG(0);
 		m_result_panel->SetEditRatio(0);
+
+		m_gModel->SetPreOkNum(0);
+		m_gModel->SetPreNgNum(0);
+		m_gModel->ClearPaperFileList();
 		m_gModel->SetResultLabel(0, 0, 0);
 
 		m_listData->ClearData();
@@ -652,9 +708,6 @@ void MainFrame::OnCreateRejUi(wxThreadEvent &)
 		m_verifyDlg = nullptr;
 	}
 
-	wxString msg = "正在生成检测后的缺陷详细信息";
-	MyLog::LogMessage(msg.mb_str());
-
 	wxString wxs_now_time;
 	wxs_now_time = m_gModel->GetNowTime(1).c_str();
 
@@ -674,9 +727,6 @@ void MainFrame::OnCreateRejUi(wxThreadEvent &)
 		m_verifyDlg->Show();
 	}
 
-
-	msg = "VerifyDlg缺陷界面生成成功";
-	MyLog::LogMessage(msg.mb_str());
 
 	if (m_gModel->GetListData().size())
 	{
@@ -764,6 +814,21 @@ void MainFrame::OnClearModel(wxCommandEvent &)
 void MainFrame::OnSaveModel(wxCommandEvent &)
 {
 	m_gModel->OnSaveModel();
+}
+
+void MainFrame::OnAddNoTestModel(wxCommandEvent &)
+{
+	m_gModel->OnAddNoTestModel();
+}
+
+void MainFrame::OnClearNoTestModel(wxCommandEvent &)
+{
+	m_gModel->OnClearNoTestModel();
+}
+
+void MainFrame::OnSavNoTesteModel(wxCommandEvent &)
+{
+	m_gModel->OnSaveNoTestModel();
 }
 
 void MainFrame::OnNoPic(wxThreadEvent &)

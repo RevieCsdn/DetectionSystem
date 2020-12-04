@@ -80,5 +80,7 @@ private:
 	wxString m_wxs_dection_catalogue;//最新检测目录
 
 	wxBusyInfo *busy_info;
+	//若文件夹为空时，减少消耗
+	wxArrayString m_delayImage;
 };
 

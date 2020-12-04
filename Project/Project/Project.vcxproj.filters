@@ -108,6 +108,9 @@
     <ClInclude Include="Util\ForeignMaterialDetector.h">
       <Filter>Util</Filter>
     </ClInclude>
+    <ClInclude Include="UserInterface\NoTestPanel.h">
+      <Filter>UserInterface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LNIApp.cpp">
@@ -181,6 +184,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\..\build_lib\json\src\json_writer.cpp">
       <Filter>json</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\NoTestPanel.cpp">
+      <Filter>UserInterface</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -17,6 +17,8 @@
 #include "./UserInterface/DetectionSetDlg.h"
 #include "./BO/DataElement.h"
 #include "./SuperDog/SuperDog.h"
+#include "./UserInterface/NoTestPanel.h"
+
 using namespace std;
 
 #undef MainFrame_STYLE
@@ -40,6 +42,7 @@ private:
 		//FIlE
 		ID_MENU_LOAD,
 		ID_MENU_READ_RECIPE,
+		ID_MENU_READ_NOTESTRECIPE,
 		//CHANGE
 		ID_MENU_PATH,
 		ID_MENU_PARAMETER,
@@ -48,6 +51,7 @@ private:
 		//DRAW
 		ID_MENU_DRAW_RECT,
 		ID_MENU_DRAW_SQUARE_RECT,
+		ID_MENU_DRAW_NOTEST_RECT,
 		//File
 		ID_MENU_FILE_OPEN_ALGORITHM_IMG,
 		ID_MENU_FILE_OPEN_AI_IMG,
@@ -85,6 +89,8 @@ private:
 	string			m_recipe_name;
 	string			m_recipe_path;
 
+
+
 	Refreshwindow	*m_refresh_window;
 	ListPanel		*m_list_panel;
 	ControlPanel	*m_control_panel;
@@ -112,11 +118,16 @@ private:
 	//Menu
 	void OnLoadPhoto(wxCommandEvent &);
 	void OnReadRecipe(wxCommandEvent &event);
+	void OnReadNoTestRecipe(wxCommandEvent &event);
+
 	void OnSetDetectionPath(wxCommandEvent &);
 	void OnSetParemeter(wxCommandEvent &);
 	void OnSetAddr(wxCommandEvent &);
+
 	void OnDrawRect(wxCommandEvent &event);
 	void OnDrawSquareRect(wxCommandEvent &event);
+	void OnNoTestRect(wxCommandEvent &event);
+
 	void OnOpenFileAlgorithmImg(wxCommandEvent &);
 	void OnOpenFileAIImg(wxCommandEvent &);
 	void OnOpenFileExcel(wxCommandEvent &);
@@ -132,6 +143,10 @@ private:
 	void OnAddModel(wxCommandEvent &);
 	void OnClearModel(wxCommandEvent &);
 	void OnSaveModel(wxCommandEvent &);
+
+	void OnAddNoTestModel(wxCommandEvent &);
+	void OnClearNoTestModel(wxCommandEvent &);
+	void OnSavNoTesteModel(wxCommandEvent &);
 private:
 	//AutomaticDetetionThread
 	void OnCreateRejUi(wxThreadEvent &);
