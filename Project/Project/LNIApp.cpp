@@ -50,12 +50,11 @@ bool LNIApp::OnInit()
 	wx_logs = new wxLogStderr(m_pLogFile);						//这个类可用于将日志消息重定向到C文件流(不要与c++流混淆)。
 #endif
 	delete wxLog::SetActiveTarget(wx_logs);						//将指定的日志目标设置为活动目标。
-																//返回指向前一个活动日志目标的指针(可能为空)。要禁止日志记录，请使用wxLogNull not NULL的新实例。
-																//如果将活动日志目标设置为NULL，则在日志记录发生时将创建一个新的默认日志目标。
-
-	wxLog::SetTimestamp(wxT("%Y-%m-%d %H:%M:%S"));				//将默认日志目标前缀的时间戳格式设置为所有消息。
-	wxLog::SetLogLevel(wxLOG_Debug);							//指定级别(数值上)大于logLevel的日志消息应该被忽略，并且不发送到活动日志目标。
-																// for cout
+																										//返回指向前一个活动日志目标的指针(可能为空)。要禁止日志记录，请使用wxLogNull not NULL的新实例。
+																										//如果将活动日志目标设置为NULL，则在日志记录发生时将创建一个新的默认日志目标。
+	wxLog::SetTimestamp(wxT("%Y-%m-%d %H:%M:%S"));		//将默认日志目标前缀的时间戳格式设置为所有消息。
+	wxLog::SetLogLevel(wxLOG_Debug);									//指定级别(数值上)大于logLevel的日志消息应该被忽略，并且不发送到活动日志目标。
+																										// for cout
 
 #ifndef __WITH_CONSOLE__
 	of = std::ofstream("stdout");
@@ -73,6 +72,9 @@ bool LNIApp::OnInit()
 		return false;
 	}
 
+	wxString l_inter = "InterfaceLog";
+	if (_access(l_inter, 0) != 0)									//access()	判断文件是否存在，并判断文件是否可写
+		CreateDirectory(l_inter, NULL);
 	// for User status	
 	string mylog_name = "InterfaceLog\\";
 	string mylog_name_data = MyLog::GetNowTime() + ".log";

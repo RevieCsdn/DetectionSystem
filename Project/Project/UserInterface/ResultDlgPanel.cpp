@@ -67,7 +67,6 @@ void ResultDlgPanel::SetEditOK(int num)
 {
 	m_proFile->SetOkNum(num);
 	m_proFile->SaveIni(m_path);
-
 	wxString str = "";
 	str << num;
 	m_edit_ok->SetLabel(str);
@@ -77,7 +76,6 @@ void ResultDlgPanel::SetEditNG(int num)
 {
 	m_proFile->SetNgNum(num);
 	m_proFile->SaveIni(m_path);
-
 	wxString str = "";
 	str << num;
 	m_edit_ng->SetLabel(str);
@@ -87,11 +85,9 @@ void ResultDlgPanel::SetEditRatio(float num)
 {
 	m_proFile->SetRatio(num);
 	m_proFile->SaveIni(m_path);
-
 	wxString str = "";
 	float f_num = num * 100.0;
 	str = wxString::Format("%.1f%%", f_num);
-
 	m_edit_ratio->SetLabel(str);
 }
 

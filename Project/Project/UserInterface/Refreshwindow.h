@@ -7,6 +7,7 @@
 #include <string>
 #include "../Util/PreDefine.h"
 #include <list>
+#include <vector>
 
 using namespace std;
 
@@ -102,7 +103,7 @@ public:
 		m_zoomX = zoomX;
 		m_zoomY = zoomY;
 	};
-	inline list<wxRect> GetwxRectList()
+	inline vector<wxRect> GetwxRectList()
 	{
 		return m_vector_wx_screenshot_rect;
 	};
@@ -153,7 +154,7 @@ private:
 
 	wxMutex			*m_mutex;
 	vector<cv::Rect> m_vector_draw_rect;
-	list<wxRect>	m_vector_wx_screenshot_rect;
+	vector<wxRect>	m_vector_wx_screenshot_rect;
 
 	bool			m_is_draw_rect;
 	int				m_iStartX;

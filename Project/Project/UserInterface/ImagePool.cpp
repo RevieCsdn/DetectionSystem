@@ -7,7 +7,7 @@ SingleImage::SingleImage(int v_img_size,int v_pool_size)
     size_of_img_buf =v_img_size;
     img_buf_pool=NULL;
     img_buf_temp_pool =NULL;
-	img_buf_sum_temp =NULL;
+		img_buf_sum_temp =NULL;
     img_buf_err =NULL;
     num_of_ai_img_size =0;
     m_select_num =0;
@@ -52,8 +52,6 @@ BYTE* SingleImage::GetImageBuf( int num )
 //         delete []img_buf_temp_pool;
 // 	img_buf_temp_pool=NULL;
 // 	img_buf_temp_pool =new BYTE[num*size_of_img_buf*size_of_img_buf];
-
- 
     int  sqrt_num =sqrt(num*1.0);
     int col_offset =0;
     int row_offset =0;
@@ -190,11 +188,12 @@ bool SingleImage::GetSingImageStatu()
 std::list<SplitRect>* SingleImage::Buf2List()
 {
     list_img_buf.clear();
+		//10000*224*224
     BYTE* img_buf =img_buf_pool;
     int temp_offset =0;
     for (int i=0;i<num_of_img ;i++)
     {
-        SplitRect split_rect ;
+        SplitRect split_rect ; 
         split_rect.setData(img_buf);
         list_img_buf.push_back(split_rect);
         img_buf += size_of_img_buf*size_of_img_buf;
@@ -222,11 +221,9 @@ void SingleImage::GetImageBufSum( int num,BYTE ** v_buf )
 		{
 			for (int col =0 ;col <sqrt_num ;col++)
 			{
-
 				buf =(img_buf_pool+col_offset+row_offset)+col*size_of_img_buf*size_of_img_buf;
 				memcpy(buf_temp,buf,size_of_img_buf);
 				buf_temp+=size_of_img_buf;
-
 			}
 			col_offset+=size_of_img_buf;
 		}

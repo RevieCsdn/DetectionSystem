@@ -111,6 +111,9 @@
     <ClInclude Include="UserInterface\NoTestPanel.h">
       <Filter>UserInterface</Filter>
     </ClInclude>
+    <ClInclude Include="Util\PIS2.h">
+      <Filter>Util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LNIApp.cpp">
@@ -187,6 +190,9 @@
     </ClCompile>
     <ClCompile Include="UserInterface\NoTestPanel.cpp">
       <Filter>UserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\PIS2.cpp">
+      <Filter>Util</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

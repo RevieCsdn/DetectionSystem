@@ -49,9 +49,6 @@ float ImageModel::m_preRatio;
 
 ListData* ImageModel::m_data;
 wxString ImageModel::m_imageResult;
-wxMutex ImageModel::m_mutexOk;
-wxMutex ImageModel::m_mutexNg;
-wxMutex ImageModel::m_mutexRatio;
 
 bool json_resolverxxx(char *indata, ai_result_type &outdata)
 {
@@ -855,8 +852,8 @@ void ImageModel::OnDetection(bool send_result_flag, cv::Mat cvSrcmat, string ima
 		}
 	}
 
-	msg = "进入算法";
-	MyLog::LogMessage(msg.mb_str());
+	//msg = "进入算法";
+	//MyLog::LogMessage(msg.mb_str());
 
 	//调用算法
 	if (image_type)
@@ -875,8 +872,20 @@ void ImageModel::OnDetection(bool send_result_flag, cv::Mat cvSrcmat, string ima
 				cout << temp_model_name << ":" << " x:" << mark_x << " y:" << mark_y << endl;
 
 				DWORD time1_for = GetTickCount();
+				//todo
+				vector<RectPoint_t> l_rectPointVec;
+				for (NoTestImage_t l_notestImage : m_noTestImageVec)
+				{
+					wxString l_noTestModel = l_notestImage.ImageName.c_str();
+					if (strstr(temp_image_name, l_noTestModel))
+					{
+						l_rectPointVec = l_notestImage.RectPointVec;
+						break;
+					}
+				}
+			
 				ForeignMaterialDetector(markimg/*markIMG*/, /*131*/mark_x, /*436*/mark_y, 
-					image_data, Mat_model_image, m_save_ic_binaryValue, m_save_ic_medianBlurSize, vecter_result);//新参数名为 m_save_ic_backValue
+					image_data, Mat_model_image, m_save_ic_binaryValue, m_save_ic_medianBlurSize, l_rectPointVec,vecter_result);//新参数名为 m_save_ic_backValue
 				DWORD time2_for = GetTickCount();
 				cout << temp_image_name << ":  ForeignMaterialDetector:" << (time2_for - time1_for) / 1000.0 << "S" << endl;
 			}
@@ -887,8 +896,8 @@ void ImageModel::OnDetection(bool send_result_flag, cv::Mat cvSrcmat, string ima
 //		bumpDetector(m_cv_srcmat, m_save_fpc_xc, m_save_fpc_dw, m_save_fpc_ow, m_save_fpc_sigma, m_save_fpc_dividesize, m_save_fpc_mergelength, m_save_fpc_filterThres, m_save_fpc_filterSize, m_vecter_result);
 	}
 	
-	msg = "算法结束";
-	MyLog::LogMessage(msg.mb_str());
+	//msg = "算法结束";
+	//MyLog::LogMessage(msg.mb_str());
 
 //	vecter_result.clear();
 
@@ -897,13 +906,11 @@ void ImageModel::OnDetection(bool send_result_flag, cv::Mat cvSrcmat, string ima
 
 	if (!vecter_result.empty())
 	{
-	//	DWORD  time_3 = GetTickCount();
-
 		Lock_(true);
 		m_refresh_window->DrawResult(vecter_result, image_data);
 		//添加截图数据
 //		m_wx_vector_list.clear();
-		list<wxRect> wx_vector_list;
+		vector<wxRect> wx_vector_list;
 		wx_vector_list = m_refresh_window->GetwxRectList();
 
 		wxImage temp_image;
@@ -915,7 +922,6 @@ void ImageModel::OnDetection(bool send_result_flag, cv::Mat cvSrcmat, string ima
 //		temp_image.SaveFile("C:\\Users\\Hwww\\Desktop\\Detecting\\2.jpg");
 		Lock_(false);
 
-		int i = 1;
 		msg = "开始缺陷图保存";
 		MyLog::LogMessage(msg.mb_str());
 
@@ -924,7 +930,6 @@ void ImageModel::OnDetection(bool send_result_flag, cv::Mat cvSrcmat, string ima
 
 		if (m_save_is_use_ai)
 		{
-#if 1
 			s_image_temp = ImagePool::GetInstance()->GetFreeSingleImage();
 			if (!s_image_temp)
 			{
@@ -936,86 +941,153 @@ void ImageModel::OnDetection(bool send_result_flag, cv::Mat cvSrcmat, string ima
 						break;
 				}
 			}
-			s_image_temp->SetImageNum(wx_vector_list.size());
-			list_split_rect_temp = s_image_temp->Buf2List();
-			it_split = list_split_rect_temp->begin();
-			s_image_temp->SetSingImageStatu(true);
+			//
+			int l_realNum = wx_vector_list.size();
+			int l_exitFlag = 1;
+			int l_aiNgNum = 0;
+			int l_picNum = 0;
 
-			msg = "准备拼大图";
-			MyLog::LogMessage(msg.mb_str());
-#endif
-		}
-		list<wxRect> ErrRedRect;
-		ErrRedRect.clear();
-		
-		for (list<wxRect>::iterator it = wx_vector_list.begin(); it != wx_vector_list.end(); it++, iter++)
-		{
-			if (m_save_is_use_ai)
+			vector<cv::Rect>::iterator l_aiIter = vecter_result.begin();
+			vector<wxRect>::iterator it = wx_vector_list.begin();
+			//string name = "";
+			//int index = 0;
+			while (true)
 			{
-				wxImage AI_temp_image;
-				AI_temp_image = temp_image.GetSubImage(wxRect(it->x, it->y, it->width, it->height));
-
-				wxString wxs_algorithm = "";
-				wxs_algorithm = wxString::Format("yw-%d", i);
-				string str_algorithm = "";
-				str_algorithm = wxs_algorithm.c_str();
-				SaveImageData(AI_temp_image, str_algorithm, image_name, temp_path);
-#if 1
-				ImageU1 img_u1(224,224);
-				img_u1.CopyFromWxImage(temp_image.GetSubImage(wxRect(it->x, it->y, it->width, it->height)));
-
-				std::memcpy(it_split->getData(), img_u1.m_data, it->width *it->height);
-
-				it_split->setRoi(RoiRect(it->x, it->y, it->width, it->height));
-				it_split++;
-#endif
-				ErrRedRect.push_back(wxRect(iter->x, iter->y, iter->width, iter->height));
-			}
-			else
-			{
-				wxs_result = "NG";
-				s_verify sy;
-				sy.m_pos_code = wxString::Format("yw-%d", i).ToStdString();
-				sy.m_rect = wxRect(100 * i, 100 * i, 500, 500);
-				sy.m_img = wxImage(temp_image).GetSubImage(wxRect(it->x, it->y, it->width, it->height));
-				sy.m_ng_rect = SaveNGRect(wxRect(it->x, it->y, it->width, it->height), cv::Rect(iter->x, iter->y, iter->width, iter->height));
-				SaveImageData(sy.m_img, sy.m_pos_code, image_name, temp_path);
-				sy.m_pos_x = 0;
-				sy.m_err_num = 1;
-				sy.m_len = 0;
-				sy.m_line_name = "X10101";
-				sy.m_pos_y = 0;
-				sy.m_type = 1;
-
-				m_list_data.push_back(sy);
-				temp_rect.push_back(sy.m_ng_rect);
-
-				msg = wxString::Format("已保存缺陷图%d", i);
-				MyLog::LogMessage(msg.mb_str());
-			}
-			i++;
-		}
-		if (m_save_is_use_ai)
-		{
-#if 1
-			s_image_temp->List2Buf();
-			int size_img = 224;
-			int size_side = s_image_temp->GetAiImageSideNum();
-			ImageU1 temp_imgu1(size_side*size_img, size_side*size_img);
-			std::memcpy(temp_imgu1.m_data, s_image_temp->GetImageBuf(size_side*size_side), size_side*size_side*size_img*size_img);
-#ifdef CURL_LONG_CONNECT
-			PostAnAllImage2AI(*list_split_rect_temp, temp_imgu1, curl_if, *s_image_temp, 5, ng_image);
-#else
-			img_num = PostAnAllImage2AI(*list_split_rect_temp, temp_imgu1, &curl_if, *s_image_temp, 5, temp_image, ErrRedRect, temp_rect, image_name, temp_path);
-			if (-2 == img_num || -1 == img_num)
-			{
-				i = 1;
-				iter = vecter_result.begin();
-				for (list<wxRect>::iterator it = wx_vector_list.begin(); it != wx_vector_list.end(); it++, iter++)
+			//	index++;
+				bool l_isEnd = false;
+				if (l_realNum > MAXIMAGENUM)
 				{
+					l_realNum = l_realNum - MAXIMAGENUM;
+					l_exitFlag = l_realNum;
+					s_image_temp->SetImageNum(MAXIMAGENUM);
+					l_picNum = MAXIMAGENUM;
+				}
+				else
+				{
+					l_realNum = l_realNum%MAXIMAGENUM;
+					l_exitFlag = l_exitFlag / MAXIMAGENUM;
+					s_image_temp->SetImageNum(l_realNum);
+					l_picNum = l_realNum;
+				}
+
+				if (l_exitFlag == 0)
+				{
+					l_isEnd = true;
+				}
+				
+				list_split_rect_temp = s_image_temp->Buf2List();
+				it_split = list_split_rect_temp->begin();
+				s_image_temp->SetSingImageStatu(true);
+
+				msg = "准备拼大图";
+				MyLog::LogMessage(msg.mb_str());
+
+				vector<wxRect> ErrRedRect;
+				ErrRedRect.clear();
+
+				for (int i = 0; i < l_picNum; i++, it++, l_aiIter++)
+				{
+					//if (m_save_is_use_ai)
+					{
+						wxImage AI_temp_image;
+						AI_temp_image = temp_image.GetSubImage(wxRect(it->x, it->y, it->width, it->height));
+
+						wxString wxs_algorithm = "";
+						wxs_algorithm = wxString::Format("yw-%d", i);
+						string str_algorithm = "";
+						str_algorithm = wxs_algorithm.c_str();
+						SaveImageData(AI_temp_image, str_algorithm, image_name, temp_path);
+
+						ImageU1 img_u1(224, 224);
+						img_u1.CopyFromWxImage(temp_image.GetSubImage(wxRect(it->x, it->y, it->width, it->height)));
+
+						std::memcpy(it_split->getData(), img_u1.m_data, it->width *it->height);
+
+						it_split->setRoi(RoiRect(it->x, it->y, it->width, it->height));
+						it_split++;
+						ErrRedRect.push_back(wxRect(l_aiIter->x, l_aiIter->y, l_aiIter->width, l_aiIter->height));
+					}
+			
+				}
+
+			//if (m_save_is_use_ai)
+				{
+					s_image_temp->List2Buf();
+					int size_img = 224;
+					int size_side = s_image_temp->GetAiImageSideNum();
+
+					ImageU1 temp_imgu1(size_side*size_img, size_side*size_img);
+
+					std::memcpy(temp_imgu1.m_data, s_image_temp->GetImageBuf(size_side*size_side), size_side*size_side*size_img*size_img);
+					//cv::Mat l_srcMat = cv::Mat(temp_imgu1.m_height, temp_imgu1.m_width, CV_8UC1, temp_imgu1.m_data);
+					//name = "image" + std::to_string(index)+".jpg";
+					//cv::imwrite(name, l_srcMat);
+					img_num = PostAnAllImage2AI(*list_split_rect_temp, temp_imgu1, &curl_if, *s_image_temp, 5, temp_image, ErrRedRect, temp_rect, image_name, temp_path);
+
+					if (-2 == img_num || -1 == img_num)
+					{
+						int i = 1;
+						iter = vecter_result.begin();
+						for (vector<wxRect>::iterator it = wx_vector_list.begin(); it != wx_vector_list.end(); it++, iter++)
+						{
+							wxs_result = "NG";
+							s_verify sy;
+							sy.m_pos_code = wxString::Format("AI-%d", i).ToStdString();
+							sy.m_rect = wxRect(100 * i, 100 * i, 500, 500);
+							sy.m_img = wxImage(temp_image).GetSubImage(wxRect(it->x, it->y, it->width, it->height));
+							sy.m_ng_rect = SaveNGRect(wxRect(it->x, it->y, it->width, it->height), cv::Rect(iter->x, iter->y, iter->width, iter->height));
+							SaveImageData(sy.m_img, sy.m_pos_code, image_name, temp_path);
+							sy.m_pos_x = 0;
+							sy.m_err_num = 1;
+							sy.m_len = 0;
+							sy.m_line_name = "X10101";
+							sy.m_pos_y = 0;
+							sy.m_type = 1;
+
+							m_list_data.push_back(sy);
+							temp_rect.push_back(sy.m_ng_rect);
+
+							msg = wxString::Format("AI超时，保存算法结果缺陷图%d", i);
+							MyLog::LogWarning(msg.mb_str());
+
+							i++;
+						}
+						wxs_NG_num << wx_vector_list.size();
+						s_image_temp->SetSingImageStatu(false);
+						break;
+					}
+					else
+					{
+						l_aiNgNum += img_num;
+						if (l_isEnd)
+						{
+							wxs_NG_num << l_aiNgNum;
+						}
+
+					}
+
+					s_image_temp->SetSingImageStatu(false);
+
+				}
+				
+				if (l_isEnd)
+				{
+					break;
+				}
+
+			}//while
+
+		}
+		else
+		{
+			//算法结果
+			vector<wxRect>::iterator it = wx_vector_list.begin();
+
+			for (int i = 0; i < wx_vector_list.size(); i++, it++, iter++)
+			{
 					wxs_result = "NG";
 					s_verify sy;
-					sy.m_pos_code = wxString::Format("AI-%d", i).ToStdString();
+					sy.m_pos_code = wxString::Format("yw-%d", i).ToStdString();
 					sy.m_rect = wxRect(100 * i, 100 * i, 500, 500);
 					sy.m_img = wxImage(temp_image).GetSubImage(wxRect(it->x, it->y, it->width, it->height));
 					sy.m_ng_rect = SaveNGRect(wxRect(it->x, it->y, it->width, it->height), cv::Rect(iter->x, iter->y, iter->width, iter->height));
@@ -1030,41 +1102,25 @@ void ImageModel::OnDetection(bool send_result_flag, cv::Mat cvSrcmat, string ima
 					m_list_data.push_back(sy);
 					temp_rect.push_back(sy.m_ng_rect);
 
-					msg = wxString::Format("AI超时，保存算法结果缺陷图%d", i);
-					MyLog::LogWarning(msg.mb_str());
-
-					i++;
-				}
-				wxs_NG_num << wx_vector_list.size();
+					msg = wxString::Format("已保存缺陷图%d", i);
+					MyLog::LogMessage(msg.mb_str());
+	
 			}
-			else
-				wxs_NG_num << img_num;
-#endif
-			s_image_temp->SetSingImageStatu(false);
-#endif
-		}
-		else
-		{
+
 			wxs_NG_num << wx_vector_list.size();
 		}
 
+		//todo
 		Lock_(true);
-	//	m_map_red_rect.insert(make_pair(image_name, temp_rect));
 		std::map<string, list<wxRect>> l_mapRect = m_data->GetRedRectMap();
 		l_mapRect.insert(make_pair(image_name, temp_rect));
 		m_list_window->SetMapRedRect(l_mapRect);
 		m_data->SetRedRectMap(l_mapRect);
-		//m_data->OnSave("./listData.dat");
 		Lock_(false);
 
 		msg = "完成所有缺陷图保存";
 		MyLog::LogMessage(msg.mb_str());
 
-//		DWORD  time_4 = GetTickCount();
-//		cout << "ImageModel >> " << "Save Image time:" << (time_4 - time_3) / 1000.0 << "s" << endl;
-
-//		msg = wxString::Format("ImageModel >> Save Image time: %f s", (time_4 - time_3) / 1000.0);
-//		MyLog::LogMessage(msg.c_str());
 	}
 	else
 	{
@@ -1798,13 +1854,8 @@ void ImageModel::ChangeResult()
 	MyLog::LogMessage(msg.c_str());
 
 	{
-		m_mutexOk.Lock();
 		OK_num += m_preOkNum;
-		m_mutexOk.Unlock();
-
-		m_mutexNg.Lock();
 		Ng_num += m_preNgNum;
-		m_mutexNg.Unlock();
 
 	}
 	//todo1
@@ -1812,21 +1863,17 @@ void ImageModel::ChangeResult()
 	{
 		if (it->paper_result/* && it->paper_lizi_result*/)
 		{
-			m_mutexOk.Lock();
 			OK_num += 1;
-			m_mutexOk.Unlock();
 		}
 		else
 		{
-			m_mutexNg.Lock();
 			Ng_num += 1;
-			m_mutexNg.Unlock();
 		}
 
 	}
-	m_mutexRatio.Lock();
+
 	Ratio_Num = (float)Ng_num / ((float)OK_num + (float)Ng_num);
-	m_mutexRatio.Unlock();
+
 
 	msg = "结果面板添加OK、NG、Ratio数据";
 	MyLog::LogMessage(msg.c_str());
@@ -1904,15 +1951,17 @@ bool ImageModel::PostAnImage2AI(gf::Point2d top_left, ImageMsg *im, curl_interfa
 	return false;
 }
 
-int ImageModel::PostAnAllImage2AI(list<SplitRect> &list_split, ImageU1 &split_img, curl_interface *curl_if, SingleImage &sing_img, double len, wxImage &ng_image, list<wxRect> &ErrRect, list<wxRect> &temp_rect, string temp_pic_name, wxString temp_path)
+int ImageModel::PostAnAllImage2AI(list<SplitRect> &list_split, ImageU1 &split_img, curl_interface *curl_if, SingleImage &sing_img, double len, wxImage &ng_image, vector<wxRect> &ErrRect, list<wxRect> &temp_rect, string temp_pic_name, wxString temp_path)
 {
 	char *content = NULL;
 	
-//	split_img.ChangeTowxImage().SaveFile("ai_Image.jpg");
 	DWORD  time_1 = GetTickCount();
 	if (curl_if->post_gray_raw_type("xxxx.jpg", split_img.m_data, split_img.m_width, split_img.m_height, &content) && content != NULL)
 	{
 		cout << "content: " << content << endl;
+		wxString msg = wxString::Format("AI content, %s", content);
+		MyLog::LogMessage(msg.c_str());
+
 		if (content[0] == '{')
 		{
 			ai_result_type art;
@@ -1939,7 +1988,7 @@ int ImageModel::PostAnAllImage2AI(list<SplitRect> &list_split, ImageU1 &split_im
 							list<SplitRect> ::iterator it = list_split.begin();
 							advance(it, sing_img.GetSelectImageNum());
 
-							list<wxRect>::iterator iter = ErrRect.begin();
+							vector<wxRect>::iterator iter = ErrRect.begin();
 							advance(iter, sing_img.GetSelectImageNum());
 
 							AIresult(art.predictions[i].Pos[j].Pos[0]/* + r_ai.x*/,
@@ -1954,7 +2003,7 @@ int ImageModel::PostAnAllImage2AI(list<SplitRect> &list_split, ImageU1 &split_im
 					} // for
 
 					DWORD  time_2 = GetTickCount();
-					cout << "SampleMsg >> " << "AI trans  :." << (time_2-time_1)/1000.0 <<"s"<<endl;
+					cout << "SampleMsg >> " << "AI trans  :" << (time_2-time_1)/1000.0 <<"s"<<endl;
 
 					wxString msg = wxString::Format("SampleMsg >> AI trans: %f s", (time_2 - time_1) / 1000.0);
 					MyLog::LogMessage(msg.c_str());
@@ -2042,12 +2091,13 @@ void ImageModel::SetDrawRect(bool flag, int pen_state)
 	m_refresh_window->SetDrawPenState(pen_state);
 	m_draw_pen_state = pen_state;
 	
+	if (NULL == m_model_panel)
+	{
+		m_model_panel = new ModelPanelWindow(m_frame);
+	}
+
 	if (flag)
 	{
-		if (NULL == m_model_panel)
-		{
-			m_model_panel = new ModelPanelWindow(m_frame);
-		}
 		m_model_panel->Show();
 	}
 	else
@@ -2063,12 +2113,13 @@ void ImageModel::SetDrawNoTestRect(bool flag,int penState)
 	m_refresh_window->SetDrawPenState(penState);
 	m_draw_pen_state = penState;
 
+	if (nullptr == m_noTestDlg)
+	{
+		m_noTestDlg = new NoTestDlg(m_frame);
+	}
+
 	if (flag)
 	{
-		if (nullptr == m_noTestDlg)
-		{
-			m_noTestDlg = new NoTestDlg(m_frame);
-		}
 		m_noTestDlg->Show();
 	}
 	else
@@ -2304,6 +2355,11 @@ void ImageModel::OnSaveNoTestModel()
 	}
 
 
+}
+
+std::vector<NoTestImage_t> ImageModel::GetNoTestImageVec()
+{
+	return m_noTestImageVec;
 }
 
 void ImageModel::OnNoPic()

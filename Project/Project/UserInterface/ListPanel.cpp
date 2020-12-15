@@ -136,10 +136,10 @@ void ListPanel::AddData(wxString image_name, wxString image_result, wxString liz
 #ifdef __LIZI__
 	msg = wxString::Format("添加检测信息：    图片名：%s， 异物结果：%s， 粒子结果：%s， 异物数量： %s， 检测后图片所在路径：%s， 检测时间：%s", image_name, image_result, lizi_result, image_NGnum, image_path, image_time);
 #else
-	msg = wxString::Format("添加检测信息：    图片名：%s， 异物结果：%s， 异物数量： %s， 检测后图片所在路径：%s， 检测时间：%s", image_name, image_result, image_NGnum, image_path, image_time);
+//	msg = wxString::Format("添加检测信息：    图片名：%s， 异物结果：%s， 异物数量： %s， 检测后图片所在路径：%s， 检测时间：%s", image_name, image_result, image_NGnum, image_path, image_time);
 #endif // __LIZI__
 
-	MyLog::LogMessage(msg.mb_str());
+//	MyLog::LogMessage(msg.mb_str());
 }
 
 void ListPanel::ModifyLiziResults(wxString file_name, bool result)

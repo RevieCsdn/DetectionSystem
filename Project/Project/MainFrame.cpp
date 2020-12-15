@@ -169,9 +169,10 @@ void MainFrame::CreateGUIControls()
 	m_menu_draw = new wxMenu;
 	m_menu_draw->AppendCheckItem(ID_MENU_DRAW_RECT, _("模板"));
 	m_menu_draw->AppendCheckItem(ID_MENU_DRAW_SQUARE_RECT, _("正方形模板"));
-	m_menu_draw->AppendCheckItem(ID_MENU_DRAW_NOTEST_RECT, _("不检测模板"));
+	m_menu_draw->AppendCheckItem(ID_MENU_DRAW_NOTEST_RECT, _("不检测区域"));
 	m_menu_draw->Check(ID_MENU_DRAW_RECT, false);
 	m_menu_draw->Check(ID_MENU_DRAW_SQUARE_RECT, false);
+	m_menu_draw->Check(ID_MENU_DRAW_NOTEST_RECT, false);
 	m_menu_bar->Append(m_menu_draw, _("制作模板"));
 
 	//File
@@ -450,7 +451,7 @@ void MainFrame::OnReadNoTestRecipe(wxCommandEvent &event)
 	string l_noTestRecipeName;
 	string l_noTestRecipePath;
 
-	wxFileDialog l_dlg(this, _("选择配方"), "./recipe", "", "dat files (*.dat) | *.dat", wxFD_FILE_MUST_EXIST | wxFD_OPEN);
+	wxFileDialog l_dlg(this, _("选择不检测配方"), "./recipe", "", "dat files (*.dat) | *.dat", wxFD_FILE_MUST_EXIST | wxFD_OPEN);
 	if (wxID_OK == l_dlg.ShowModal())
 	{
 		l_noTestRecipeName = l_dlg.GetFilename().c_str();
@@ -498,6 +499,8 @@ void MainFrame::OnDrawRect(wxCommandEvent &event)
 {
 	if (event.GetSelection())
 	{
+		m_menu_draw->Check(ID_MENU_DRAW_SQUARE_RECT, false);
+		m_menu_draw->Check(ID_MENU_DRAW_NOTEST_RECT, false);
 		m_is_draw_rect = true;
 		m_gModel->SetDrawRect(m_is_draw_rect ,1);
 	}
@@ -512,6 +515,12 @@ void MainFrame::OnDrawSquareRect(wxCommandEvent &event)
 {
 	if (event.GetSelection())
 	{
+		wxCommandEvent l_event;
+		l_event.SetInt(0);
+		OnNoTestRect(l_event);
+
+		m_menu_draw->Check(ID_MENU_DRAW_RECT, false);
+		m_menu_draw->Check(ID_MENU_DRAW_NOTEST_RECT, false);
 		m_is_draw_rect = true;
 		m_gModel->SetDrawRect(m_is_draw_rect, 2);
 	}
@@ -526,6 +535,12 @@ void MainFrame::OnNoTestRect(wxCommandEvent &event)
 {
 	if (event.GetSelection())
 	{
+		wxCommandEvent l_event;
+		l_event.SetInt(0);
+		OnDrawSquareRect(l_event);
+
+		m_menu_draw->Check(ID_MENU_DRAW_RECT, false);
+		m_menu_draw->Check(ID_MENU_DRAW_SQUARE_RECT, false);
 		m_is_draw_rect = true;
 		m_gModel->SetDrawNoTestRect(m_is_draw_rect, NOTESTRECT);
 	}
@@ -727,7 +742,6 @@ void MainFrame::OnCreateRejUi(wxThreadEvent &)
 		m_verifyDlg->Show();
 	}
 
-
 	if (m_gModel->GetListData().size())
 	{
 		m_gModel->OnSaveFailurePics(false, m_gModel->GetListData().size());
@@ -740,10 +754,10 @@ void MainFrame::OnCreateRejUi(wxThreadEvent &)
 		m_gModel->OnSaveRecord(true, m_gModel->GetListData().size());
 	}
 		
-
 	m_mutex->Unlock();
 
 	m_gModel->ClearListData();
+
 }
 
 //读取信号后开启检测	读图并检测

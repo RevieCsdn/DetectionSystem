@@ -42,6 +42,9 @@ private:
 	float m_ratio;
 	wxString m_dataTime;
 
+	wxString m_machineSn;
+	wxString m_msgQueenName;
+
 protected:
 	Profile();
 
@@ -51,11 +54,32 @@ public:
 	void			loadIni(wxString path);
 	void			SaveIni(wxString path);
 
+	inline void SetMachineSn(wxString machineSn)
+	{
+		m_machineSn = machineSn;
+		m_pFileConfig->Write(wxT("DataReport/m_machineSn"), m_machineSn);
+	};
+	inline wxString GetMachineSn()
+	{
+		return m_machineSn;
+	};
+
+	inline void SetMsgQueenName(wxString name)
+	{
+		m_msgQueenName = name;
+		m_pFileConfig->Write(wxT("DataReport/m_msgQueenName"), m_msgQueenName);
+	};
+
+	inline wxString GetMsgQueenName()
+	{
+		return m_msgQueenName;
+	};
+
+
 	inline void SetOkNum(int okNum)
 	{
 		m_okNum = okNum;
 		m_pFileConfig->Write(wxT("PreviousData/m_okNum"), m_okNum);
-		
 	};
 
 	inline int GetOkNum()

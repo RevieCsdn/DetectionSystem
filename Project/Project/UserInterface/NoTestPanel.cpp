@@ -36,7 +36,7 @@ void NoTestPanel::CreateGui()
 
 	wxArrayString cols_name;
 	cols_name.Add(_("模板名"));
-	cols_name.Add(_("Mark数量"));
+	cols_name.Add(_("不检测区域数量"));
 
 	for (unsigned int i = 0; i < cols_name.size(); i++)
 	{
@@ -96,7 +96,7 @@ BEGIN_EVENT_TABLE(NoTestDlg, wxDialog)
 END_EVENT_TABLE()
 
 NoTestDlg::NoTestDlg(wxWindow* parent)
-	:wxDialog(parent, -1, _("不检测模板"), wxPoint(850, 250), wxSize(800, 500), wxCAPTION)
+	:wxDialog(parent, -1, _("不检测区域"), wxPoint(850, 250), wxSize(800, 500), wxCAPTION)
 {
 	m_parent = parent;
 

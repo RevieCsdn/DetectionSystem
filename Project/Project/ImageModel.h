@@ -25,6 +25,8 @@
 #include "./Util/ForeignMaterialDetector.h"
 #include "./Util/Profile.h"
 
+#define MAXIMAGENUM 1600
+
 class NoTestDlg;
 using namespace  std;
 
@@ -279,7 +281,7 @@ public:
 	static void SaveImageData(wxImage image, string name, string image_name, wxString save_path);
 	static wxRect SaveNGRect(wxRect wx_rect, cv::Rect cv_rect);
 	bool PostAnImage2AI(gf::Point2d top_left, ImageMsg *im, curl_interface *curl_if, wxImage &ng_image, double len, wxString filename, int num, wxRect wx_rect, cv::Rect cv_rect, list<wxRect> &temp_rect, string image_name, wxString save_path);
-	static int PostAnAllImage2AI(list<SplitRect> &list_split, ImageU1 &split_img, curl_interface *curl_if, SingleImage &sing_img, double len, wxImage &ng_image, list<wxRect> &ErrRect, list<wxRect> &temp_rect, string temp_pic_name, wxString temp_path);
+	static int PostAnAllImage2AI(list<SplitRect> &list_split, ImageU1 &split_img, curl_interface *curl_if, SingleImage &sing_img, double len, wxImage &ng_image, vector<wxRect> &ErrRect, list<wxRect> &temp_rect, string temp_pic_name, wxString temp_path);
 	static bool AIresult(double xx, double yy, double rw, double rh, double len, wxImage &NG_image, int num, wxString filename, wxRect wx_rect, cv::Rect cv_rect, list<wxRect> &temp_rect, string image_name, wxString save_path);
 	//Menu
 	static bool OnLoadImage(cv::String image_path, string image_name);
@@ -308,6 +310,8 @@ public:
 	void OnAddNoTestModel();
 	void OnClearNoTestModel();
 	void OnSaveNoTestModel();
+
+	vector<NoTestImage_t> GetNoTestImageVec();
 
 	void OnNoPic();
 	void OnNGSingle();
@@ -341,7 +345,7 @@ private:
 	static list<Image_Properties> m_list_image_model;
 	static vector<NoTestImage_t> m_noTestImageVec;
 
-//	list<lizi_paper>			m_list_lizi_result;
+//	list<lizi_paper>			m_list_lizi_result;  
 //	paper_file					m_now_paper_file;//当前片子
 	static int					m_paper_file_num;//当前片子中有多少图片
 	int							m_draw_pen_state;
@@ -393,10 +397,6 @@ private:
 
 	static string				AI_pic_name;
 	static wxMutex				*m_mutex;
-
-	static wxMutex m_mutexOk;
-	static wxMutex m_mutexNg;
-	static wxMutex m_mutexRatio;
 
 	static list<pic_data>		*m_list_pic_data;
 	static string				m_now_detection_file_name;

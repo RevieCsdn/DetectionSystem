@@ -62,6 +62,9 @@ void Profile::loadIni(wxString path)
 	m_pFileConfig->Read(wxT("PreviousData/m_ngNum"), &m_ngNum,0);
 	m_pFileConfig->Read(wxT("PreviousData/m_ratio"), &m_ratio);
 	m_pFileConfig->Read(wxT("PreviousData/m_dateTime"), &m_dataTime);
+	//DataReport
+	m_pFileConfig->Read(wxT("DataReport/m_msgQueenName"), &m_msgQueenName);
+	m_pFileConfig->Read(wxT("DataReport/m_machineSn"), &m_machineSn);
 
 }
 

@@ -186,8 +186,8 @@ void *AutomaticDetetionThread::Entry()
 					}
 					else
 					{
-						msg = wxString::Format("当前检测路径%s", wxs_temp_path);
-						MyLog::LogMessage(msg.c_str());
+						//msg = wxString::Format("当前检测路径%s", wxs_temp_path);
+						//MyLog::LogMessage(msg.c_str());
 					}
 
 					if (!m_b_run_flag)
@@ -508,8 +508,8 @@ void *AutomaticDetetionThread::Entry()
 					}
 					else
 					{
-						msg = wxString::Format("当前检测路径%s", wxs_temp_path);
-						MyLog::LogMessage(msg.c_str());
+						//msg = wxString::Format("当前检测路径%s", wxs_temp_path);
+						//MyLog::LogMessage(msg.c_str());
 					}
 
 					if (!m_b_run_flag)
@@ -688,11 +688,11 @@ void *AutomaticDetetionThread::Entry()
 						m_list_is_dection.push_back(str);
 						i_file_num++;
 					}
-
-					//while (m_i_fin_file_num < i_file_num)
-					//{
-					//	Sleep(1);
-					//}
+					//防止占用过多cup资源
+					while (m_i_fin_file_num < i_file_num)
+					{
+						Sleep(1);
+					}
 				}
 			}
 			if (m_delayImage.size() == 0)
