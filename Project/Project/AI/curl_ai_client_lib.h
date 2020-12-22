@@ -19,6 +19,7 @@
 #include <stdio.h>
 #include <vector>
 #include <curl\curl.h>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -26,7 +27,7 @@ using namespace std;
 //extern struct CURL;
 
 typedef struct {
-    double Pos[5];
+    double Pos[9];
 } CURL_AI_CLIENT_LIB_API Pos_type;
 
 typedef struct {
@@ -40,7 +41,7 @@ typedef struct {
     bool succes;
 } CURL_AI_CLIENT_LIB_API ai_result_type;
 
-CURL_AI_CLIENT_LIB_API bool json_resolver(char *indata, ai_result_type &outdata);
+CURL_AI_CLIENT_LIB_API bool json_resolver(char *indata, ai_result_type &outdata ,int pos_num =5);
 
 
 class CURL_AI_CLIENT_LIB_API curl_interface
@@ -77,6 +78,8 @@ public:
     // 连接检测
     // 连接成功返回true，反之false
     bool            is_connect();
+
+    static void     curl_clean_all();
 
 private:
     static bool bInit;

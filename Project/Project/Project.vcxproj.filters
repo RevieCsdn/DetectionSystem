@@ -114,6 +114,9 @@
     <ClInclude Include="Util\PIS2.h">
       <Filter>Util</Filter>
     </ClInclude>
+    <ClInclude Include="Util\MyThreadPool.h">
+      <Filter>Util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LNIApp.cpp">
@@ -192,6 +195,9 @@
       <Filter>UserInterface</Filter>
     </ClCompile>
     <ClCompile Include="Util\PIS2.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\MyThreadPool.cpp">
       <Filter>Util</Filter>
     </ClCompile>
   </ItemGroup>

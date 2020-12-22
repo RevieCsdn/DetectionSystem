@@ -180,6 +180,7 @@
     <ClInclude Include="Util\bumpDetector.h" />
     <ClInclude Include="Util\ForeignMaterialDetector.h" />
     <ClInclude Include="Util\lizi.h" />
+    <ClInclude Include="Util\MyThreadPool.h" />
     <ClInclude Include="Util\PIS2.h" />
     <ClInclude Include="Util\PreDefine.h" />
     <ClInclude Include="Util\Profile.h" />
@@ -209,6 +210,7 @@
     <ClCompile Include="UserInterface\ResultDlgPanel.cpp" />
     <ClCompile Include="UserInterface\SocketCenter.cpp" />
     <ClCompile Include="UserInterface\VerifyDlg.cpp" />
+    <ClCompile Include="Util\MyThreadPool.cpp" />
     <ClCompile Include="Util\PIS2.cpp" />
     <ClCompile Include="Util\Profile.cpp" />
     <ClCompile Include="Util\ThreadPool.cpp" />

@@ -14,6 +14,9 @@ wxString			ImageModel::m_show_img_string;
 list<paper_file>	ImageModel::m_list_paper_file;
 list<Image_Properties> ImageModel::m_list_image_model;
 vector<NoTestImage_t> ImageModel::m_noTestImageVec;
+vector<cv::Rect> ImageModel::vecter_result;
+wxString ImageModel::wxs_NG_num;
+vector<wxRect> ImageModel::wx_vector_list;
 
 int					ImageModel::m_paper_file_num;
 int					ImageModel::m_save_ic_binaryValue;
@@ -49,6 +52,17 @@ float ImageModel::m_preRatio;
 
 ListData* ImageModel::m_data;
 wxString ImageModel::m_imageResult;
+int ImageModel::img_num;
+MyThreadPool* ImageModel::m_threadPool;
+mutex ImageModel::m_mutexPic;
+mutex ImageModel::m_mutexPost;
+
+list<PostPara> ImageModel::m_postParaVec;
+SingleImage* ImageModel::s_image_temp;
+string ImageModel::m_imageName;
+string ImageModel::m_imagePath;
+list<wxRect> ImageModel::m_rectList;
+int ImageModel::m_aiNgNum;
 
 bool json_resolverxxx(char *indata, ai_result_type &outdata)
 {
@@ -117,11 +131,13 @@ ImageModel::ImageModel(wxWindow *frame)
 	m_save_path_img = "";
 	m_save_path_excel = "";
 	m_save_single = 0;
+	m_aiNgNum = 0;
 
 	m_refresh_window = NULL;
 	m_list_window = NULL;
 	m_control_window = NULL;
 	m_socket_center = NULL;
+	s_image_temp = NULL;
 //	m_verifyDlg = NULL;
 	
 	m_testing_start_flag = false;
@@ -166,6 +182,7 @@ ImageModel::ImageModel(wxWindow *frame)
 	m_preRatio = 0;
 
 	m_data = nullptr;
+	m_threadPool = new MyThreadPool;
 	//OK_num = 0;
 	//Ng_num = 0;
 	//Ratio_Num = 0;
@@ -211,6 +228,11 @@ ImageModel::~ImageModel()
 	}
 	m_list_paper_file.clear();
 	m_list_recipe;
+	//
+	if (m_threadPool != nullptr)
+	{
+		delete m_threadPool;
+	}
 }
 void ImageModel::DeleteSocketThread()
 {
@@ -733,12 +755,12 @@ void ImageModel::OnDetection(bool send_result_flag, cv::Mat cvSrcmat, string ima
 
 	list<SplitRect>::iterator it_split;
 	list<SplitRect> *list_split_rect_temp = NULL;
-	SingleImage *s_image_temp = NULL;
+	//SingleImage *s_image_temp = NULL;
 
 	if (image_data.empty())
 		cout << "errorImage" << endl;
 
-	vector<cv::Rect> vecter_result;
+	//vector<cv::Rect> vecter_result;
 	vecter_result.clear();
 //	vecter_result.reserve(10000);
 
@@ -749,7 +771,8 @@ void ImageModel::OnDetection(bool send_result_flag, cv::Mat cvSrcmat, string ima
 	wxString temp_image_name = image_name.c_str();
 	temp_image_name = temp_image_name.SubString(0, temp_image_name.size() - 5);
 
-	wxString wxs_NG_num = "";
+	//wxString wxs_NG_num = "";
+	wxs_NG_num = "";
 
 	wxString temp_path = image_path;
 	temp_path = image_path.substr(0, image_path.size() - image_name.size() - 1);
@@ -902,15 +925,16 @@ void ImageModel::OnDetection(bool send_result_flag, cv::Mat cvSrcmat, string ima
 //	vecter_result.clear();
 
 	curl_interface curl_if(m_save_ai_path.ToStdString().c_str(), 15);
-	int img_num = 0;
-
+	//int img_num = 0;
+	img_num = 0;
 	if (!vecter_result.empty())
 	{
 		Lock_(true);
 		m_refresh_window->DrawResult(vecter_result, image_data);
 		//添加截图数据
 //		m_wx_vector_list.clear();
-		vector<wxRect> wx_vector_list;
+		//vector<wxRect> wx_vector_list;
+		wx_vector_list.clear();
 		wx_vector_list = m_refresh_window->GetwxRectList();
 
 		wxImage temp_image;
@@ -951,9 +975,33 @@ void ImageModel::OnDetection(bool send_result_flag, cv::Mat cvSrcmat, string ima
 			vector<wxRect>::iterator it = wx_vector_list.begin();
 			//string name = "";
 			//int index = 0;
+			//add threadpool
+			int l_vectest = 0;
+			if (!m_postParaVec.empty())
+			{
+				std::list<PostPara>::iterator l_it = m_postParaVec.begin();
+				while (l_it != m_postParaVec.end())
+				{
+					if (l_it->m_splitList != nullptr)
+					{
+						//delete l_it->m_splitList;
+						l_it->m_splitList->clear();
+					}
+					if (l_it->m_puzzle.m_data != nullptr)
+					{
+						delete l_it->m_puzzle.m_data;
+						l_it->m_puzzle.m_data = nullptr;
+					}
+					l_it->m_errRedVec.clear();
+					l_it = m_postParaVec.erase(l_it);
+				}
+			}
+		//	cout << "m_postParaVec==========" << m_postParaVec.size() << endl;
+		//	m_postParaVec.clear();
+
+			m_aiNgNum = 0;
 			while (true)
 			{
-			//	index++;
 				bool l_isEnd = false;
 				if (l_realNum > MAXIMAGENUM)
 				{
@@ -961,6 +1009,7 @@ void ImageModel::OnDetection(bool send_result_flag, cv::Mat cvSrcmat, string ima
 					l_exitFlag = l_realNum;
 					s_image_temp->SetImageNum(MAXIMAGENUM);
 					l_picNum = MAXIMAGENUM;
+
 				}
 				else
 				{
@@ -969,12 +1018,12 @@ void ImageModel::OnDetection(bool send_result_flag, cv::Mat cvSrcmat, string ima
 					s_image_temp->SetImageNum(l_realNum);
 					l_picNum = l_realNum;
 				}
-
+				
 				if (l_exitFlag == 0)
 				{
 					l_isEnd = true;
 				}
-				
+
 				list_split_rect_temp = s_image_temp->Buf2List();
 				it_split = list_split_rect_temp->begin();
 				s_image_temp->SetSingImageStatu(true);
@@ -1011,18 +1060,34 @@ void ImageModel::OnDetection(bool send_result_flag, cv::Mat cvSrcmat, string ima
 				}
 
 			//if (m_save_is_use_ai)
-				{
+				//{
 					s_image_temp->List2Buf();
 					int size_img = 224;
 					int size_side = s_image_temp->GetAiImageSideNum();
 
-					ImageU1 temp_imgu1(size_side*size_img, size_side*size_img);
+					//ImageU1 temp_imgu1(size_side*size_img, size_side*size_img);
 
-					std::memcpy(temp_imgu1.m_data, s_image_temp->GetImageBuf(size_side*size_side), size_side*size_side*size_img*size_img);
+					//std::memcpy(temp_imgu1.m_data, s_image_temp->GetImageBuf(size_side*size_side), size_side*size_side*size_img*size_img);
 					//cv::Mat l_srcMat = cv::Mat(temp_imgu1.m_height, temp_imgu1.m_width, CV_8UC1, temp_imgu1.m_data);
 					//name = "image" + std::to_string(index)+".jpg";
 					//cv::imwrite(name, l_srcMat);
-					img_num = PostAnAllImage2AI(*list_split_rect_temp, temp_imgu1, &curl_if, *s_image_temp, 5, temp_image, ErrRedRect, temp_rect, image_name, temp_path);
+					//
+					PostPara l_postPara;
+					l_postPara.m_splitList = list_split_rect_temp;
+					l_postPara.m_puzzle.m_width = size_side*size_img;
+					l_postPara.m_puzzle.m_height = size_side*size_img;
+					l_postPara.m_puzzle.Create(size_side*size_img, size_side*size_img);
+					std::memcpy(l_postPara.m_puzzle.m_data, s_image_temp->GetImageBuf(size_side*size_side), size_side*size_side*size_img*size_img);
+				//l_postPara.m_puzzle = temp_imgu1;
+					l_postPara.m_errRedVec = ErrRedRect;
+					m_postParaVec.push_back(l_postPara);
+
+					m_rectList.clear();
+					m_rectList = temp_rect;
+					m_imageName = image_name;
+					m_imagePath = temp_path;
+
+					/*img_num = PostAnAllImage2AI(*list_split_rect_temp, temp_imgu1, &curl_if, *s_image_temp, 5, temp_image, ErrRedRect, temp_rect, image_name, temp_path);
 
 					if (-2 == img_num || -1 == img_num)
 					{
@@ -1064,20 +1129,35 @@ void ImageModel::OnDetection(bool send_result_flag, cv::Mat cvSrcmat, string ima
 							wxs_NG_num << l_aiNgNum;
 						}
 
-					}
-
+					}*/
 					s_image_temp->SetSingImageStatu(false);
-
-				}
 				
+			//	}
+
 				if (l_isEnd)
 				{
 					break;
 				}
-
+	
 			}//while
+	
+			int l_num = 0;
+			 int l_threadNum = m_postParaVec.size();
+			 m_threadPool->Start(l_threadNum);
+		   m_threadPool->SetExitThread(l_threadNum);
+			
+			 for (PostPara& para: m_postParaVec)
+			{
+			//	this_thread::sleep_for(chrono::milliseconds(200));
+				l_num++;
+				m_threadPool->SetRunNum(l_num);
+				std::function<void()> l_task = bind(ImageModel::PostImageFun,std::ref(para), /*std::ref(curl_if),*/ std::ref(temp_image));
+				m_threadPool->AddTask(l_task);
+			}
 
-		}
+			 m_threadPool->Finish();
+			 wxs_NG_num << m_aiNgNum;
+		}//AI
 		else
 		{
 			//算法结果
@@ -1109,7 +1189,6 @@ void ImageModel::OnDetection(bool send_result_flag, cv::Mat cvSrcmat, string ima
 
 			wxs_NG_num << wx_vector_list.size();
 		}
-
 		//todo
 		Lock_(true);
 		std::map<string, list<wxRect>> l_mapRect = m_data->GetRedRectMap();
@@ -1152,7 +1231,7 @@ void ImageModel::OnDetection(bool send_result_flag, cv::Mat cvSrcmat, string ima
 		}
 	}
 
-	
+	cout << "wxs_result :" << wxs_result << endl;
 	//在列表界面加入检测后信息
 	wxString wxs_now_time;
 	wxs_now_time = GetNowTime(1).c_str();
@@ -1385,6 +1464,7 @@ void ImageModel::OnDetection(bool send_result_flag, cv::Mat cvSrcmat, string ima
 	}
 	msg = "图片转移完成";
 	MyLog::LogMessage(msg.mb_str());
+	cout << "Image Change" << endl;
 }
 //粒子检测
 bool ImageModel::OnLiziDetection(wxString grp_path, string grp_name, wxString org_path, string org_name)
@@ -1844,6 +1924,138 @@ void ImageModel::PlanOneAutoBtnFlag(bool flag)
 }
 
 
+void ImageModel::SendAIPicNum(SingleImage* sImage,list<SplitRect>* spitRectLsit,list<SplitRect>::iterator splitIt,vector<cv::Rect>::iterator rectIt, vector<wxRect>::iterator wxRectIt, int picNum, wxImage& tempImage, string& imageName, string& imagePath, curl_interface& curl_if, list<wxRect>& temp_rect)
+{
+	spitRectLsit = sImage->Buf2List();
+	splitIt = spitRectLsit->begin();
+	sImage->SetSingImageStatu(true);
+
+	//msg = "准备拼大图";
+	//MyLog::LogMessage(msg.mb_str());
+	vector<wxRect> ErrRedRect;
+	ErrRedRect.clear();
+	cout << "picNum=== : " << picNum << endl;
+	
+	for (int i = 0; i < picNum; i++/*, rectIt++, wxRectIt++*/)
+	{
+		//if (m_save_is_use_ai)
+		{
+			rectIt++, wxRectIt++;
+			cout << "picNumI : " << i << endl;
+			wxImage AI_temp_image;
+			AI_temp_image = tempImage.GetSubImage(wxRect(wxRectIt->x, wxRectIt->y, wxRectIt->width, wxRectIt->height));
+
+			wxString wxs_algorithm = "";
+			wxs_algorithm = wxString::Format("yw-%d", i);
+			string str_algorithm = "";
+			str_algorithm = wxs_algorithm.c_str();
+			SaveImageData(AI_temp_image, str_algorithm, imageName, imagePath);
+
+			ImageU1 img_u1(224, 224);
+			img_u1.CopyFromWxImage(tempImage.GetSubImage(wxRect(wxRectIt->x, wxRectIt->y, wxRectIt->width, wxRectIt->height)));
+
+			std::memcpy(splitIt->getData(), img_u1.m_data, wxRectIt->width *wxRectIt->height);
+
+			splitIt->setRoi(RoiRect(wxRectIt->x, wxRectIt->y, wxRectIt->width, wxRectIt->height));
+			splitIt++;
+			ErrRedRect.push_back(wxRect(rectIt->x, rectIt->y, rectIt->width, rectIt->height));
+
+		}
+
+	}
+	
+
+	{
+		sImage->List2Buf();
+		int size_img = 224;
+		int size_side = sImage->GetAiImageSideNum();
+
+		ImageU1 temp_imgu1(size_side*size_img, size_side*size_img);
+
+		std::memcpy(temp_imgu1.m_data, sImage->GetImageBuf(size_side*size_side), size_side*size_side*size_img*size_img);
+		//cv::Mat l_srcMat = cv::Mat(temp_imgu1.m_height, temp_imgu1.m_width, CV_8UC1, temp_imgu1.m_data);
+		//name = "image" + std::to_string(index)+".jpg";
+		//cv::imwrite(name, l_srcMat);
+		img_num = PostAnAllImage2AI(*spitRectLsit, temp_imgu1, &curl_if, *sImage, 5, tempImage, ErrRedRect, temp_rect, imageName, imagePath);
+
+		if (-2 == img_num || -1 == img_num)
+		{
+			int i = 1;
+		//	rectIt = vecter_result.begin();
+			//for (vector<wxRect>::iterator it = wx_vector_list.begin(); it != wx_vector_list.end(); it++, rectIt++)
+			//{
+			//	wxs_result = "NG";
+			//	s_verify sy;
+			//	sy.m_pos_code = wxString::Format("AI-%d", i).ToStdString();
+			//	sy.m_rect = wxRect(100 * i, 100 * i, 500, 500);
+			//	sy.m_img = wxImage(tempImage).GetSubImage(wxRect(it->x, it->y, it->width, it->height));
+			//	sy.m_ng_rect = SaveNGRect(wxRect(it->x, it->y, it->width, it->height), cv::Rect(rectIt->x, rectIt->y, rectIt->width, rectIt->height));
+			//	SaveImageData(sy.m_img, sy.m_pos_code, imageName, imagePath);
+			//	sy.m_pos_x = 0;
+			//	sy.m_err_num = 1;
+			//	sy.m_len = 0;
+			//	sy.m_line_name = "X10101";
+			//	sy.m_pos_y = 0;
+			//	sy.m_type = 1;
+
+			//	m_list_data.push_back(sy);
+			//	temp_rect.push_back(sy.m_ng_rect);
+
+			//	//msg = wxString::Format("AI超时，保存算法结果缺陷图%d", i);
+			//	//MyLog::LogWarning(msg.mb_str());
+
+			//	i++;
+			//}
+			wxs_NG_num << wx_vector_list.size();
+			sImage->SetSingImageStatu(false);
+			//break;
+		}
+		else
+		{
+		//	l_aiNgNum += img_num;
+			//if (l_isEnd)
+			{
+				wxs_NG_num << img_num;
+			}
+
+		}
+
+		sImage->SetSingImageStatu(false);
+
+	}
+
+}
+
+void ImageModel::PostImageFun(PostPara& para,/* curl_interface& curlIf,*/ wxImage& tempImage)
+{
+	unique_lock<mutex> l_lock(m_mutexPost);
+	img_num = 0;
+	curl_interface curl_if(m_save_ai_path.ToStdString().c_str(), 15);
+	list<SplitRect>* l_spitRect = para.m_splitList;
+	//ImageU1 l_puzzle(para.m_puzzle.m_width,para.m_puzzle.m_height);
+	//l_puzzle = para.m_puzzle;
+	vector<wxRect> l_rectVec = para.m_errRedVec;
+
+	img_num = PostAnAllImage2AI(*l_spitRect, para.m_puzzle, &curl_if, *s_image_temp, 5, tempImage, l_rectVec, m_rectList, m_imageName, m_imagePath);
+	l_lock.unlock();
+
+	if (-2 == img_num || -1 == img_num)
+	{
+	//	wxs_NG_num << wx_vector_list.size();
+		unique_lock<mutex> l_lock(m_mutexPic);
+		m_aiNgNum = wx_vector_list.size();
+		l_lock.unlock();
+	}
+	else
+	{
+		unique_lock<mutex> l_lock(m_mutexPic);
+		m_aiNgNum += img_num;
+		l_lock.unlock();
+		//wxs_NG_num << img_num;
+	}
+
+}
+
 void ImageModel::ChangeResult()
 {
 	int OK_num = 0;
@@ -1856,7 +2068,6 @@ void ImageModel::ChangeResult()
 	{
 		OK_num += m_preOkNum;
 		Ng_num += m_preNgNum;
-
 	}
 	//todo1
 	for (list<paper_file>::iterator it = m_list_paper_file.begin(); it != m_list_paper_file.end(); it++)
@@ -1954,7 +2165,7 @@ bool ImageModel::PostAnImage2AI(gf::Point2d top_left, ImageMsg *im, curl_interfa
 int ImageModel::PostAnAllImage2AI(list<SplitRect> &list_split, ImageU1 &split_img, curl_interface *curl_if, SingleImage &sing_img, double len, wxImage &ng_image, vector<wxRect> &ErrRect, list<wxRect> &temp_rect, string temp_pic_name, wxString temp_path)
 {
 	char *content = NULL;
-	
+
 	DWORD  time_1 = GetTickCount();
 	if (curl_if->post_gray_raw_type("xxxx.jpg", split_img.m_data, split_img.m_width, split_img.m_height, &content) && content != NULL)
 	{
@@ -2037,7 +2248,6 @@ int ImageModel::PostAnAllImage2AI(list<SplitRect> &list_split, ImageU1 &split_im
 	else
 	{
 		cout << "SampleMsg >> " << "post gray raw fail, or no content returned." << curl_if->get_code_res() << endl;
-		wxLogError(wxString::Format("%s(%d) post gray raw fail, or no content returned.", __FILE__, __LINE__));
 
 		wxString msg = wxString::Format("post gray raw fail, or no content returned. %d", curl_if->get_code_res());
 		MyLog::LogError(msg.c_str());
