@@ -1,38 +1,47 @@
+Connecting to AI FTP.http://192.168.20.188:30003/predict
+OnDetection start:20201228\test\000012_S2J0CSI0GS7\[000012]XU01_081711.jpg
 XU01: x:613 y:389
 [INFO]£ºProgram begin!
 [INFO]: step1 begin!
 [INFO]: step1, get transform success!
 [INFO]: step2-begin!
+OnDetection start:20201228\test\000012_S2J0CSI0GS7\[000012]XU02_081712.jpg
 [INFO]: step2 transform success!
 [INFO]: step3-begin!
 XU02: x:613 y:491
+OnDetection start:20201228\test\000012_S2J0CSI0GS7\[000012]XU03_081712.jpg
 XU03: x:531 y:614
-vecter_result======:  0
+OnDetection start:20201228\test\000012_S2J0CSI0GS7\[000012]XU04_081712.jpg
 wxs_result :OK
-vecter_result======:  0
+OnDetection start:20201228\test\000012_S2J0CSI0GS7\[000012]XU05_081712.jpg
 wxs_result :OK
-vecter_result======:  0
-wxs_result :OK
+OnDetection start:20201228\test\000012_S2J0CSI0GS7\[000012]XU06_081712.jpg
 Image Change
-20201225\test\000013_S2J0CSI0GS4\[000013]XU04_081803.jpg:  ===Task take time:=== 1.781s
+OnDetection stop:20201228\test\000012_S2J0CSI0GS7\[000012]XU04_081712.jpg
+Task1 >> time:1.734s
+wxs_result :OK
+OnDetection start:20201228\test\000012_S2J0CSI0GS7\[000012]YL01_081701.jpg
 YL01: x:978 y:743
+OnDetection start:20201228\test\000012_S2J0CSI0GS7\[000012]YL02_081701.jpg
 Image Change
 Image Change
-20201225\test\000013_S2J0CSI0GS4\[000013]XU05_081804.jpg:  ===Task take time:=== 1.359s
-20201225\test\000013_S2J0CSI0GS4\[000013]XU06_081804.jpg:  ===Task take time:=== 0.859s
+OnDetection stop:20201228\test\000012_S2J0CSI0GS7\[000012]XU05_081712.jpg
+Task1 >> time:1.828s
+OnDetection stop:20201228\test\000012_S2J0CSI0GS7\[000012]XU06_081712.jpg
+Task1 >> time:1.422s
 YL02: x:1247 y:980
 [INFO]: step3-success!
 [INFO]: step4-begin!
 [INFO]: step4-success!
 [INFO]: step5 begin!
 [INFO]: step5 detect success!
-20201225\test\000013_S2J0CSI0GS4\[000013]XU01_081803.jpgForeign Task:8.859S
+20201228\test\000012_S2J0CSI0GS7\[000012]XU01_081711.jpg:  ForeignMaterialDetector:6.891S
 [INFO]£ºProgram begin!
 [INFO]: step1 begin!
-vecter_result======:  0
 wxs_result :OK
 Image Change
-20201225\test\000013_S2J0CSI0GS4\[000013]XU01_081803.jpg:  ===Task take time:=== 9.406s
+OnDetection stop:20201228\test\000012_S2J0CSI0GS7\[000012]XU01_081711.jpg
+Task1 >> time:7.484s
 [INFO]: step1, get transform success!
 [INFO]: step2-begin!
 [INFO]: step2 transform success!
@@ -42,96 +51,149 @@ Image Change
 [INFO]: step4-success!
 [INFO]: step5 begin!
 [INFO]: step5 detect success!
-20201225\test\000013_S2J0CSI0GS4\[000013]XU02_081803.jpgForeign Task:6.078S
+20201228\test\000012_S2J0CSI0GS7\[000012]XU02_081712.jpg:  ForeignMaterialDetector:6.125S
 [INFO]£ºProgram begin!
 [INFO]: step1 begin!
-vecter_result======:  0
-wxs_result :OK
-Image Change
-20201225\test\000013_S2J0CSI0GS4\[000013]XU02_081803.jpg:  ===Task take time:=== 15.063s
+ImagePool :1
 [INFO]: step1, get transform success!
 [INFO]: step2-begin!
 [INFO]: step2 transform success!
 [INFO]: step3-begin!
+===Exit threadPool===
+content: {
+  "id": "2ea2e10e-7bef-4354-9f5c-8a665429d610", 
+  "predictions": [], 
+  "success": true
+}
+-------9d7f`Õ[bµ\
+SampleMsg >> AI trans  :0.078s
+wxs_result :OK
+Image Change
+OnDetection stop:20201228\test\000012_S2J0CSI0GS7\[000012]XU02_081712.jpg
+Task1 >> time:14.188s
 [INFO]: step3-success!
 [INFO]: step4-begin!
 [INFO]: step4-success!
 [INFO]: step5 begin!
 [INFO]: step5 detect success!
-20201225\test\000013_S2J0CSI0GS4\[000013]XU03_081803.jpgForeign Task:5.953S
+20201228\test\000012_S2J0CSI0GS7\[000012]XU03_081712.jpg:  ForeignMaterialDetector:6.156S
 [INFO]£ºProgram begin!
 [INFO]: step1 begin!
-vecter_result======:  0
-wxs_result :OK
-Image Change
-20201225\test\000013_S2J0CSI0GS4\[000013]XU03_081803.jpg:  ===Task take time:=== 20.469s
+ImagePool :1
 [INFO]: step1, get transform success!
 [INFO]: step2-begin!
+===Exit threadPool===
 [INFO]: step2 transform success!
 [INFO]: step3-begin!
+content: {
+  "id": "b63f9279-7091-401e-9c06-e52cce39b0cd", 
+  "predictions": [], 
+  "success": true
+}
+
+SampleMsg >> AI trans  :0.016s
+wxs_result :OK
+Image Change
+OnDetection stop:20201228\test\000012_S2J0CSI0GS7\[000012]XU03_081712.jpg
+Task1 >> time:19.563s
 [INFO]: step3-success!
 [INFO]: step4-begin!
 [INFO]: step4-success!
 [INFO]: step5 begin!
 [INFO]: step5 detect success!
-20201225\test\000013_S2J0CSI0GS4\[000013]YL01_081752.jpgForeign Task:2.938S
+20201228\test\000012_S2J0CSI0GS7\[000012]YL01_081701.jpg:  ForeignMaterialDetector:3.578S
 [INFO]£ºProgram begin!
 [INFO]: step1 begin!
-vecter_result======:  0
-wxs_result :OK
-Image Change
-20201225\test\000013_S2J0CSI0GS4\[000013]YL01_081752.jpg:  ===Task take time:=== 21.047s
+ImagePool :3
 [INFO]: step1, get transform success!
 [INFO]: step2-begin!
+===Exit threadPool===
+content: {
+  "id": "5ffd982e-b54b-4071-85da-00b7ecc952f4", 
+  "predictions": [], 
+  "success": true
+}
+
+SampleMsg >> AI trans  :0.11s
 [INFO]: step2 transform success!
 [INFO]: step3-begin!
+wxs_result :OK
+Image Change
+OnDetection stop:20201228\test\000012_S2J0CSI0GS7\[000012]YL01_081701.jpg
+Task1 >> time:21.172s
 [INFO]: step3-success!
 [INFO]: step4-begin!
 [INFO]: step4-success!
 [INFO]: step5 begin!
 [INFO]: step5 detect success!
-20201225\test\000013_S2J0CSI0GS4\[000013]YL02_081753.jpgForeign Task:2.781S
-vecter_result======:  0
+20201228\test\000012_S2J0CSI0GS7\[000012]YL02_081701.jpg:  ForeignMaterialDetector:3.11S
+ImagePool :3
+===Exit threadPool===
+content: {
+  "id": "2b081315-f08a-406a-b8dc-588256448b59", 
+  "predictions": [], 
+  "success": true
+}
+
+SampleMsg >> AI trans  :0.109s
 wxs_result :OK
 Image Change
-20201225\test\000013_S2J0CSI0GS4\[000013]YL02_081753.jpg:  ===Task take time:=== 23.906s
+OnDetection stop:20201228\test\000012_S2J0CSI0GS7\[000012]YL02_081701.jpg
+Task1 >> time:24.188s
+OnDetection start:20201228\test\000013_S2J0CSI0GS4\[000013]XU01_081803.jpg
 XU01: x:613 y:389
 [INFO]£ºProgram begin!
 [INFO]: step1 begin!
 [INFO]: step1, get transform success!
 [INFO]: step2-begin!
+OnDetection start:20201228\test\000013_S2J0CSI0GS4\[000013]XU02_081803.jpg
 XU02: x:613 y:491
 [INFO]: step2 transform success!
 [INFO]: step3-begin!
+OnDetection start:20201228\test\000013_S2J0CSI0GS4\[000013]XU03_081803.jpg
 XU03: x:531 y:614
-vecter_result======:  0
+OnDetection start:20201228\test\000013_S2J0CSI0GS4\[000013]XU04_081803.jpg
 wxs_result :OK
-vecter_result======:  0
-wxs_result :OK
+OnDetection start:20201228\test\000013_S2J0CSI0GS4\[000013]XU05_081804.jpg
 Image Change
-20201225\test\000014_S2J0CSI0GQM\[000014]XU04_081913.jpg:  ===Task take time:=== 1.453s
-vecter_result======:  0
+OnDetection stop:20201228\test\000013_S2J0CSI0GS4\[000013]XU04_081803.jpg
+Task1 >> time:1.219s
 wxs_result :OK
+OnDetection start:20201228\test\000013_S2J0CSI0GS4\[000013]XU06_081804.jpg
+wxs_result :OK
+OnDetection start:20201228\test\000013_S2J0CSI0GS4\[000013]YL01_081752.jpg
 YL01: x:978 y:743
-Image Change
-Image Change
-20201225\test\000014_S2J0CSI0GQM\[000014]XU05_081913.jpg:  ===Task take time:=== 1.281s
-20201225\test\000014_S2J0CSI0GQM\[000014]XU06_081913.jpg:  ===Task take time:=== 0.844s
+OnDetection start:20201228\test\000013_S2J0CSI0GS4\[000013]YL02_081753.jpg
+Image ChangeImage Change
+
+OnDetection stop:20201228\test\000013_S2J0CSI0GS4\[000013]XU06_081804.jpg
+Task1 >> time:1.313s
+OnDetection stop:20201228\test\000013_S2J0CSI0GS4\[000013]XU05_081804.jpg
+Task1 >> time:1.719s
 YL02: x:1247 y:980
 [INFO]: step3-success!
 [INFO]: step4-begin!
 [INFO]: step4-success!
 [INFO]: step5 begin!
 [INFO]: step5 detect success!
-20201225\test\000014_S2J0CSI0GQM\[000014]XU01_081912.jpgForeign Task:6.485S
+20201228\test\000013_S2J0CSI0GS4\[000013]XU01_081803.jpg:  ForeignMaterialDetector:6.937S
 [INFO]£ºProgram begin!
 [INFO]: step1 begin!
-vecter_result======:  0
-wxs_result :OK
-Image Change
-20201225\test\000014_S2J0CSI0GQM\[000014]XU01_081912.jpg:  ===Task take time:=== 7.016s
+ImagePool :1
 [INFO]: step1, get transform success!
 [INFO]: step2-begin!
+===Exit threadPool===
+content: {
+  "id": "f7a79271-e6c9-4290-bdb0-e80ba7e827de", 
+  "predictions": [], 
+  "success": true
+}
+
+SampleMsg >> AI trans  :0.031s
+wxs_result :OK
+Image Change
+OnDetection stop:20201228\test\000013_S2J0CSI0GS4\[000013]XU01_081803.jpg
+Task1 >> time:8.016s
 [INFO]: step2 transform success!
 [INFO]: step3-begin!
 [INFO]: step3-success!
@@ -139,15 +201,24 @@ Image Change
 [INFO]: step4-success!
 [INFO]: step5 begin!
 [INFO]: step5 detect success!
-20201225\test\000014_S2J0CSI0GQM\[000014]XU02_081913.jpgForeign Task:6.093S
+20201228\test\000013_S2J0CSI0GS4\[000013]XU02_081803.jpg:  ForeignMaterialDetector:6.282S
 [INFO]£ºProgram begin!
 [INFO]: step1 begin!
-vecter_result======:  0
-wxs_result :OK
-Image Change
-20201225\test\000014_S2J0CSI0GQM\[000014]XU02_081913.jpg:  ===Task take time:=== 12.703s
+ImagePool :1
 [INFO]: step1, get transform success!
 [INFO]: step2-begin!
+===Exit threadPool===
+content: {
+  "id": "3638d026-92a5-418e-b6e2-d4ae8866e236", 
+  "predictions": [], 
+  "success": true
+}
+
+SampleMsg >> AI trans  :0.125s
+wxs_result :OK
+Image Change
+OnDetection stop:20201228\test\000013_S2J0CSI0GS4\[000013]XU02_081803.jpg
+Task1 >> time:14.078s
 [INFO]: step2 transform success!
 [INFO]: step3-begin!
 [INFO]: step3-success!
@@ -155,15 +226,49 @@ Image Change
 [INFO]: step4-success!
 [INFO]: step5 begin!
 [INFO]: step5 detect success!
-20201225\test\000014_S2J0CSI0GQM\[000014]XU03_081913.jpgForeign Task:5.86S
+20201228\test\000013_S2J0CSI0GS4\[000013]XU03_081803.jpg:  ForeignMaterialDetector:6.25S
 [INFO]£ºProgram begin!
 [INFO]: step1 begin!
-vecter_result======:  0
-wxs_result :OK
-Image Change
-20201225\test\000014_S2J0CSI0GQM\[000014]XU03_081913.jpg:  ===Task take time:=== 18.094s
+ImagePool :3
 [INFO]: step1, get transform success!
 [INFO]: step2-begin!
+===Exit threadPool===
+[INFO]: step2 transform success!
+[INFO]: step3-begin!
+content: {
+  "id": "daa49d34-1066-4414-a848-8255ade97eb8", 
+  "predictions": [], 
+  "success": true
+}
+HPX]\ZXUSRQWŒJ
+SampleMsg >> AI trans  :0.125s
+wxs_result :OK
+Image Change
+OnDetection stop:20201228\test\000013_S2J0CSI0GS4\[000013]XU03_081803.jpg
+Task1 >> time:20s
+[INFO]: step3-success!
+[INFO]: step4-begin!
+[INFO]: step4-success!
+[INFO]: step5 begin!
+[INFO]: step5 detect success!
+20201228\test\000013_S2J0CSI0GS4\[000013]YL01_081752.jpg:  ForeignMaterialDetector:3.203S
+[INFO]£ºProgram begin!
+[INFO]: step1 begin!
+ImagePool :3
+===Exit threadPool===
+[INFO]: step1, get transform success!
+[INFO]: step2-begin!
+content: {
+  "id": "17305d5f-6186-4919-9aa8-abecbe82c2e8", 
+  "predictions": [], 
+  "success": true
+}
+ifcVL;(ÇWÄ
+SampleMsg >> AI trans  :0.109s
+wxs_result :OK
+Image Change
+OnDetection stop:20201228\test\000013_S2J0CSI0GS4\[000013]YL01_081752.jpg
+Task1 >> time:21.141s
 [INFO]: step2 transform success!
 [INFO]: step3-begin!
 [INFO]: step3-success!
@@ -171,64 +276,449 @@ Image Change
 [INFO]: step4-success!
 [INFO]: step5 begin!
 [INFO]: step5 detect success!
-20201225\test\000014_S2J0CSI0GQM\[000014]YL01_081902.jpgForeign Task:2.906S
-[INFO]£ºProgram begin!
-[INFO]: step1 begin!
-vecter_result======:  0
+20201228\test\000013_S2J0CSI0GS4\[000013]YL02_081753.jpg:  ForeignMaterialDetector:3.25S
+ImagePool :3
+===Exit threadPool===
+content: {
+  "id": "5aeb102e-cca5-4e53-b525-e49f308e0b0d", 
+  "predictions": [], 
+  "success": true
+}
+
+SampleMsg >> AI trans  :0.125s
 wxs_result :OK
 Image Change
-20201225\test\000014_S2J0CSI0GQM\[000014]YL01_081902.jpg:  ===Task take time:=== 18.797s
-[INFO]: step1, get transform success!
-[INFO]: step2-begin!
-[INFO]: step2 transform success!
-[INFO]: step3-begin!
-[INFO]: step3-success!
-[INFO]: step4-begin!
-[INFO]: step4-success!
-[INFO]: step5 begin!
-[INFO]: step5 detect success!
-20201225\test\000014_S2J0CSI0GQM\[000014]YL02_081902.jpgForeign Task:2.859S
-vecter_result======:  17
-wx_vector_list.size:===============  17
-wxs_result :NG
-Image Change
-20201225\test\000014_S2J0CSI0GQM\[000014]YL02_081902.jpg:  ===Task take time:=== 22.641s
+OnDetection stop:20201228\test\000013_S2J0CSI0GS4\[000013]YL02_081753.jpg
+Task1 >> time:24.281s
+OnDetection start:20201228\test\000014_S2J0CSI0GQM\[000014]XU01_081912.jpg
 XU01: x:613 y:389
 [INFO]£ºProgram begin!
 [INFO]: step1 begin!
 [INFO]: step1, get transform success!
 [INFO]: step2-begin!
+OnDetection start:20201228\test\000014_S2J0CSI0GQM\[000014]XU02_081913.jpg
 [INFO]: step2 transform success!
 [INFO]: step3-begin!
 XU02: x:613 y:491
+OnDetection start:20201228\test\000014_S2J0CSI0GQM\[000014]XU03_081913.jpg
 XU03: x:531 y:614
-vecter_result======:  0
+OnDetection start:20201228\test\000014_S2J0CSI0GQM\[000014]XU04_081913.jpg
 wxs_result :OK
-vecter_result======:  0
+OnDetection start:20201228\test\000014_S2J0CSI0GQM\[000014]XU05_081913.jpg
+Image Change
+OnDetection stop:20201228\test\000014_S2J0CSI0GQM\[000014]XU04_081913.jpg
+Task1 >> time:1.328s
 wxs_result :OK
-vecter_result======:  0
+OnDetection start:20201228\test\000014_S2J0CSI0GQM\[000014]XU06_081913.jpg
 wxs_result :OK
+OnDetection start:20201228\test\000014_S2J0CSI0GQM\[000014]YL01_081902.jpg
 YL01: x:978 y:743
+OnDetection start:20201228\test\000014_S2J0CSI0GQM\[000014]YL02_081902.jpg
 Image Change
 Image Change
-Image Change
-20201225\test\000015_S2J0CSI0GRA\[000015]XU05_082015.jpg:  ===Task take time:=== 1.375s
-20201225\test\000015_S2J0CSI0GRA\[000015]XU06_082015.jpg:  ===Task take time:=== 0.938s
-20201225\test\000015_S2J0CSI0GRA\[000015]XU04_082015.jpg:  ===Task take time:=== 1.969s
+OnDetection stop:20201228\test\000014_S2J0CSI0GQM\[000014]XU05_081913.jpg
+Task1 >> time:1.734s
+OnDetection stop:20201228\test\000014_S2J0CSI0GQM\[000014]XU06_081913.jpg
+Task1 >> time:1.297s
 YL02: x:1247 y:980
 [INFO]: step3-success!
 [INFO]: step4-begin!
 [INFO]: step4-success!
 [INFO]: step5 begin!
 [INFO]: step5 detect success!
-20201225\test\000015_S2J0CSI0GRA\[000015]XU01_082014.jpgForeign Task:6.656S
+20201228\test\000014_S2J0CSI0GQM\[000014]XU01_081912.jpg:  ForeignMaterialDetector:7.078S
 [INFO]£ºProgram begin!
 [INFO]: step1 begin!
-vecter_result======:  0
 wxs_result :OK
 Image Change
-20201225\test\000015_S2J0CSI0GRA\[000015]XU01_082014.jpg:  ===Task take time:=== 7.157s
+OnDetection stop:20201228\test\000014_S2J0CSI0GQM\[000014]XU01_081912.jpg
+Task1 >> time:7.609s
 [INFO]: step1, get transform success!
 [INFO]: step2-begin!
 [INFO]: step2 transform success!
 [INFO]: step3-begin!
+[INFO]: step3-success!
+[INFO]: step4-begin!
+[INFO]: step4-success!
+[INFO]: step5 begin!
+[INFO]: step5 detect success!
+20201228\test\000014_S2J0CSI0GQM\[000014]XU02_081913.jpg:  ForeignMaterialDetector:6.313S
+[INFO]£ºProgram begin!
+[INFO]: step1 begin!
+ImagePool :2
+[INFO]: step1, get transform success!
+[INFO]: step2-begin!
+===Exit threadPool===
+content: {
+  "id": "0bfb3cb9-27d1-4d20-a7a4-d9ca80de54b5", 
+  "predictions": [], 
+  "success": true
+}
+
+SampleMsg >> AI trans  :0.109s
+[INFO]: step2 transform success!
+[INFO]: step3-begin!
+wxs_result :OK
+Image Change
+OnDetection stop:20201228\test\000014_S2J0CSI0GQM\[000014]XU02_081913.jpg
+Task1 >> time:14.25s
+[INFO]: step3-success!
+[INFO]: step4-begin!
+[INFO]: step4-success!
+[INFO]: step5 begin!
+[INFO]: step5 detect success!
+20201228\test\000014_S2J0CSI0GQM\[000014]XU03_081913.jpg:  ForeignMaterialDetector:6.562S
+[INFO]£ºProgram begin!
+[INFO]: step1 begin!
+ImagePool :2
+[INFO]: step1, get transform success!
+[INFO]: step2-begin!
+===Exit threadPool===
+[INFO]: step2 transform success!
+[INFO]: step3-begin!
+content: {
+  "id": "43c359df-f771-4dc6-946f-3ea9beafe155", 
+  "predictions": [], 
+  "success": true
+}
+
+SampleMsg >> AI trans  :0.171s
+wxs_result :OK
+Image Change
+OnDetection stop:20201228\test\000014_S2J0CSI0GQM\[000014]XU03_081913.jpg
+Task1 >> time:20.406s
+[INFO]: step3-success!
+[INFO]: step4-begin!
+[INFO]: step4-success!
+[INFO]: step5 begin!
+[INFO]: step5 detect success!
+20201228\test\000014_S2J0CSI0GQM\[000014]YL01_081902.jpg:  ForeignMaterialDetector:3.156S
+[INFO]£ºProgram begin!
+[INFO]: step1 begin!
+ImagePool :3
+[INFO]: step1, get transform success!
+[INFO]: step2-begin!
+===Exit threadPool===
+[INFO]: step2 transform success!
+[INFO]: step3-begin!
+content: {
+  "id": "1471cd4c-3c53-4199-8ca1-3e4dd905cbde", 
+  "predictions": [], 
+  "success": true
+}
+
+SampleMsg >> AI trans  :0.125s
+wxs_result :OK
+Image Change
+OnDetection stop:20201228\test\000014_S2J0CSI0GQM\[000014]YL01_081902.jpg
+Task1 >> time:21.344s
+[INFO]: step3-success!
+[INFO]: step4-begin!
+[INFO]: step4-success!
+[INFO]: step5 begin!
+[INFO]: step5 detect success!
+20201228\test\000014_S2J0CSI0GQM\[000014]YL02_081902.jpg:  ForeignMaterialDetector:3.11S
+ImagePool :6
+===Exit threadPool===
+content: {
+  "id": "96e311e5-6035-43b9-83cb-be8480b152db", 
+  "predictions": [], 
+  "success": true
+}
+
+SampleMsg >> AI trans  :0.422s
+wxs_result :OK
+Image Change
+OnDetection stop:20201228\test\000014_S2J0CSI0GQM\[000014]YL02_081902.jpg
+Task1 >> time:24.687s
+OnDetection start:20201228\test\000015_S2J0CSI0GRA\[000015]XU01_082014.jpg
+XU01: x:613 y:389
+[INFO]£ºProgram begin!
+[INFO]: step1 begin!
+[INFO]: step1, get transform success!
+[INFO]: step2-begin!
+OnDetection start:20201228\test\000015_S2J0CSI0GRA\[000015]XU02_082014.jpg
+[INFO]: step2 transform success!
+[INFO]: step3-begin!
+XU02: x:613 y:491
+OnDetection start:20201228\test\000015_S2J0CSI0GRA\[000015]XU03_082014.jpg
+XU03: x:531 y:614
+OnDetection start:20201228\test\000015_S2J0CSI0GRA\[000015]XU04_082015.jpg
+wxs_result :OK
+OnDetection start:20201228\test\000015_S2J0CSI0GRA\[000015]XU05_082015.jpg
+Image Change
+OnDetection stop:20201228\test\000015_S2J0CSI0GRA\[000015]XU04_082015.jpg
+Task1 >> time:1.328s
+wxs_result :OK
+OnDetection start:20201228\test\000015_S2J0CSI0GRA\[000015]XU06_082015.jpg
+wxs_result :OK
+OnDetection start:20201228\test\000015_S2J0CSI0GRA\[000015]YL01_082004.jpg
+YL01: x:978 y:743
+OnDetection start:20201228\test\000015_S2J0CSI0GRA\[000015]YL02_082004.jpg
+Image Change
+Image Change
+OnDetection stop:20201228\test\000015_S2J0CSI0GRA\[000015]XU05_082015.jpg
+Task1 >> time:1.812s
+OnDetection stop:20201228\test\000015_S2J0CSI0GRA\[000015]XU06_082015.jpg
+Task1 >> time:1.39s
+YL02: x:1247 y:980
+[INFO]: step3-success!
+[INFO]: step4-begin!
+[INFO]: step4-success!
+[INFO]: step5 begin!
+[INFO]: step5 detect success!
+20201228\test\000015_S2J0CSI0GRA\[000015]XU01_082014.jpg:  ForeignMaterialDetector:6.954S
+[INFO]£ºProgram begin!
+[INFO]: step1 begin!
+ImagePool :2
+[INFO]: step1, get transform success!
+[INFO]: step2-begin!
+[INFO]: step2 transform success!
+[INFO]: step3-begin!
+===Exit threadPool===
+content: {
+  "id": "f9bccf4b-319f-4e0d-8e42-195e46714783", 
+  "predictions": [], 
+  "success": true
+}
+
+SampleMsg >> AI trans  :0.094s
+wxs_result :OK
+Image Change
+OnDetection stop:20201228\test\000015_S2J0CSI0GRA\[000015]XU01_082014.jpg
+Task1 >> time:8.719s
+[INFO]: step3-success!
+[INFO]: step4-begin!
+[INFO]: step4-success!
+[INFO]: step5 begin!
+[INFO]: step5 detect success!
+20201228\test\000015_S2J0CSI0GRA\[000015]XU02_082014.jpg:  ForeignMaterialDetector:6.593S
+[INFO]£ºProgram begin!
+[INFO]: step1 begin!
+ImagePool :3
+[INFO]: step1, get transform success!
+[INFO]: step2-begin!
+===Exit threadPool===
+[INFO]: step2 transform success!
+[INFO]: step3-begin!
+content: {
+  "id": "65c4a2ec-076f-434d-b8dc-6bbee4b9a218", 
+  "predictions": [], 
+  "success": true
+}
+
+SampleMsg >> AI trans  :0.156s
+wxs_result :OK
+Image Change
+OnDetection stop:20201228\test\000015_S2J0CSI0GRA\[000015]XU02_082014.jpg
+Task1 >> time:14.812s
+[INFO]: step3-success!
+[INFO]: step4-begin!
+[INFO]: step4-success!
+[INFO]: step5 begin!
+[INFO]: step5 detect success!
+20201228\test\000015_S2J0CSI0GRA\[000015]XU03_082014.jpg:  ForeignMaterialDetector:6.313S
+[INFO]£ºProgram begin!
+[INFO]: step1 begin!
+ImagePool :3
+[INFO]: step1, get transform success!
+[INFO]: step2-begin!
+===Exit threadPool===
+[INFO]: step2 transform success!
+[INFO]: step3-begin!
+content: {
+  "id": "61aea7ba-c85c-4134-a22d-cb9e13a5bdfc", 
+  "predictions": [], 
+  "success": true
+}
+
+SampleMsg >> AI trans  :0.125s
+wxs_result :OK
+Image Change
+OnDetection stop:20201228\test\000015_S2J0CSI0GRA\[000015]XU03_082014.jpg
+Task1 >> time:20.407s
+[INFO]: step3-success!
+[INFO]: step4-begin!
+[INFO]: step4-success!
+[INFO]: step5 begin!
+[INFO]: step5 detect success!
+20201228\test\000015_S2J0CSI0GRA\[000015]YL01_082004.jpg:  ForeignMaterialDetector:3.437S
+[INFO]£ºProgram begin!
+[INFO]: step1 begin!
+ImagePool :3
+[INFO]: step1, get transform success!
+[INFO]: step2-begin!
+===Exit threadPool===
+[INFO]: step2 transform success!
+[INFO]: step3-begin!
+content: {
+  "id": "8de74fd9-d55f-4649-b6a7-7de7d69fa398", 
+  "predictions": [], 
+  "success": true
+}
+
+SampleMsg >> AI trans  :0.125s
+wxs_result :OK
+Image Change
+OnDetection stop:20201228\test\000015_S2J0CSI0GRA\[000015]YL01_082004.jpg
+Task1 >> time:21.578s
+[INFO]: step3-success!
+[INFO]: step4-begin!
+[INFO]: step4-success!
+[INFO]: step5 begin!
+[INFO]: step5 detect success!
+20201228\test\000015_S2J0CSI0GRA\[000015]YL02_082004.jpg:  ForeignMaterialDetector:3.078S
+ImagePool :3
+===Exit threadPool===
+content: {
+  "id": "e1c5b676-7e12-4507-808e-ea2a5eb11b35", 
+  "predictions": [], 
+  "success": true
+}
+
+SampleMsg >> AI trans  :0.125s
+wxs_result :OK
+Image Change
+OnDetection stop:20201228\test\000015_S2J0CSI0GRA\[000015]YL02_082004.jpg
+Task1 >> time:24.531s
+OnDetection start:20201228\test\000016_S2J0CSI0GS8\[000016]XU01_082051.jpg
+XU01: x:613 y:389
+[INFO]£ºProgram begin!
+[INFO]: step1 begin!
+[INFO]: step1, get transform success!
+[INFO]: step2-begin!
+OnDetection start:20201228\test\000016_S2J0CSI0GS8\[000016]XU02_082051.jpg
+XU02: x:613 y:491
+[INFO]: step2 transform success!
+[INFO]: step3-begin!
+OnDetection start:20201228\test\000016_S2J0CSI0GS8\[000016]XU03_082051.jpg
+XU03: x:531 y:614
+OnDetection start:20201228\test\000016_S2J0CSI0GS8\[000016]XU04_082051.jpg
+wxs_result :OK
+OnDetection start:20201228\test\000016_S2J0CSI0GS8\[000016]XU05_082052.jpg
+wxs_result :OK
+OnDetection start:20201228\test\000016_S2J0CSI0GS8\[000016]XU06_082052.jpg
+Image Change
+OnDetection stop:20201228\test\000016_S2J0CSI0GS8\[000016]XU04_082051.jpg
+Task1 >> time:1.844s
+wxs_result :OK
+OnDetection start:20201228\test\000016_S2J0CSI0GS8\[000016]YL01_082040.jpg
+YL01: x:978 y:743
+OnDetection start:20201228\test\000016_S2J0CSI0GS8\[000016]YL02_082041.jpg
+Image ChangeImage Change
+
+OnDetection stop:20201228\test\000016_S2J0CSI0GS8\[000016]XU05_082052.jpg
+Task1 >> time:1.906s
+OnDetection stop:20201228\test\000016_S2J0CSI0GS8\[000016]XU06_082052.jpg
+Task1 >> time:1.546s
+YL02: x:1247 y:980
+[INFO]: step3-success!
+[INFO]: step4-begin!
+[INFO]: step4-success!
+[INFO]: step5 begin!
+[INFO]: step5 detect success!
+20201228\test\000016_S2J0CSI0GS8\[000016]XU01_082051.jpg:  ForeignMaterialDetector:7.016S
+[INFO]£ºProgram begin!
+[INFO]: step1 begin!
+wxs_result :OK
+Image Change
+OnDetection stop:20201228\test\000016_S2J0CSI0GS8\[000016]XU01_082051.jpg
+Task1 >> time:7.516s
+[INFO]: step1, get transform success!
+[INFO]: step2-begin!
+[INFO]: step2 transform success!
+[INFO]: step3-begin!
+[INFO]: step3-success!
+[INFO]: step4-begin!
+[INFO]: step4-success!
+[INFO]: step5 begin!
+[INFO]: step5 detect success!
+20201228\test\000016_S2J0CSI0GS8\[000016]XU02_082051.jpg:  ForeignMaterialDetector:6.203S
+[INFO]£ºProgram begin!
+[INFO]: step1 begin!
+ImagePool :3
+[INFO]: step1, get transform success!
+[INFO]: step2-begin!
+[INFO]: step2 transform success!
+[INFO]: step3-begin!
+===Exit threadPool===
+content: {
+  "id": "f62ca9eb-05aa-4ca2-a945-f7e817787a1e", 
+  "predictions": [], 
+  "success": true
+}
+
+SampleMsg >> AI trans  :0.172s
+wxs_result :OK
+Image Change
+OnDetection stop:20201228\test\000016_S2J0CSI0GS8\[000016]XU02_082051.jpg
+Task1 >> time:14.407s
+[INFO]: step3-success!
+[INFO]: step4-begin!
+[INFO]: step4-success!
+[INFO]: step5 begin!
+[INFO]: step5 detect success!
+20201228\test\000016_S2J0CSI0GS8\[000016]XU03_082051.jpg:  ForeignMaterialDetector:6.25S
+[INFO]£ºProgram begin!
+[INFO]: step1 begin!
+ImagePool :3
+[INFO]: step1, get transform success!
+[INFO]: step2-begin!
+[INFO]: step2 transform success!
+[INFO]: step3-begin!
+===Exit threadPool===
+content: {
+  "id": "7c0b7f91-0755-4515-9dc4-5ecd98ef6857", 
+  "predictions": [], 
+  "success": true
+}
+
+SampleMsg >> AI trans  :0.219s
+wxs_result :OK
+Image Change
+OnDetection stop:20201228\test\000016_S2J0CSI0GS8\[000016]XU03_082051.jpg
+Task1 >> time:20.266s
+[INFO]: step3-success!
+[INFO]: step4-begin!
+[INFO]: step4-success!
+[INFO]: step5 begin!
+[INFO]: step5 detect success!
+20201228\test\000016_S2J0CSI0GS8\[000016]YL01_082040.jpg:  ForeignMaterialDetector:3.234S
+[INFO]£ºProgram begin!
+[INFO]: step1 begin!
+ImagePool :5
+[INFO]: step1, get transform success!
+[INFO]: step2-begin!
+[INFO]: step2 transform success!
+[INFO]: step3-begin!
+===Exit threadPool===
+content: {
+  "id": "45772714-e14e-4ca8-8d07-b9dd8c4212c0", 
+  "predictions": [], 
+  "success": true
+}
+
+SampleMsg >> AI trans  :0.282s
+wxs_result :OK
+Image Change
+OnDetection stop:20201228\test\000016_S2J0CSI0GS8\[000016]YL01_082040.jpg
+Task1 >> time:21.578s
+[INFO]: step3-success!
+[INFO]: step4-begin!
+[INFO]: step4-success!
+[INFO]: step5 begin!
+[INFO]: step5 detect success!
+20201228\test\000016_S2J0CSI0GS8\[000016]YL02_082041.jpg:  ForeignMaterialDetector:3.109S
+ImagePool :5
+===Exit threadPool===
+content: {
+  "id": "16e3610d-88fc-410f-9667-dd3dc8889c92", 
+  "predictions": [], 
+  "success": true
+}
+
+SampleMsg >> AI trans  :0.266s
+wxs_result :OK
+Image Change
+OnDetection stop:20201228\test\000016_S2J0CSI0GS8\[000016]YL02_082041.jpg
+Task1 >> time:24.5s
