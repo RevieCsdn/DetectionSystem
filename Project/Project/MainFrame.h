@@ -107,7 +107,13 @@ private:
 	bool			m_is_draw_rect;
 	//////////////////////////////////
 	ListData* m_listData;
+	HasBeenTest* m_hasBeenTest;
+	list<string> m_nameList;
 	string m_strPath;
+	bool m_runExe;
+	string m_hasBeenStr;
+	wxString m_hasBeenPath;
+
 private:
 	void CreateGUIControls();
  	bool Init();

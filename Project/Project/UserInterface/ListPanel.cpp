@@ -312,6 +312,8 @@ void ListPanel::OnMouseLeftDouble(wxListEvent &event)
 					sy.m_img = wxImage(img_list[i_img]);
 					if (iter != temp_map.end())
 					{
+						//cout << "it->x: " << it->x << "it->y: " << it->y << endl;
+						//cout << "it->width: " << it->width << "it->height: " << it->height << endl;
 						sy.m_ng_rect = wxRect(it->x, it->y, it->width, it->height);
 					}
 					else
@@ -341,6 +343,8 @@ void ListPanel::OnMouseLeftDouble(wxListEvent &event)
 					sy.m_img = wxImage(img_list[i_img]);
 					if (iter != temp_map.end())
 					{
+						//cout << "it->x: " << it->x << "it->y: " << it->y << endl;
+						//cout << "it->width: " << it->width << "it->height: " << it->height << endl;
 						sy.m_ng_rect = wxRect(it->x, it->y, it->width, it->height);
 					}
 					sy.m_pos_x = 0;

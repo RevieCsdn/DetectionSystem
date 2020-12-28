@@ -337,3 +337,37 @@ private:
 	}
 
 };
+//
+class HasBeenTest
+{
+public:
+	HasBeenTest(string name = "", string path = "");
+	virtual ~HasBeenTest();
+
+	bool OnSave(string path = "");
+	static HasBeenTest* OnLoad(string path);
+
+	inline void SetTestNameList(list<string> nameList)
+	{
+		m_nameList = nameList;
+	};
+	inline list<string> GetTestNameList()
+	{
+		return m_nameList;
+	};
+	inline void ClearTestName()
+	{
+		m_nameList.clear();
+	};
+private:
+	list<string> m_nameList;
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive& ar, const unsigned int version)
+	{
+		ar& m_nameList;
+	}
+
+};

@@ -63,6 +63,8 @@ MainFrame::MainFrame(wxWindow* parent, wxWindowID id /* = -1 */, const wxString&
 
 	m_verifyDlg = NULL;
 	m_is_draw_rect = false;
+	m_hasBeenTest = nullptr;
+	m_runExe = true;
 
  	m_gProfile = Profile::Instance();
  	m_gProfile->loadIni("Ini.ini");
@@ -111,6 +113,11 @@ MainFrame::~MainFrame()
 	{
 		delete m_listData;
 		m_listData = nullptr;
+	}
+	if (m_hasBeenTest)
+	{
+		delete m_hasBeenTest;
+		m_hasBeenTest = nullptr;
 	}
 #ifdef __CHECK_SUPER_DOG__
 	if (m_superdog)
@@ -353,9 +360,6 @@ void MainFrame::RefreshPreviousData()
 		m_listData = ListData::OnLoad(m_strPath);
 	}
 	
-	//m_listData->ClearData();
-	//m_listData->OnSave(l_strPath);
-
 	std::vector<ImageInfo> l_infoVec = m_listData->GetListInfo();
 	for (ImageInfo info: l_infoVec)
 	{
@@ -369,6 +373,23 @@ void MainFrame::RefreshPreviousData()
 
 	std::map<string, list<wxRect>> l_mapRect = m_listData->GetRedRectMap();
 	m_list_panel->SetMapRedRect(l_mapRect);
+	
+	//
+	m_hasBeenPath = "./HasBeenTest.dat";
+	m_hasBeenStr = string(m_hasBeenPath.mb_str());
+	if (_access(m_hasBeenPath, 0) == -1)
+	{
+		m_hasBeenTest = new HasBeenTest;
+		m_hasBeenTest->OnSave(m_hasBeenStr);
+	}
+	//else
+	//{
+	//	m_hasBeenTest = HasBeenTest::OnLoad(m_hasBeenStr);
+	//	m_nameList = m_hasBeenTest->GetTestNameList();
+	//}
+
+	
+
 }
 
 //Menu
@@ -682,6 +703,23 @@ void MainFrame::OnSelfMotion(wxCommandEvent &)
 		}
 		m_AutomaticThread = new AutomaticDetetionThread(this);
 		m_AutomaticThread->SetImageModel(m_gModel);
+	//if (m_runExe)
+		if (_access(m_hasBeenPath, 0) == -1)
+		{
+			m_hasBeenTest = new HasBeenTest;
+			m_hasBeenTest->OnSave(m_hasBeenStr);
+		}
+
+		{
+			m_runExe = false;
+			m_hasBeenTest = HasBeenTest::OnLoad(m_hasBeenStr);
+			m_nameList = m_hasBeenTest->GetTestNameList();
+			if (!m_nameList.empty())
+			{
+				m_AutomaticThread->SetDectionList(m_nameList);
+			}
+		}
+
 		m_AutomaticThread->Create();
 		m_AutomaticThread->Run();
 
@@ -723,24 +761,24 @@ void MainFrame::OnCreateRejUi(wxThreadEvent &)
 		m_verifyDlg = nullptr;
 	}
 
-	wxString wxs_now_time;
-	wxs_now_time = m_gModel->GetNowTime(1).c_str();
+	//wxString wxs_now_time;
+	//wxs_now_time = m_gModel->GetNowTime(1).c_str();
 
-	wxString temp_image_name = m_gModel->GetImageName().c_str();
-	temp_image_name = temp_image_name.SubString(0, temp_image_name.size() - 5);
+	//wxString temp_image_name = m_gModel->GetImageName().c_str();
+	//temp_image_name = temp_image_name.SubString(0, temp_image_name.size() - 5);
 
-	wxString l_result = m_gModel->GetImageResult();
-	if (l_result == "NG")
-	{
-		m_verifyDlg = new VerifyDlg(this);
-		m_verifyDlg->SetShowImagePath(m_gModel->GetShowPath());
-		m_verifyDlg->SetTestResult(m_gModel->GetListData(), 0);
-		m_verifyDlg->SetUseTime(wxs_now_time);
-		m_verifyDlg->SetMachineSn(m_gModel->GetImageName());
-		m_verifyDlg->SetWorkSide(m_gModel->GetListData().size());
-		m_verifyDlg->SetInsTime(time(NULL));
-		m_verifyDlg->Show();
-	}
+	//wxString l_result = m_gModel->GetImageResult();
+	//if (l_result == "NG")
+	//{
+	//	m_verifyDlg = new VerifyDlg(this);
+	//	m_verifyDlg->SetShowImagePath(m_gModel->GetShowPath());
+	//	m_verifyDlg->SetTestResult(m_gModel->GetListData(), 0);
+	//	m_verifyDlg->SetUseTime(wxs_now_time);
+	//	m_verifyDlg->SetMachineSn(m_gModel->GetImageName());
+	//	m_verifyDlg->SetWorkSide(m_gModel->GetListData().size());
+	//	m_verifyDlg->SetInsTime(time(NULL));
+	//	m_verifyDlg->Show();
+	//}
 
 	if (m_gModel->GetListData().size())
 	{

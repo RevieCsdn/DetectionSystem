@@ -10,8 +10,9 @@ AutomaticDetetionThread::AutomaticDetetionThread(wxWindow *frame)
 	m_verifyDlg = NULL;
 	m_type = 0;
 
-	m_mutex = new wxMutex();
 	m_thread_pool = new ThreadPool(2, 10);
+	m_mutex = new wxMutex();
+	
 	m_b_planone_run_flag = false;
 	m_b_first = true;
 
@@ -23,6 +24,7 @@ AutomaticDetetionThread::AutomaticDetetionThread(wxWindow *frame)
 	m_wxs_dection_catalogue = "";
 
 	busy_info = NULL;
+	m_hasBeenTest = new HasBeenTest;
 }
 
 AutomaticDetetionThread::~AutomaticDetetionThread()
@@ -47,6 +49,12 @@ AutomaticDetetionThread::~AutomaticDetetionThread()
 		delete busy_info;
 		busy_info = NULL;
 	}
+	if (m_hasBeenTest)
+	{
+		delete m_hasBeenTest;
+		m_hasBeenTest = nullptr;
+	}
+
 	m_list_pic_data.clear();
 	m_list_is_dection.clear();
 }
@@ -54,6 +62,7 @@ AutomaticDetetionThread::~AutomaticDetetionThread()
 void *AutomaticDetetionThread::Entry()
 {
 	wxString msg = "";
+	
 	while (m_b_run_flag)
 	{
 		if (TestDestroy())
@@ -647,8 +656,10 @@ void *AutomaticDetetionThread::Entry()
 						}
 //	#endif
 						wxString strtemp;
+
 						strtemp = img_list[i_img].substr(m_gmodel->GetTestingPath().size() + 1, img_list[i_img].size());
 						string str = strtemp.c_str();
+						
 						//判断当前图是否检测过
 						bool is_find = false;
 						for (list<string>::iterator it = m_list_is_dection.begin(); it != m_list_is_dection.end(); it++)
@@ -660,7 +671,6 @@ void *AutomaticDetetionThread::Entry()
 							}
 						}
 						if (is_find) continue;
-
 						msg = "开始读取图并显示";
 						MyLog::LogMessage(msg.c_str());
 
@@ -686,6 +696,8 @@ void *AutomaticDetetionThread::Entry()
 							return 0;
 						}
 						m_list_is_dection.push_back(str);
+						m_hasBeenTest->SetTestNameList(m_list_is_dection);
+						m_hasBeenTest->OnSave("./HasBeenTest.dat");
 						i_file_num++;
 					}
 					//防止占用过多cup资源

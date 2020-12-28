@@ -26,7 +26,7 @@
 #include "./Util/Profile.h"
 #include "./Util/MyThreadPool.h"
 
-#define MAXIMAGENUM 400
+#define MAXIMAGENUM 900
 
 class NoTestDlg;
 using namespace  std;
@@ -100,7 +100,7 @@ private:
 	ModelPanelWindow			*m_model_panel;
 	ImagePool					*m_image_pool;
 	NoTestDlg* m_noTestDlg;
-	//static Profile* m_proFile;
+
 	static MyThreadPool* m_threadPool;
 
 public:
@@ -128,7 +128,6 @@ public:
 	void ClearPaperFileList();
 	void PlanOneAutoBtnFlag(bool flag);
 
-	static void SendAIPicNum(SingleImage* sImage, list<SplitRect>* spitRectLsit, list<SplitRect>::iterator splitIt, vector<cv::Rect>::iterator rectIt, vector<wxRect>::iterator wxRectIt,int picNum,wxImage& tempImage,string& imageName,string& imagePath, curl_interface& curl_if, list<wxRect>& temp_rect);
 	static void PostImageFun(PostPara& para, /*curl_interface& curlIf,*/ wxImage& tempImage);
 
 	inline void SetPreOkNum(int num)
@@ -436,8 +435,14 @@ private:
 	static vector<cv::Rect> vecter_result;
 	static wxString wxs_NG_num;
 	static vector<wxRect> wx_vector_list;
+	
 	static mutex m_mutexPic;
 	static mutex m_mutexPost;
+	static mutex m_mutexThread;
+	static mutex m_mutexArti;
+	static mutex m_mutexNum;
+
+
 	static list<PostPara> m_postParaVec;
 	static SingleImage* s_image_temp;
 
@@ -445,6 +450,6 @@ private:
 	static string m_imageName;
 	static string m_imagePath;
 	static int m_aiNgNum;
-
+	
 };
 

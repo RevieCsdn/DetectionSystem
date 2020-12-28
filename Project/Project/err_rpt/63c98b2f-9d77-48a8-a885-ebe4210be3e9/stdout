@@ -1,0 +1,77 @@
+OnDetection start:20201224\test\000749_S2J0BCI0MFT\[000749]XU02_161550.jpg
+XU02: x:984 y:956
+[INFO]£ºProgram begin!
+[INFO]: step1 begin!
+OnDetection start:20201224\test\000749_S2J0BCI0MFT\[000749]XU04_161551.jpg
+[INFO]: step1, get transform success!
+[INFO]: step2-begin!
+vecter_result======:  0
+wxs_result :OK
+[INFO]: step2 transform success!
+[INFO]: step3-begin!
+Image Change
+OnDetection stop:20201224\test\000749_S2J0BCI0MFT\[000749]XU04_161551.jpg
+Task1 >> time:0.812s
+[INFO]: step3-success!
+[INFO]: step4-begin!
+[INFO]: step4-success!
+[INFO]: step5 begin!
+[INFO]: step5 detect success!
+20201224\test\000749_S2J0BCI0MFT\[000749]XU02_161550.jpg:  ForeignMaterialDetector:5.234S
+vecter_result======:  2105
+wxs_result :NG
+Image Change
+OnDetection stop:20201224\test\000749_S2J0BCI0MFT\[000749]XU02_161550.jpg
+Task1 >> time:124s
+OnDetection start:20201224\test\000749_S2J0BCI0MFT\[000749]XU02_161550.jpg
+XU02: x:984 y:956
+[INFO]£ºProgram begin!
+[INFO]: step1 begin!
+OnDetection start:20201224\test\000749_S2J0BCI0MFT\[000749]XU04_161551.jpg
+[INFO]: step1, get transform success!
+[INFO]: step2-begin!
+vecter_result======:  0
+wxs_result :OK
+Image Change
+[INFO]: step2 transform success!
+[INFO]: step3-begin!
+OnDetection stop:20201224\test\000749_S2J0BCI0MFT\[000749]XU04_161551.jpg
+Task1 >> time:0.703s
+[INFO]: step3-success!
+[INFO]: step4-begin!
+[INFO]: step4-success!
+[INFO]: step5 begin!
+[INFO]: step5 detect success!
+20201224\test\000749_S2J0BCI0MFT\[000749]XU02_161550.jpg:  ForeignMaterialDetector:4.938S
+vecter_result======:  2105
+wxs_result :NG
+Image Change
+OnDetection stop:20201224\test\000749_S2J0BCI0MFT\[000749]XU02_161550.jpg
+Task1 >> time:11.297s
+Connecting to AI FTP.http://192.168.20.188:30003/predict
+OnDetection start:20201224\test\000749_S2J0BCI0MFT\[000749]XU02_161550.jpg
+XU02: x:984 y:956
+[INFO]£ºProgram begin!
+[INFO]: step1 begin!
+OnDetection start:20201224\test\000749_S2J0BCI0MFT\[000749]XU04_161551.jpg
+[INFO]: step1, get transform success!
+[INFO]: step2-begin!
+vecter_result======:  0
+wxs_result :OK
+[INFO]: step2 transform success!
+[INFO]: step3-begin!
+Image Change
+OnDetection stop:20201224\test\000749_S2J0BCI0MFT\[000749]XU04_161551.jpg
+Task1 >> time:1.36s
+[INFO]: step3-success!
+[INFO]: step4-begin!
+[INFO]: step4-success!
+[INFO]: step5 begin!
+[INFO]: step5 detect success!
+20201224\test\000749_S2J0BCI0MFT\[000749]XU02_161550.jpg:  ForeignMaterialDetector:5.578S
+vecter_result======:  2105
+ImagePool :30
+ImagePool :30
+ImagePool :18
+===Exit threadPool===
+SampleMsg >> post gray raw fail, or no content returned.28

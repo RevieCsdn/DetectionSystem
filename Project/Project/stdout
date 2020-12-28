@@ -1,1 +1,234 @@
-Connecting to AI FTP.http://192.168.20.188:30003/predict
+XU01: x:613 y:389
+[INFO]£ºProgram begin!
+[INFO]: step1 begin!
+[INFO]: step1, get transform success!
+[INFO]: step2-begin!
+[INFO]: step2 transform success!
+[INFO]: step3-begin!
+XU02: x:613 y:491
+XU03: x:531 y:614
+vecter_result======:  0
+wxs_result :OK
+vecter_result======:  0
+wxs_result :OK
+vecter_result======:  0
+wxs_result :OK
+Image Change
+20201225\test\000013_S2J0CSI0GS4\[000013]XU04_081803.jpg:  ===Task take time:=== 1.781s
+YL01: x:978 y:743
+Image Change
+Image Change
+20201225\test\000013_S2J0CSI0GS4\[000013]XU05_081804.jpg:  ===Task take time:=== 1.359s
+20201225\test\000013_S2J0CSI0GS4\[000013]XU06_081804.jpg:  ===Task take time:=== 0.859s
+YL02: x:1247 y:980
+[INFO]: step3-success!
+[INFO]: step4-begin!
+[INFO]: step4-success!
+[INFO]: step5 begin!
+[INFO]: step5 detect success!
+20201225\test\000013_S2J0CSI0GS4\[000013]XU01_081803.jpgForeign Task:8.859S
+[INFO]£ºProgram begin!
+[INFO]: step1 begin!
+vecter_result======:  0
+wxs_result :OK
+Image Change
+20201225\test\000013_S2J0CSI0GS4\[000013]XU01_081803.jpg:  ===Task take time:=== 9.406s
+[INFO]: step1, get transform success!
+[INFO]: step2-begin!
+[INFO]: step2 transform success!
+[INFO]: step3-begin!
+[INFO]: step3-success!
+[INFO]: step4-begin!
+[INFO]: step4-success!
+[INFO]: step5 begin!
+[INFO]: step5 detect success!
+20201225\test\000013_S2J0CSI0GS4\[000013]XU02_081803.jpgForeign Task:6.078S
+[INFO]£ºProgram begin!
+[INFO]: step1 begin!
+vecter_result======:  0
+wxs_result :OK
+Image Change
+20201225\test\000013_S2J0CSI0GS4\[000013]XU02_081803.jpg:  ===Task take time:=== 15.063s
+[INFO]: step1, get transform success!
+[INFO]: step2-begin!
+[INFO]: step2 transform success!
+[INFO]: step3-begin!
+[INFO]: step3-success!
+[INFO]: step4-begin!
+[INFO]: step4-success!
+[INFO]: step5 begin!
+[INFO]: step5 detect success!
+20201225\test\000013_S2J0CSI0GS4\[000013]XU03_081803.jpgForeign Task:5.953S
+[INFO]£ºProgram begin!
+[INFO]: step1 begin!
+vecter_result======:  0
+wxs_result :OK
+Image Change
+20201225\test\000013_S2J0CSI0GS4\[000013]XU03_081803.jpg:  ===Task take time:=== 20.469s
+[INFO]: step1, get transform success!
+[INFO]: step2-begin!
+[INFO]: step2 transform success!
+[INFO]: step3-begin!
+[INFO]: step3-success!
+[INFO]: step4-begin!
+[INFO]: step4-success!
+[INFO]: step5 begin!
+[INFO]: step5 detect success!
+20201225\test\000013_S2J0CSI0GS4\[000013]YL01_081752.jpgForeign Task:2.938S
+[INFO]£ºProgram begin!
+[INFO]: step1 begin!
+vecter_result======:  0
+wxs_result :OK
+Image Change
+20201225\test\000013_S2J0CSI0GS4\[000013]YL01_081752.jpg:  ===Task take time:=== 21.047s
+[INFO]: step1, get transform success!
+[INFO]: step2-begin!
+[INFO]: step2 transform success!
+[INFO]: step3-begin!
+[INFO]: step3-success!
+[INFO]: step4-begin!
+[INFO]: step4-success!
+[INFO]: step5 begin!
+[INFO]: step5 detect success!
+20201225\test\000013_S2J0CSI0GS4\[000013]YL02_081753.jpgForeign Task:2.781S
+vecter_result======:  0
+wxs_result :OK
+Image Change
+20201225\test\000013_S2J0CSI0GS4\[000013]YL02_081753.jpg:  ===Task take time:=== 23.906s
+XU01: x:613 y:389
+[INFO]£ºProgram begin!
+[INFO]: step1 begin!
+[INFO]: step1, get transform success!
+[INFO]: step2-begin!
+XU02: x:613 y:491
+[INFO]: step2 transform success!
+[INFO]: step3-begin!
+XU03: x:531 y:614
+vecter_result======:  0
+wxs_result :OK
+vecter_result======:  0
+wxs_result :OK
+Image Change
+20201225\test\000014_S2J0CSI0GQM\[000014]XU04_081913.jpg:  ===Task take time:=== 1.453s
+vecter_result======:  0
+wxs_result :OK
+YL01: x:978 y:743
+Image Change
+Image Change
+20201225\test\000014_S2J0CSI0GQM\[000014]XU05_081913.jpg:  ===Task take time:=== 1.281s
+20201225\test\000014_S2J0CSI0GQM\[000014]XU06_081913.jpg:  ===Task take time:=== 0.844s
+YL02: x:1247 y:980
+[INFO]: step3-success!
+[INFO]: step4-begin!
+[INFO]: step4-success!
+[INFO]: step5 begin!
+[INFO]: step5 detect success!
+20201225\test\000014_S2J0CSI0GQM\[000014]XU01_081912.jpgForeign Task:6.485S
+[INFO]£ºProgram begin!
+[INFO]: step1 begin!
+vecter_result======:  0
+wxs_result :OK
+Image Change
+20201225\test\000014_S2J0CSI0GQM\[000014]XU01_081912.jpg:  ===Task take time:=== 7.016s
+[INFO]: step1, get transform success!
+[INFO]: step2-begin!
+[INFO]: step2 transform success!
+[INFO]: step3-begin!
+[INFO]: step3-success!
+[INFO]: step4-begin!
+[INFO]: step4-success!
+[INFO]: step5 begin!
+[INFO]: step5 detect success!
+20201225\test\000014_S2J0CSI0GQM\[000014]XU02_081913.jpgForeign Task:6.093S
+[INFO]£ºProgram begin!
+[INFO]: step1 begin!
+vecter_result======:  0
+wxs_result :OK
+Image Change
+20201225\test\000014_S2J0CSI0GQM\[000014]XU02_081913.jpg:  ===Task take time:=== 12.703s
+[INFO]: step1, get transform success!
+[INFO]: step2-begin!
+[INFO]: step2 transform success!
+[INFO]: step3-begin!
+[INFO]: step3-success!
+[INFO]: step4-begin!
+[INFO]: step4-success!
+[INFO]: step5 begin!
+[INFO]: step5 detect success!
+20201225\test\000014_S2J0CSI0GQM\[000014]XU03_081913.jpgForeign Task:5.86S
+[INFO]£ºProgram begin!
+[INFO]: step1 begin!
+vecter_result======:  0
+wxs_result :OK
+Image Change
+20201225\test\000014_S2J0CSI0GQM\[000014]XU03_081913.jpg:  ===Task take time:=== 18.094s
+[INFO]: step1, get transform success!
+[INFO]: step2-begin!
+[INFO]: step2 transform success!
+[INFO]: step3-begin!
+[INFO]: step3-success!
+[INFO]: step4-begin!
+[INFO]: step4-success!
+[INFO]: step5 begin!
+[INFO]: step5 detect success!
+20201225\test\000014_S2J0CSI0GQM\[000014]YL01_081902.jpgForeign Task:2.906S
+[INFO]£ºProgram begin!
+[INFO]: step1 begin!
+vecter_result======:  0
+wxs_result :OK
+Image Change
+20201225\test\000014_S2J0CSI0GQM\[000014]YL01_081902.jpg:  ===Task take time:=== 18.797s
+[INFO]: step1, get transform success!
+[INFO]: step2-begin!
+[INFO]: step2 transform success!
+[INFO]: step3-begin!
+[INFO]: step3-success!
+[INFO]: step4-begin!
+[INFO]: step4-success!
+[INFO]: step5 begin!
+[INFO]: step5 detect success!
+20201225\test\000014_S2J0CSI0GQM\[000014]YL02_081902.jpgForeign Task:2.859S
+vecter_result======:  17
+wx_vector_list.size:===============  17
+wxs_result :NG
+Image Change
+20201225\test\000014_S2J0CSI0GQM\[000014]YL02_081902.jpg:  ===Task take time:=== 22.641s
+XU01: x:613 y:389
+[INFO]£ºProgram begin!
+[INFO]: step1 begin!
+[INFO]: step1, get transform success!
+[INFO]: step2-begin!
+[INFO]: step2 transform success!
+[INFO]: step3-begin!
+XU02: x:613 y:491
+XU03: x:531 y:614
+vecter_result======:  0
+wxs_result :OK
+vecter_result======:  0
+wxs_result :OK
+vecter_result======:  0
+wxs_result :OK
+YL01: x:978 y:743
+Image Change
+Image Change
+Image Change
+20201225\test\000015_S2J0CSI0GRA\[000015]XU05_082015.jpg:  ===Task take time:=== 1.375s
+20201225\test\000015_S2J0CSI0GRA\[000015]XU06_082015.jpg:  ===Task take time:=== 0.938s
+20201225\test\000015_S2J0CSI0GRA\[000015]XU04_082015.jpg:  ===Task take time:=== 1.969s
+YL02: x:1247 y:980
+[INFO]: step3-success!
+[INFO]: step4-begin!
+[INFO]: step4-success!
+[INFO]: step5 begin!
+[INFO]: step5 detect success!
+20201225\test\000015_S2J0CSI0GRA\[000015]XU01_082014.jpgForeign Task:6.656S
+[INFO]£ºProgram begin!
+[INFO]: step1 begin!
+vecter_result======:  0
+wxs_result :OK
+Image Change
+20201225\test\000015_S2J0CSI0GRA\[000015]XU01_082014.jpg:  ===Task take time:=== 7.157s
+[INFO]: step1, get transform success!
+[INFO]: step2-begin!
+[INFO]: step2 transform success!
+[INFO]: step3-begin!

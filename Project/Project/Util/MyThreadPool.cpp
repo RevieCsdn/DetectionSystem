@@ -95,7 +95,7 @@ void MyThreadPool::RunTask()
 			m_isEmpty = true;
 			if (m_runNum == m_exit)
 			{
-				cout << "m_done========" << endl;
+				cout << "===Exit threadPool===" << endl;
 				m_done = true;
 			}
 			

@@ -156,5 +156,32 @@ NoTestData* NoTestData::OnLoad(string name,string path)
 
 	return l_noTestData;
 }
+///////////////
+HasBeenTest::HasBeenTest(string name, string path)
+{
+}
 
+HasBeenTest::~HasBeenTest()
+{
+}
 
+bool HasBeenTest::OnSave(string path)
+{
+	std::ofstream ofs(path, std::ios::binary);
+	boost::archive::binary_oarchive oa(ofs);
+	oa << *this;
+	ofs.close();
+
+	return true;
+}
+
+HasBeenTest * HasBeenTest::OnLoad(string path)
+{
+	HasBeenTest *l_testData = new HasBeenTest;
+	std::ifstream ifs(path, std::ios::binary);
+	boost::archive::binary_iarchive ia(ifs);
+	ia >> *l_testData;
+	ifs.close();
+
+	return l_testData;
+}

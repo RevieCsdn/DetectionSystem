@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<CrashRpt version="1403">
+    <CrashGUID>63c98b2f-9d77-48a8-a885-ebe4210be3e9</CrashGUID>
+    <AppName>LNIApp</AppName>
+    <AppVersion>2.01</AppVersion>
+    <ImageName>D:\MyFX\DetectionVer\Project\x64\Release\Project.exe</ImageName>
+    <OperatingSystem>Windows 10 Home China Build 18363</OperatingSystem>
+    <OSIs64Bit>1</OSIs64Bit>
+    <GeoLocation>zh-cn</GeoLocation>
+    <SystemTimeUTC>2020-12-24T06:29:46Z</SystemTimeUTC>
+    <ExceptionAddress>0x7ffab279552f</ExceptionAddress>
+    <ExceptionModule>D:\MyFX\DetectionVer\Project\x64\Release\CrashRpt1403.dll</ExceptionModule>
+    <ExceptionModuleBase>0x7ffab2790000</ExceptionModuleBase>
+    <ExceptionModuleVersion>1.4.0.3</ExceptionModuleVersion>
+    <ExceptionType>4</ExceptionType>
+    <GUIResourceCount>299</GUIResourceCount>
+    <OpenHandleCount>1168</OpenHandleCount>
+    <MemoryUsageKbytes>2583736</MemoryUsageKbytes>
+    <ScreenshotInfo>
+        <VirtualScreen left="0" top="0" width="3840" height="1080" />
+        <Monitors>
+            <Monitor left="0" top="0" width="1920" height="1080" file="screenshot0.png" />
+            <Monitor left="1920" top="0" width="1920" height="1080" file="screenshot1.png" />
+        </Monitors>
+        <Windows />
+    </ScreenshotInfo>
+    <CustomProps />
+    <FileList>
+        <FileItem name="crashdump.dmp" description="Crash Minidump" />
+        <FileItem name="crashrpt.xml" description="Crash Description XML" />
+        <FileItem name="screenshot0.png" description="Desktop Screenshot" />
+        <FileItem name="screenshot1.png" description="Desktop Screenshot" />
+        <FileItem name="stdout" description="Log File2" />
+    </FileList>
+</CrashRpt>

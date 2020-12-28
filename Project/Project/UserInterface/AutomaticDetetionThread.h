@@ -7,6 +7,7 @@
 #include "../UserInterface/VerifyDlg.h"
 #include "../Util/ThreadPool.h"
 #include <wx/busyinfo.h>
+#include "../BO/DataElement.h"
 
 class AutomaticDetetionThread :
 	public wxThread
@@ -51,6 +52,12 @@ public:
 	{
 		m_type = type;
 	};
+
+	inline void SetDectionList(list<string> decList)
+	{
+	//	m_list_is_dection = decList;
+		m_list_is_dection.assign(decList.begin(), decList.end());
+	};
 	static void SetFinFileFlag(int result);
 	bool GetDirCreateTime(TCHAR* DirName, SYSTEMTIME& stime);
 
@@ -82,5 +89,7 @@ private:
 	wxBusyInfo *busy_info;
 	//若文件夹为空时，减少消耗
 	wxArrayString m_delayImage;
+	HasBeenTest* m_hasBeenTest;
+
 };
 
