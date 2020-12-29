@@ -1,6 +1,6 @@
 d:\myfx\detectionver\project\project\x64\release\vc140.pdb
-d:\myfx\detectionver\project\project\x64\release\resultdlgpanel.obj
 d:\myfx\detectionver\project\project\x64\release\refreshwindow.obj
+d:\myfx\detectionver\project\project\x64\release\popupdlg.obj
 d:\myfx\detectionver\project\project\x64\release\notestpanel.obj
 d:\myfx\detectionver\project\project\x64\release\listpanel.obj
 d:\myfx\detectionver\project\project\x64\release\imagepool.obj
@@ -26,16 +26,14 @@ d:\myfx\detectionver\project\project\x64\release\pis2.obj
 d:\myfx\detectionver\project\project\x64\release\mythreadpool.obj
 d:\myfx\detectionver\project\project\x64\release\verifydlg.obj
 d:\myfx\detectionver\project\project\x64\release\socketcenter.obj
+d:\myfx\detectionver\project\project\x64\release\resultdlgpanel.obj
+d:\myfx\detectionver\project\x64\release\project.exe
+d:\myfx\detectionver\project\x64\release\project.pdb
 d:\myfx\detectionver\project\x64\release\project.lib
 d:\myfx\detectionver\project\x64\release\project.exp
-d:\myfx\detectionver\project\x64\release\project.pdb
 d:\myfx\detectionver\project\project\x64\release\project.tlog\cl.command.1.tlog
 d:\myfx\detectionver\project\project\x64\release\project.tlog\cl.read.1.tlog
 d:\myfx\detectionver\project\project\x64\release\project.tlog\cl.write.1.tlog
-d:\myfx\detectionver\project\project\x64\release\project.tlog\link-cvtres.read.1.tlog
-d:\myfx\detectionver\project\project\x64\release\project.tlog\link-cvtres.write.1.tlog
-d:\myfx\detectionver\project\project\x64\release\project.tlog\link-rc.read.1.tlog
-d:\myfx\detectionver\project\project\x64\release\project.tlog\link-rc.write.1.tlog
 d:\myfx\detectionver\project\project\x64\release\project.tlog\link.command.1.tlog
 d:\myfx\detectionver\project\project\x64\release\project.tlog\link.read.1.tlog
 d:\myfx\detectionver\project\project\x64\release\project.tlog\link.write.1.tlog

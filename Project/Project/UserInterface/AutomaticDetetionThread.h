@@ -9,6 +9,7 @@
 #include <wx/busyinfo.h>
 #include "../BO/DataElement.h"
 
+using namespace std;
 class AutomaticDetetionThread :
 	public wxThread
 {
@@ -19,6 +20,7 @@ public:
 		ID_SEND_READ_SINGLE,
 		ID_NO_PIC,
 		ID_SEND_NG_SINGLE,
+		ID_RECIPE_ERROR,
 	};
 	AutomaticDetetionThread(wxWindow *frame);
 	virtual ~AutomaticDetetionThread();
@@ -58,6 +60,12 @@ public:
 	//	m_list_is_dection = decList;
 		m_list_is_dection.assign(decList.begin(), decList.end());
 	};
+
+	inline void SetPicesName(string name)
+	{
+		m_picesName = name;
+	};
+
 	static void SetFinFileFlag(int result);
 	bool GetDirCreateTime(TCHAR* DirName, SYSTEMTIME& stime);
 
@@ -87,9 +95,10 @@ private:
 	wxString m_wxs_dection_catalogue;//最新检测目录
 
 	wxBusyInfo *busy_info;
-	//若文件夹为空时，减少消耗
+	//若文件夹为空时，减少cpu消耗
 	wxArrayString m_delayImage;
 	HasBeenTest* m_hasBeenTest;
+	string m_picesName;
 
 };
 

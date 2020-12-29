@@ -123,13 +123,7 @@ void MyThreadPool::Finish()
 			item.join();
 		}
 	}
-	//for (auto& item: m_threads)
-	//{
-	//	if (item->joinable())
-	//	{
-	//		item->join();
-	//	}
-	//}
+
 }
 
 void MyThreadPool::SetRunNum(int num)

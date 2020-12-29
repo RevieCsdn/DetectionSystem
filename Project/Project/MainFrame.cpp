@@ -41,6 +41,8 @@ BEGIN_EVENT_TABLE(MainFrame, wxFrame)
 	EVT_THREAD(ImageModel::ID_CREATE_REJUDE_UI, MainFrame::OnCreateRejUi)
 	EVT_THREAD(AutomaticDetetionThread::ID_NO_PIC, MainFrame::OnNoPic)
 	EVT_THREAD(AutomaticDetetionThread::ID_SEND_NG_SINGLE, MainFrame::OnSendNGSingle)
+	EVT_THREAD(AutomaticDetetionThread::ID_RECIPE_ERROR, MainFrame::OnRecipeError)
+
 	EVT_CLOSE(MainFrame::OnClose)
 	EVT_SUPERDOG(-1, MainFrame::OnSuperDogShow)
 END_EVENT_TABLE()
@@ -54,17 +56,13 @@ MainFrame::MainFrame(wxWindow* parent, wxWindowID id /* = -1 */, const wxString&
 	freopen("CON", "w", stdout);			//但使用时应当保证流是可靠的。
 	freopen("CON", "w", stderr);			//这四句话保证了cout输出可以传到控制台上
 
-	wxString msg = "=========================================================================================================================";
-	MyLog::LogMessage(msg.mb_str());
-	msg = "开启软件";
-	MyLog::LogMessage(msg.mb_str());
-
 	m_AutomaticThread = NULL;
 
 	m_verifyDlg = NULL;
 	m_is_draw_rect = false;
 	m_hasBeenTest = nullptr;
 	m_runExe = true;
+	//l_pop = nullptr;
 
  	m_gProfile = Profile::Instance();
  	m_gProfile->loadIni("Ini.ini");
@@ -74,7 +72,7 @@ MainFrame::MainFrame(wxWindow* parent, wxWindowID id /* = -1 */, const wxString&
 
 	CreateGUIControls();
 	Init();
-
+	
 	m_mutex = new wxMutex();
 
 }
@@ -134,6 +132,7 @@ void MainFrame::CreateGUIControls()
 	wxMessageDialog dlg(this, _("请选择当前工作模式："), _("设置"), wxYES_NO | wxCANCEL);
 	dlg.SetYesNoLabels(_("在线"), _("脱机"));
 	int i_status = dlg.ShowModal();
+	
 	if (i_status == wxID_YES)
 	{
 		PLAN_ONE = true;
@@ -149,7 +148,6 @@ void MainFrame::CreateGUIControls()
 		dlg.Destroy();
 		ExitSystem(false);
 	}
-
 
 	wxInitAllImageHandlers();
 
@@ -225,6 +223,11 @@ void MainFrame::CreateGUIControls()
 	m_mgr.Update();
 
 	RefreshPreviousData();
+
+
+	//l_pop = new PopUpDlg(this);
+	//l_pop->Show();
+
 }
 
 bool MainFrame::Init()
@@ -250,6 +253,7 @@ bool MainFrame::Init()
 	m_gModel->SetResultWinodw(m_result_panel);
 	m_gModel->SetProfile(m_gProfile);
 	m_gModel->SetListData(m_listData);
+
 
 	wxString str = "MainFrame初始化完成";
 	MyLog::LogMessage(str.mb_str());
@@ -326,18 +330,6 @@ void MainFrame::ExitSystem(bool flag)
 
 void MainFrame::RefreshPreviousData()
 {
-	//wxDateTime l_dt = wxDateTime::Now();
-	//wxString l_dtStr = l_dt.Format("%Y-%m-%d");
-
-	//wxString l_preDt = m_gProfile->GetDateTime();
-	//if (l_dtStr != l_preDt)
-	//{
-	//	m_gProfile->SetDateTime(l_dtStr);
-	//	m_gProfile->SetOkNum(0);
-	//	m_gProfile->SetNgNum(0);
-	//	m_gProfile->SetRatio(0);
-	//}
-
 	int l_previousOkNum = m_gProfile->GetOkNum();
 	m_result_panel->SetEditOK(l_previousOkNum);
 
@@ -382,13 +374,6 @@ void MainFrame::RefreshPreviousData()
 		m_hasBeenTest = new HasBeenTest;
 		m_hasBeenTest->OnSave(m_hasBeenStr);
 	}
-	//else
-	//{
-	//	m_hasBeenTest = HasBeenTest::OnLoad(m_hasBeenStr);
-	//	m_nameList = m_hasBeenTest->GetTestNameList();
-	//}
-
-	
 
 }
 
@@ -432,30 +417,23 @@ void MainFrame::OnLoadPhoto(wxCommandEvent &)
 //读取配方
 void MainFrame::OnReadRecipe(wxCommandEvent &event)
 {
-	wxString msg = "用户按下读取配方按钮";
-	MyLog::LogUser(msg.mb_str());
-
 	wxFileDialog dlg(this, _("选择配方"), "./recipe", "", "dat files (*.dat) | *.dat", wxFD_FILE_MUST_EXIST | wxFD_OPEN);
 	if (wxID_OK == dlg.ShowModal())
 	{
 		m_recipe_name = dlg.GetFilename().c_str();
 		m_recipe_path = dlg.GetPath().c_str();
-
-		msg = wxString::Format("确认配方为：%s, 路径为：%s", m_recipe_name, m_recipe_path);
-		MyLog::LogMessage(msg.mb_str());
+		//msg = wxString::Format("确认配方为：%s, 路径为：%s", m_recipe_name, m_recipe_path);
+		//MyLog::LogMessage(msg.mb_str());
 	}
 	else
 	{
-		msg = "用户取消选择配方";
-		MyLog::LogMessage(msg.mb_str());
-
+		//msg = "用户取消选择配方";
+		//MyLog::LogMessage(msg.mb_str());
 		dlg.Destroy();
 		return;
 	}
 	dlg.Destroy();
 
-	msg = "自动删除配方（删除原配方才能导入新配方）";
-	MyLog::LogMessage(msg.mb_str());
 	this->OnClearModel(event);
 
 	DataOrganization *d = DataOrganization::OnLoad(m_recipe_name, m_recipe_path);
@@ -463,8 +441,6 @@ void MainFrame::OnReadRecipe(wxCommandEvent &event)
 
 	wxMessageBox("读取成功");
 
-	msg = "配方读取成功";
-	MyLog::LogMessage(msg.mb_str());
 }
 
 void MainFrame::OnReadNoTestRecipe(wxCommandEvent &event)
@@ -544,6 +520,7 @@ void MainFrame::OnDrawSquareRect(wxCommandEvent &event)
 		m_menu_draw->Check(ID_MENU_DRAW_NOTEST_RECT, false);
 		m_is_draw_rect = true;
 		m_gModel->SetDrawRect(m_is_draw_rect, 2);
+
 	}
 	else
 	{
@@ -703,7 +680,8 @@ void MainFrame::OnSelfMotion(wxCommandEvent &)
 		}
 		m_AutomaticThread = new AutomaticDetetionThread(this);
 		m_AutomaticThread->SetImageModel(m_gModel);
-	//if (m_runExe)
+		m_AutomaticThread->SetPicesName(m_recipe_name);
+
 		if (_access(m_hasBeenPath, 0) == -1)
 		{
 			m_hasBeenTest = new HasBeenTest;
@@ -711,7 +689,6 @@ void MainFrame::OnSelfMotion(wxCommandEvent &)
 		}
 
 		{
-			m_runExe = false;
 			m_hasBeenTest = HasBeenTest::OnLoad(m_hasBeenStr);
 			m_nameList = m_hasBeenTest->GetTestNameList();
 			if (!m_nameList.empty())
@@ -885,7 +862,8 @@ void MainFrame::OnSavNoTesteModel(wxCommandEvent &)
 
 void MainFrame::OnNoPic(wxThreadEvent &)
 {
-	m_gModel->OnNoPic();
+	m_gModel->ShowPopDlg();
+	//m_gModel->OnNoPic();
 }
 
 void MainFrame::OnSendNGSingle(wxThreadEvent &)
@@ -897,4 +875,9 @@ void MainFrame::OnSuperDogShow(SuperDogEvent &event)
 {
 	wxMessageBox("加密狗被拔出，程序自动退出!");
 	ExitSystem(false);
+}
+
+void MainFrame::OnRecipeError(wxThreadEvent &)
+{
+	m_gModel->OnNoPic();
 }

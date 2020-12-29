@@ -18,6 +18,7 @@
 #include "./BO/DataElement.h"
 #include "./SuperDog/SuperDog.h"
 #include "./UserInterface/NoTestPanel.h"
+//#include "./UserInterface/PopUpDlg.h"
 
 using namespace std;
 
@@ -113,7 +114,7 @@ private:
 	bool m_runExe;
 	string m_hasBeenStr;
 	wxString m_hasBeenPath;
-
+	//PopUpDlg* l_pop;
 private:
 	void CreateGUIControls();
  	bool Init();
@@ -165,6 +166,6 @@ private:
 	//SuperDog
 	void OnSuperDogShow(SuperDogEvent &event);
 	//
-
+	void OnRecipeError(wxThreadEvent &);
 };
 

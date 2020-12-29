@@ -25,6 +25,7 @@
 #include "./Util/ForeignMaterialDetector.h"
 #include "./Util/Profile.h"
 #include "./Util/MyThreadPool.h"
+#include "./UserInterface/PopUpDlg.h"
 
 #define MAXIMAGENUM 900
 
@@ -100,7 +101,8 @@ private:
 	ModelPanelWindow			*m_model_panel;
 	ImagePool					*m_image_pool;
 	NoTestDlg* m_noTestDlg;
-
+	//PopUpDlg* m_popUpDlg;
+	AlignFailFrm* m_popUpDlg;
 	static MyThreadPool* m_threadPool;
 
 public:
@@ -130,6 +132,9 @@ public:
 
 	static void PostImageFun(PostPara& para, /*curl_interface& curlIf,*/ wxImage& tempImage);
 
+	void ShowPopDlg();
+	void HidePopDlg();
+	
 	inline void SetPreOkNum(int num)
 	{
 		m_preOkNum = num;

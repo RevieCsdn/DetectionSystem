@@ -37,7 +37,6 @@ private:
 //	static string		m_image_Name;
 };
 
-
 class ThreadPool
 {
 private:

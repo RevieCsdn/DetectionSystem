@@ -191,6 +191,7 @@ ImageModel::ImageModel(wxWindow *frame)
 	//Ng_num = 0;
 	//Ratio_Num = 0;
 	//m_runExe = false;
+	m_popUpDlg = nullptr;
 }
 
 ImageModel::~ImageModel()
@@ -236,6 +237,12 @@ ImageModel::~ImageModel()
 	if (m_threadPool != nullptr)
 	{
 		delete m_threadPool;
+		m_threadPool = nullptr;
+	}
+	if (m_popUpDlg != nullptr)
+	{
+		delete m_popUpDlg;
+		m_popUpDlg = nullptr;
 	}
 }
 void ImageModel::DeleteSocketThread()
@@ -1715,8 +1722,7 @@ bool ImageModel::OnSelfMotion()
 		msg = "准备停止自动检测";
 		MyLog::LogMessage(msg.mb_str());
 		m_testing_start_flag = false;
-// 		m_list_paper_file.clear();
-// 		m_list_file_struct.clear();
+
 		this->SetDrawRect(true, m_draw_pen_state);
 		m_model_panel->Show();
 	}
@@ -1944,7 +1950,6 @@ void ImageModel::PostImageFun(PostPara& para,/* curl_interface& curlIf,*/ wxImag
 
 	if (-2 == img_num || -1 == img_num)
 	{
-	//	wxs_NG_num << wx_vector_list.size();
 		unique_lock<mutex> l_lock(m_mutexPic);
 		m_aiNgNum = wx_vector_list.size();
 		l_lock.unlock();
@@ -1954,9 +1959,30 @@ void ImageModel::PostImageFun(PostPara& para,/* curl_interface& curlIf,*/ wxImag
 		unique_lock<mutex> l_lock(m_mutexPic);
 		m_aiNgNum += img_num;
 		l_lock.unlock();
-		//wxs_NG_num << img_num;
 	}
 
+}
+
+void ImageModel::ShowPopDlg()
+{
+	if (m_popUpDlg == nullptr)
+	{
+		m_popUpDlg = new AlignFailFrm(m_frame);
+		m_popUpDlg->OnShowFail();
+	}
+	else
+	{
+		m_popUpDlg->OnShowFail();
+	}
+}
+
+void ImageModel::HidePopDlg()
+{
+	if (m_popUpDlg != nullptr)
+	{
+		delete m_popUpDlg;
+		m_popUpDlg = nullptr;
+	}
 }
 
 void ImageModel::ChangeResult()
@@ -2481,8 +2507,7 @@ void ImageModel::OnNoPic()
 	msg = "准备停止自动检测";
 	MyLog::LogMessage(msg.mb_str());
 	m_testing_start_flag = false;
-	// 		m_list_paper_file.clear();
-	// 		m_list_file_struct.clear();
+
 	this->SetDrawRect(false, m_draw_pen_state);
 	m_model_panel->Show();
 

@@ -1,4 +1,7 @@
 #include "AutomaticDetetionThread.h"
+#include <thread>
+
+#include <chrono>  
 
 int	AutomaticDetetionThread::m_i_fin_file_num;
 
@@ -25,6 +28,8 @@ AutomaticDetetionThread::AutomaticDetetionThread(wxWindow *frame)
 
 	busy_info = NULL;
 	m_hasBeenTest = new HasBeenTest;
+	m_picesName = "";
+
 }
 
 AutomaticDetetionThread::~AutomaticDetetionThread()
@@ -81,8 +86,6 @@ void *AutomaticDetetionThread::Entry()
 		{
 			if (m_b_planone_run_flag)
 			{
-//				DWORD  time_5 = GetTickCount();
-
 				msg = "m_b_planone_run_flag开启";
 				MyLog::LogInfat(msg.c_str());
 
@@ -489,8 +492,17 @@ void *AutomaticDetetionThread::Entry()
 			const char* filePath = temp_path.c_str();
 			vector<string> files;
 			this->getJustCurrentDir(filePath, files);
+			//test 级别
 			for (vector<string>::iterator iter = files.begin(); iter != files.end(); iter++)
 			{
+				if (!strstr(m_picesName.c_str(), iter->c_str()))
+				{
+					wxMessageBox(_("配方模板与片子不一致！"), _("Error"));
+					wxQueueEvent(m_frame->GetEventHandler(),
+						new wxCommandEvent(wxEVT_THREAD, ID_RECIPE_ERROR));
+					return 0;
+				}
+
 				wxString wxs_filePath = "";
 				wxs_filePath = temp_path + iter->c_str() + "\\";
 				const char* cfilePath = wxs_filePath.c_str();
@@ -529,13 +541,12 @@ void *AutomaticDetetionThread::Entry()
 					wxDir::GetAllFiles(wxs_temp_path, &img_list, "*.jpg", wxDIR_DEFAULT);
 					m_delayImage = img_list;
 					if (img_list.size() == 0)
-					{
-						wxMessageBox(_("该目录下片子为空！"), _("Error"));
+					{ 
+						//wxMessageBox(_("该目录下片子为空！"), _("Error"));
 						//m_b_run_flag = false;
-						//wxQueueEvent(m_frame->GetEventHandler(),
-						//	new wxCommandEvent(wxEVT_THREAD, ID_NO_PIC));
-						//continue;
-						break;
+						wxQueueEvent(m_frame->GetEventHandler(),
+							new wxCommandEvent(wxEVT_THREAD, ID_NO_PIC));
+						continue;
 					}
 
 					if (!m_b_run_flag)

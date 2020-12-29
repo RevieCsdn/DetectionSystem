@@ -117,6 +117,9 @@
     <ClInclude Include="Util\MyThreadPool.h">
       <Filter>Util</Filter>
     </ClInclude>
+    <ClInclude Include="UserInterface\PopUpDlg.h">
+      <Filter>UserInterface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LNIApp.cpp">
@@ -199,6 +202,9 @@
     </ClCompile>
     <ClCompile Include="Util\MyThreadPool.cpp">
       <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\PopUpDlg.cpp">
+      <Filter>UserInterface</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -120,9 +120,6 @@ void ControlPanel::SetSelfMotionBtnStatus(bool flag)
 			m_btn_connect->Enable(true);
 			m_btn_connect->SetBackgroundColour(wxColor(255, 0, 0));
 		}
-// 
-// 		m_btn_detection->Enable(true);
-// 		m_btn_detection->SetBackgroundColour(wxColor(125, 255, 125));
 
 		m_btn_self_motion->Enable(true);
 		m_btn_self_motion->SetLabel("×Ô¶¯¼ì²â");
