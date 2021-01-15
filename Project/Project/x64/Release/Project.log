@@ -1,4 +1,4 @@
-﻿生成启动时间为 2021/1/12 17:14:32。
+﻿生成启动时间为 2021/1/15 10:39:56。
      1>项目“D:\MyFX\DetectionVer\Project\Project\Project.vcxproj”在节点 2 上(Build 个目标)。
      1>ClCompile:
          D:\VS\VS2015\VC\bin\x86_amd64\CL.exe /c /ID:\build_lib\opencv440_2015\include /ID:\build_lib\opencv440_2015\include\opencv2 /I"D:\build_lib\wxWidgets-3.1.0-64\include\msvc" /I"D:\build_lib\wxWidgets-3.1.0-64\include" /ID:\build_lib\CrashRpt\include /ID:\build_lib\curl\include /ID:\build_lib\json\include /ID:\build_lib\MIL\Include /ID:\build_lib\boost166\boost166 /ID:\build_lib\SuperDog /ID:\build_lib\MCMQWin32Api64 /I"D:\MyFX\tools\VLD\Visual Leak Detector\include" /Zi /nologo /W3 /WX- /O2 /Oi /D NDEBUG /D _WINDOWS /D WIN32_LEAN_AND_MEAN /D _CRT_SECURE_NO_WARNINGS /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /openmp /Fo"x64\Release\\" /Fd"x64\Release\vc140.pdb" /Gd /TP /errorReport:prompt UserInterface\AutomaticDetetionThread.cpp
@@ -71,4 +71,4 @@
 
 已成功生成。
 
-已用时间 00:00:15.23
+已用时间 00:01:56.12

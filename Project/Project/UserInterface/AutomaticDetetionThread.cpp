@@ -511,7 +511,7 @@ void *AutomaticDetetionThread::Entry()
 				vector<string> vfiles;
 				this->getJustCurrentDir(cfilePath, vfiles);
 
-				//在获取一级子目录
+				//在获取一级子目录(test)
 				for (vector<string>::iterator it = vfiles.begin(); it != vfiles.end(); it++)
 				{
 					m_i_fin_file_num = 0;
