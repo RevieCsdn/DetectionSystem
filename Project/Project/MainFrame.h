@@ -115,6 +115,8 @@ private:
 	string m_hasBeenStr;
 	wxString m_hasBeenPath;
 	//PopUpDlg* l_pop;
+	// read = false save = tr
+	bool m_isReadOrSave;
 private:
 	void CreateGUIControls();
  	bool Init();

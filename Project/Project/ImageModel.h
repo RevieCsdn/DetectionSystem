@@ -13,7 +13,7 @@
 #include "./Util/Profile.h"
 #include "./UserInterface/DetectionSetDlg.h"
 #include "./UserInterface/SocketCenter.h"
-#include "./Util/bumpDetector.h"
+//#include "./Util/bumpDetector.h"
 #include "./UserInterface/VerifyDlg.h"
 #include "./UserInterface/ResultDlgPanel.h"
 #include "json/json.h"
@@ -22,11 +22,10 @@
 #include "./BO/DataElement.h"
 #include "./UserInterface/ImagePool.h"
 #include "./Util/ThreadPool.h"
-#include "./Util/ForeignMaterialDetector.h"
 #include "./Util/Profile.h"
 #include "./Util/MyThreadPool.h"
 #include "./UserInterface/PopUpDlg.h"
-
+#include "./Util/ForeignMaterialDetector.h"
 #define MAXIMAGENUM 900
 
 class NoTestDlg;
@@ -285,6 +284,11 @@ public:
 	{
 		m_list_pic_data = m_list;
 	};
+
+	inline string GetDetectPath()
+	{
+		return m_detectPath;
+	};
 	//////////////
 	static void SetImageResult(wxString result);
 
@@ -378,15 +382,18 @@ private:
 	static int					m_excel_path_now_num;//Excel表里路径超链接位置
 	int							m_save_single;
 	
-//	static wxString				m_save_report_path;
+//static wxString				m_save_report_path;
 	int m_NGNum;
 	int m_OKNum;
 	int m_allPicesNum;
 	int m_radio;
+
+
 	//Parameter
 	static int					m_save_ic_binaryValue;
 	static int					m_save_ic_backValue;
 	static int					m_save_ic_medianBlurSize;
+
 	//Addr
 	int							m_save_read_addr;
 	wxString					m_save_read_type;
@@ -411,6 +418,7 @@ private:
 
 	string m_noTestRecName;
 	string m_noTestRecPath;
+	string m_detectPath;
 
 	static string				AI_pic_name;
 	static wxMutex				*m_mutex;
@@ -446,7 +454,6 @@ private:
 	static mutex m_mutexThread;
 	static mutex m_mutexArti;
 	static mutex m_mutexNum;
-
 
 	static list<PostPara> m_postParaVec;
 	static SingleImage* s_image_temp;

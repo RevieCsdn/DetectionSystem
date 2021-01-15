@@ -1,0 +1,3 @@
+2021-01-03 14:33:30: Connecting to AI FTP.
+2021-01-03 18:27:34: Error: Failed to copy the file 'Report\20210103\2021-01-03-AM.xls' to 'D:\\Report\20210103\2021-01-03-AM.xls' (error 32: 另一个程序正在使用此文件，进程无法访问。)
+2021-01-03 18:27:54: Error: Failed to copy the file 'Report\20210103\2021-01-03-AM.xls' to 'D:\\Report\20210103\2021-01-03-AM.xls' (error 32: 另一个程序正在使用此文件，进程无法访问。)

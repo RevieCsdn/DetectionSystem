@@ -1,0 +1,68 @@
+﻿生成启动时间为 2021/1/6 17:24:28。
+     1>项目“D:\MyFX\DetectionVer\Project\Project\Project.vcxproj”在节点 2 上(Build 个目标)。
+     1>ClCompile:
+         D:\VS\VS2015\VC\bin\CL.exe /c /I"D:\MyFX\tools\VLD\Visual Leak Detector\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Release\\" /Fd"Release\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\..\..\..\build_lib\json\src\json_reader.cpp ..\..\..\..\..\build_lib\json\src\json_value.cpp ..\..\..\..\..\build_lib\json\src\json_writer.cpp AlgorithmLog.cpp BO\DataElement.cpp ImageModel.cpp LNIApp.cpp MainFrame.cpp MyLog.cpp PreDefine.cpp SuperDog\errorprinter.cpp SuperDog\SuperDog.cpp UserInterface\AutomaticDetetionThread.cpp UserInterface\ControlPanel.cpp UserInterface\DetectionSetDlg.cpp UserInterface\ImagePool.cpp UserInterface\ListPanel.cpp UserInterface\NoTestPanel.cpp UserInterface\PopUpDlg.cpp UserInterface\Refreshwindow.cpp UserInterface\ResultDlgPanel.cpp UserInterface\SocketCenter.cpp UserInterface\VerifyDlg.cpp Util\MyThreadPool.cpp Util\PIS2.cpp Util\Profile.cpp Util\ThreadPool.cpp Util\UtilObject.cpp
+         json_reader.cpp
+     1>..\..\..\..\..\build_lib\json\src\json_reader.cpp(1): fatal error C1083: 无法打开包括文件: “json/reader.h”: No such file or directory
+         json_value.cpp
+     1>..\..\..\..\..\build_lib\json\src\json_value.cpp(2): fatal error C1083: 无法打开包括文件: “json/value.h”: No such file or directory
+         json_writer.cpp
+     1>..\..\..\..\..\build_lib\json\src\json_writer.cpp(1): fatal error C1083: 无法打开包括文件: “json/writer.h”: No such file or directory
+         AlgorithmLog.cpp
+     1>AlgorithmLog.cpp(67): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         C:\Program Files (x86)\Windows Kits\10\Include\10.0.10150.0\ucrt\time.h(505): note: 参见“localtime”的声明
+         DataElement.cpp
+     1>d:\myfx\detectionver\project\project\bo\DataElement.h(7): fatal error C1083: 无法打开包括文件: “wx/wx.h”: No such file or directory
+         ImageModel.cpp
+     1>d:\myfx\detectionver\project\project\ImageModel.h(2): fatal error C1083: 无法打开包括文件: “wx/wx.h”: No such file or directory
+         LNIApp.cpp
+     1>d:\myfx\detectionver\project\project\LNIApp.h(2): fatal error C1083: 无法打开包括文件: “wx/wx.h”: No such file or directory
+         MainFrame.cpp
+     1>d:\myfx\detectionver\project\project\MainFrame.h(2): fatal error C1083: 无法打开包括文件: “wx/wx.h”: No such file or directory
+         MyLog.cpp
+     1>MyLog.cpp(33): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         C:\Program Files (x86)\Windows Kits\10\Include\10.0.10150.0\ucrt\time.h(505): note: 参见“localtime”的声明
+     1>MyLog.cpp(74): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         C:\Program Files (x86)\Windows Kits\10\Include\10.0.10150.0\ucrt\time.h(505): note: 参见“localtime”的声明
+         PreDefine.cpp
+         errorprinter.cpp
+     1>d:\myfx\detectionver\project\project\superdog\errorprinter.h(8): fatal error C1083: 无法打开包括文件: “dog_api_cpp.h”: No such file or directory
+         SuperDog.cpp
+     1>d:\myfx\detectionver\project\project\superdog\SuperDog.h(9): fatal error C1083: 无法打开包括文件: “wx/wx.h”: No such file or directory
+         AutomaticDetetionThread.cpp
+     1>d:\myfx\detectionver\project\project\userinterface\AutomaticDetetionThread.h(2): fatal error C1083: 无法打开包括文件: “wx/wx.h”: No such file or directory
+         ControlPanel.cpp
+     1>d:\myfx\detectionver\project\project\userinterface\ControlPanel.h(2): fatal error C1083: 无法打开包括文件: “wx/wx.h”: No such file or directory
+         DetectionSetDlg.cpp
+     1>d:\myfx\detectionver\project\project\userinterface\DetectionSetDlg.h(2): fatal error C1083: 无法打开包括文件: “wx/wx.h”: No such file or directory
+         ImagePool.cpp
+     1>d:\myfx\detectionver\project\project\userinterface\ImagePool.h(6): fatal error C1083: 无法打开包括文件: “wx/wx.h”: No such file or directory
+         ListPanel.cpp
+     1>d:\myfx\detectionver\project\project\userinterface\ListPanel.h(2): fatal error C1083: 无法打开包括文件: “wx/wx.h”: No such file or directory
+         NoTestPanel.cpp
+     1>d:\myfx\detectionver\project\project\userinterface\NoTestPanel.h(2): fatal error C1083: 无法打开包括文件: “wx/wx.h”: No such file or directory
+         PopUpDlg.cpp
+     1>d:\myfx\detectionver\project\project\userinterface\PopUpDlg.h(2): fatal error C1083: 无法打开包括文件: “wx/wx.h”: No such file or directory
+         Refreshwindow.cpp
+     1>d:\myfx\detectionver\project\project\userinterface\Refreshwindow.h(2): fatal error C1083: 无法打开包括文件: “wx/wx.h”: No such file or directory
+         正在编译...
+         ResultDlgPanel.cpp
+     1>d:\myfx\detectionver\project\project\userinterface\ResultDlgPanel.h(3): fatal error C1083: 无法打开包括文件: “wx/wx.h”: No such file or directory
+         SocketCenter.cpp
+     1>d:\myfx\detectionver\project\project\userinterface\SocketCenter.h(9): fatal error C1083: 无法打开包括文件: “wx/wx.h”: No such file or directory
+         VerifyDlg.cpp
+     1>d:\myfx\detectionver\project\project\userinterface\VerifyDlg.h(2): fatal error C1083: 无法打开包括文件: “wx/wx.h”: No such file or directory
+         MyThreadPool.cpp
+         PIS2.cpp
+     1>d:\myfx\detectionver\project\project\util\PIS2.h(4): fatal error C1083: 无法打开包括文件: “MCMQWin32Api.h”: No such file or directory
+         Profile.cpp
+     1>d:\myfx\detectionver\project\project\util\Profile.h(2): fatal error C1083: 无法打开包括文件: “wx/fileconf.h”: No such file or directory
+         ThreadPool.cpp
+     1>d:\myfx\detectionver\project\project\util\ThreadPool.h(6): fatal error C1083: 无法打开包括文件: “wx/wx.h”: No such file or directory
+         UtilObject.cpp
+     1>d:\myfx\detectionver\project\project\util\UtilObject.h(6): fatal error C1083: 无法打开包括文件: “wx/wx.h”: No such file or directory
+     1>已完成生成项目“D:\MyFX\DetectionVer\Project\Project\Project.vcxproj”(Build 个目标)的操作 - 失败。
+
+生成失败。
+
+已用时间 00:00:07.99

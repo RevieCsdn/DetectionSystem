@@ -8,7 +8,7 @@
 #include "../Util/PreDefine.h"
 #include <list>
 #include <vector>
-
+#include "../Util/ForeignMaterialDetector.h"
 using namespace std;
 
 #define NOTESTRECT 3
@@ -23,12 +23,12 @@ typedef struct Imageproperties
 	cv::Mat Model_image;
 }Image_Properties;
 
-typedef struct RectPoint
-{
-	cv::Point LeftUpPoint;
-	cv::Point RightDownPoint;
-
-}RectPoint_t;
+//typedef struct RectPoint
+//{
+//	cv::Point LeftUpPoint;
+//	cv::Point RightDownPoint;
+//
+//}RectPoint_t;
 typedef struct NoTestImage
 {
 	string ImageName;

@@ -51,9 +51,10 @@ bool DataOrganization::OnSave(string v_path /* = "" */)
 	MyLog::LogMessage(msg.c_str());
 
 	return true;
-}
-/////////////////////////////////
 
+}
+
+/////////////////////////////////
 ListData::ListData(string path)
 {
 }

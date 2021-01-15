@@ -45,6 +45,8 @@ private:
 	wxString m_machineSn;
 	wxString m_msgQueenName;
 
+	wxString m_typeList;
+
 protected:
 	Profile();
 
@@ -64,6 +66,15 @@ public:
 		return m_machineSn;
 	};
 
+	inline void SetTypeList(wxString typeList)
+	{
+		m_typeList = typeList;
+		m_pFileConfig->Write(wxT("AI/m_typeList"), m_typeList);
+	};
+	wxString GetTypeList()
+	{
+		return m_typeList;
+	};
 	inline void SetMsgQueenName(wxString name)
 	{
 		m_msgQueenName = name;

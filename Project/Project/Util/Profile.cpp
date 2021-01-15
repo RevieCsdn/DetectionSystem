@@ -57,6 +57,7 @@ void Profile::loadIni(wxString path)
 	//AI
 	m_pFileConfig->Read(wxT("AI/m_b_is_use_ai"), &m_b_is_use_ai, false);
 	m_pFileConfig->Read(wxT("AI/m_wxs_ai_path"), &m_wxs_ai_path, "http://192.168.0.112:30003/predict");
+	m_pFileConfig->Read(wxT("AI/m_typeList"), &m_typeList, "0");
 	//Previous
 	m_pFileConfig->Read(wxT("PreviousData/m_okNum"), &m_okNum,0);
 	m_pFileConfig->Read(wxT("PreviousData/m_ngNum"), &m_ngNum,0);

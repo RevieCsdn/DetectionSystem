@@ -1,4 +1,5 @@
 #include "VerifyDlg.h"
+#include "../ImageModel.h"
 
 BEGIN_EVENT_TABLE(ImageFrame, wxFrame)
 	EVT_PAINT(ImageFrame::OnPaint)
@@ -661,18 +662,16 @@ void VerifyDlg::OnBtnPrevClick(wxCommandEvent &)
 //查看原图
 void VerifyDlg::OnBtnShowImage(wxCommandEvent &)
 {
-	wxString msg = "用户按下查看原图";
-	MyLog::LogUser(msg.mb_str());
-
 	if (!m_show_map_path.empty())
 	{
+		wxString l_wxPath = ImageModel::GetInstance(m_frame)->GetSavePath();
+		string l_strPath = string(l_wxPath.mb_str());
 		string sPicturePath = m_show_map_path.c_str();
-		string sPicturePara = "shimgvw.dll ImageView_Fullscreen " + sPicturePath;
 
-		ShellExecute(NULL, NULL, _("rundll32.exe"), _(sPicturePara), _("C:\\WINDOWS\\system32"), SW_SHOW);
-
-		msg = wxString::Format("已打开图片，路径为：%s", sPicturePara);
-		MyLog::LogMessage(msg.mb_str());
+		string l_allPath = l_strPath + "\\" + sPicturePath;
+		//string sPicturePara = "shimgvw.dll ImageView_Fullscreen " + sPicturePath;
+		//ShellExecute(NULL, NULL, _("rundll32.exe"), _(sPicturePath), _("C:\\WINDOWS\\system32"), SW_SHOW);
+		ShellExecute(NULL, (LPCWSTR)L"open", (LPCWSTR)_(l_allPath), (LPCWSTR)L"", (LPCWSTR)L"", SW_SHOW);
 	}
 
 }

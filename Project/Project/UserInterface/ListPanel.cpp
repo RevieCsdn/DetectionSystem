@@ -219,6 +219,7 @@ void ListPanel::ClearListData()
 	m_mylistctrl->DeleteAllItems();
 }
 
+
 void ListPanel::OnMouseLeftDouble(wxListEvent &event)
 {
 	wxString msg = "用户双击检测信息行，正在显示详细检测信息";
@@ -229,7 +230,8 @@ void ListPanel::OnMouseLeftDouble(wxListEvent &event)
 #ifdef __LIZI__
 	wxString temp_image_path = m_mylistctrl->GetItemText(wli_item, 5);
 #else
-	wxString temp_image_path = m_mylistctrl->GetItemText(wli_item, 4);
+	wxString temp_image_path = m_mylistctrl->GetItemText(wli_item, 1);
+	//wxString temp_image_path = m_mylistctrl->GetItemText(wli_item, 4);
 #endif // __LIZI__
 	wxString temp_Find_path;
 

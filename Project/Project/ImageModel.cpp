@@ -826,7 +826,8 @@ void ImageModel::OnDetection(bool send_result_flag, cv::Mat cvSrcmat, string ima
 				wxDir::GetAllFiles(temp_file_name, &img_list, "*.jpg", wxDIR_DEFAULT);
 				if (img_list.size() == 0)
 				{
-					wxMessageBox(_("该片子下没有图片"));
+					//wxMessageBox(_("该片子下没有图片"));
+					cout << "该片子下没有图片" << endl;
 				}
 				for (int i = 0; i < img_list.size(); i++)
 				{
@@ -902,6 +903,8 @@ void ImageModel::OnDetection(bool send_result_flag, cv::Mat cvSrcmat, string ima
 				cv::Mat markimg = it->image_mark.front();
 				int mark_x = it->image_point.front().x;
 				int mark_y = it->image_point.front().y;
+				float l_markX = mark_x;
+				float l_markY = mark_y;
 				Mat_model_image = it->Model_image.clone();
 				cout << temp_model_name << ":" << " x:" << mark_x << " y:" << mark_y << endl;
 
@@ -917,11 +920,13 @@ void ImageModel::OnDetection(bool send_result_flag, cv::Mat cvSrcmat, string ima
 						break;
 					}
 				}
-				
+
 				std::unique_lock<mutex> l_artiLock(m_mutexArti);
+				string l_imageName = string(temp_image_name.mb_str());
+				vecter_result.clear();
 				DWORD time1_for = GetTickCount();
-				ForeignMaterialDetector(markimg/*markIMG*/, /*131*/mark_x, /*436*/mark_y, 
-					image_data, Mat_model_image, m_save_ic_binaryValue, m_save_ic_medianBlurSize, l_rectPointVec,vecter_result);//新参数名为 m_save_ic_backValue
+				ForeignMaterialDetector(markimg/*markIMG*/, /*131*/mark_x, /*436*/mark_y,
+					image_data, Mat_model_image, m_save_ic_binaryValue, m_save_ic_medianBlurSize, l_rectPointVec, vecter_result, l_imageName);//新参数名为 m_save_ic_backValue
 				DWORD time2_for = GetTickCount();
 				cout << temp_image_name << ":  ForeignMaterialDetector:" << (time2_for - time1_for) / 1000.0 << "S" << endl;
 				l_artiLock.unlock();
@@ -938,7 +943,7 @@ void ImageModel::OnDetection(bool send_result_flag, cv::Mat cvSrcmat, string ima
 	//MyLog::LogMessage(msg.mb_str());
 
 //	vecter_result.clear();
-
+	cout << "vecter_result: " << vecter_result.size() << endl;
 	curl_interface curl_if(m_save_ai_path.ToStdString().c_str(), 15);
 	//int img_num = 0;
 	img_num = 0;
@@ -1247,7 +1252,8 @@ void ImageModel::OnDetection(bool send_result_flag, cv::Mat cvSrcmat, string ima
 	wxs_now_time = GetNowTime(1).c_str();
 	
 	wxString str_lizi_result = "OK";
-	file_save_path += "-HasBeenTesting";
+	//file_save_path += "-HasBeenTesting";
+	//file_save_path += ".jpg";
 	//判断片子的图片OK或者NG数
 	bool is_find_pic = false;
 	for (list<paper_file>::iterator it = m_list_paper_file.begin(); it != m_list_paper_file.end(); it++)
@@ -1463,10 +1469,10 @@ void ImageModel::OnDetection(bool send_result_flag, cv::Mat cvSrcmat, string ima
 	m_show_img_string = file_path;
 
 	//转移图片位置
-	//if (!wxDir::Exists(file_save_path))
-	//{
-	//	wxDir::Make(file_save_path);
-	//}
+	if (!wxDir::Exists(file_save_path))
+	{
+		wxDir::Make(file_save_path);
+	}
 
 	//if (wxCopyFile(image_path, file_path))
 	//{
@@ -2380,6 +2386,7 @@ void ImageModel::OnSaveModel()
 	{
 		string v_path = "";
 		v_path = dlg.GetPath().c_str();
+		m_detectPath = v_path;
 
 		if (true == d_save->OnSave(v_path))
 		{
@@ -2529,7 +2536,7 @@ void ImageModel::SendReadSingleOver()
 
 	m_socket_center->SendMsg_Write(5601, "D", 1, data); 
 }
-
+//报表
 void ImageModel::OnSaveFailurePics(bool result, int num)
 {
 	wxString wxs_now_report_path = "";
@@ -2541,9 +2548,9 @@ void ImageModel::OnSaveFailurePics(bool result, int num)
 	char time_A_or_P[64] = { 0 };
 	time_t t = time((NULL));
 	tm *tm_cur = localtime(&t);
-	if (tm_cur->tm_hour < 8 || tm_cur->tm_hour > 19)
+	if (tm_cur->tm_hour < 8 || tm_cur->tm_hour > 20)
 	{
-		t = t - 12 * 60 * 60;
+		//t = t - 12 * 60 * 60;
 		strftime(time_A_or_P, sizeof(time_A_or_P), "%Y-%m-%d-PM.xls", localtime(&t));
 	}
 	else
@@ -2686,6 +2693,10 @@ std::string ImageModel::SplitString(const string& line, vector<string>& vectorSt
 
 		l_index1 = l_index + delimiter.size();
 		l_index = line.find(delimiter, l_index1);
+	}
+	if (l_index1 != line.length())
+	{
+		vectorStr.push_back(line.substr(l_index1));
 	}
 	string l_count = vectorStr[2];
 
@@ -3037,6 +3048,7 @@ int ImageModel::Task1(PVOID p)
 	DWORD  time_2 = GetTickCount();
 	cout << temp_image_name << ": ===Tasktime=== :" << (time_2 - time_1) / 1000.0 << "s" << endl;
 	
+
 	Lock_(true);
 	m_now_detection_file_num++;
 	if (m_now_detection_file_num == m_now_detection_file_all_num)

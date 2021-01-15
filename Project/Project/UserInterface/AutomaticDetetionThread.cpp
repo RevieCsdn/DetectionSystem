@@ -29,6 +29,7 @@ AutomaticDetetionThread::AutomaticDetetionThread(wxWindow *frame)
 	busy_info = NULL;
 	m_hasBeenTest = new HasBeenTest;
 	m_picesName = "";
+	m_isDetect = false;
 
 }
 
@@ -74,12 +75,12 @@ void *AutomaticDetetionThread::Entry()
 		{
 			msg = "AutomaticDetetionThread TestDestroy() error";
 			MyLog::LogError(msg.c_str());
-
 			wxMessageBox(msg);
 			break;
 		}
 
 		wxArrayString img_list;
+		wxArrayString l_dirArray;
 		wxString temp_path = "";
 
 		if (PLAN_ONE)
@@ -273,6 +274,7 @@ void *AutomaticDetetionThread::Entry()
 #endif // __READ_CSV__
 
 					wxDir::GetAllFiles(wxs_temp_path, &img_list, "*.jpg", wxDIR_DEFAULT);
+					//wxDir::GetAllFiles(wxs_temp_path, &l_dirArray, "*.jpg", wxDIR_DIRS);
 
 					if (img_list.size() == 0)
 					{
@@ -415,8 +417,8 @@ void *AutomaticDetetionThread::Entry()
 						}
 						if (is_find) continue;
 
-						msg = "开始读取图并显示";
-						MyLog::LogMessage(msg.c_str());
+						//msg = "开始读取图并显示";
+						//MyLog::LogMessage(msg.c_str());
 
 						if (!m_b_run_flag)
 						{
@@ -518,6 +520,11 @@ void *AutomaticDetetionThread::Entry()
 					wxString wxs_temp_path = "";
 					wxs_temp_path = wxs_filePath + it->c_str()+ "\\";
 
+					//todo
+					const char* l_hasBeenDir = wxs_temp_path.c_str();
+					vector<string> l_hasBeenVec;
+					this->getJustCurrentDir(l_hasBeenDir, l_hasBeenVec);
+					
 					wxDir dir_demp(wxs_temp_path);
 					if (!dir_demp.Open(wxs_temp_path))
 					{
@@ -538,28 +545,24 @@ void *AutomaticDetetionThread::Entry()
 						return 0;
 					}
 					Sleep(10);
-					wxDir::GetAllFiles(wxs_temp_path, &img_list, "*.jpg", wxDIR_DEFAULT);
-					m_delayImage = img_list;
-					if (img_list.size() == 0)
-					{ 
-						//wxMessageBox(_("该目录下片子为空！"), _("Error"));
-						//m_b_run_flag = false;
-						wxQueueEvent(m_frame->GetEventHandler(),
-							new wxCommandEvent(wxEVT_THREAD, ID_NO_PIC));
-						continue;
-					}
+					wxArrayString img_list1;
+					wxDir::GetAllFiles(wxs_temp_path, &img_list1, "*.jpg", wxDIR_FILES);
+					//cout << "img_list======= " << img_list1.size() << endl;
+					m_delayImage = img_list1;
+					//if (img_list1.size() == 0)
+					//{ 
+					//	wxQueueEvent(m_frame->GetEventHandler(),
+					//		new wxCommandEvent(wxEVT_THREAD, ID_NO_PIC));
+					//	continue;
+					//}
 
 					if (!m_b_run_flag)
 					{
 						return 0;
 					}
 					//m_gmodel->SendReadSingleOver();	//发送读取成功信号，用于PLC做清零操作
-					for (size_t i_img = 0; i_img < img_list.size(); i_img++)
+					for (size_t i_img = 0; i_img < img_list1.size(); i_img++)
 					{
-						if (!m_b_run_flag)
-						{
-							return 0;
-						}
 // 	#ifdef __LIZI__ 
 // 
 // 						if (strstr(img_list[i_img], "-HasBeenTesting")/* || strstr(img_list[i_img], "XU02_")*/)
@@ -661,38 +664,59 @@ void *AutomaticDetetionThread::Entry()
 // 							}
 // 						}
 //	#else
-						if (strstr(img_list[i_img], "-HasBeenTesting") || strstr(img_list[i_img], "_SUB_"))
+						//cout << "img_list[i_img]: " << img_list[i_img] << endl;
+						if (/*strstr(img_list[i_img], "-HasBeenTesting") ||*/ strstr(img_list1[i_img], "_SUB_"))
 						{
 							continue;
 						}
 //	#endif
 						wxString strtemp;
 
-						strtemp = img_list[i_img].substr(m_gmodel->GetTestingPath().size() + 1, img_list[i_img].size());
+						strtemp = img_list1[i_img].substr(m_gmodel->GetTestingPath().size() + 1, img_list1[i_img].size());
 						string str = strtemp.c_str();
-						
-						//判断当前图是否检测过
-						bool is_find = false;
-						for (list<string>::iterator it = m_list_is_dection.begin(); it != m_list_is_dection.end(); it++)
+
+						vector<string> l_strVec;
+						ImageModel::SplitString(str, l_strVec, "\\");
+						string l_subImage = "";
+						if (!l_strVec.empty())
 						{
-							if (it->c_str() == str)
+							string l_imageName = "";
+							int l_index = l_strVec.size() - 1;
+							l_imageName = l_strVec[l_index];
+							int l_size = l_imageName.size() - 4;
+							l_subImage = l_imageName.substr(0, l_size);
+						}
+
+						m_isDetect = false;
+						for (vector<string>::iterator it = l_hasBeenVec.begin(); it != l_hasBeenVec.end(); it++)
+						{
+							if (l_subImage == it->c_str())
 							{
-								is_find = true;
+								m_isDetect = true;
 								break;
 							}
 						}
-						if (is_find) continue;
-						msg = "开始读取图并显示";
-						MyLog::LogMessage(msg.c_str());
 
-						if (!m_b_run_flag)
+						if (m_isDetect)
 						{
-							return 0;
+							continue;
 						}
-						//DWORD  time_1 = GetTickCount();
 
+						//判断当前图是否检测过
+						//bool is_find = false;
+						//for (list<string>::iterator it = m_list_is_dection.begin(); it != m_list_is_dection.end(); it++)
+						//{
+						//	if (it->c_str() == str)
+						//	{
+						//		is_find = true;
+						//		break;
+						//	}
+						//}
+						//if (is_find) continue;
+
+						//msg = "开始读取图并显示";
 						pic_data temp_pic_data;
-						temp_pic_data.image_path = cv::String(img_list[i_img]);
+						temp_pic_data.image_path = cv::String(img_list1[i_img]);
 						temp_pic_data.image_name = str;
 						cv::Mat temp_image_data = cv::imread(temp_pic_data.image_path, 0);
 						temp_pic_data.image_data = temp_image_data;
@@ -702,15 +726,13 @@ void *AutomaticDetetionThread::Entry()
 
 						m_thread_pool->QueueTaskItem(ImageModel::Task1, NULL, AutomaticDetetionThread::SetFinFileFlag);
 
-						if (!m_b_run_flag)
-						{
-							return 0;
-						}
 						m_list_is_dection.push_back(str);
-						m_hasBeenTest->SetTestNameList(m_list_is_dection);
-						m_hasBeenTest->OnSave("./HasBeenTest.dat");
+						//m_hasBeenTest->SetTestNameList(m_list_is_dection);
+						//m_hasBeenTest->OnSave("./HasBeenTest.dat");
 						i_file_num++;
-					}
+
+					}//检测图片目录
+
 					//防止占用过多cup资源
 					while (m_i_fin_file_num < i_file_num)
 					{

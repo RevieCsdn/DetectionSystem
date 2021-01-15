@@ -99,6 +99,9 @@ private:
 	wxArrayString m_delayImage;
 	HasBeenTest* m_hasBeenTest;
 	string m_picesName;
+	wxMutex m_detectMutex;
+
+	bool m_isDetect;
 
 };
 

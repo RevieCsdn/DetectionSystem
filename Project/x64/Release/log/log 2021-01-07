@@ -1,0 +1,5 @@
+2021-01-07 08:20:02: Error: Directory 'E:\yiwu_Excel\Report\' couldn't be created (error 3: 系统找不到指定的路径。)
+2021-01-07 08:20:02: Error: Directory 'E:\yiwu_Excel\Report\20210107\' couldn't be created (error 3: 系统找不到指定的路径。)
+2021-01-07 08:20:02: Error: Failed to copy the file 'Report\20210107\2021-01-07-AM.xls' to 'E:\yiwu_Excel\Report\20210107\2021-01-07-AM.xls' (error 3: 系统找不到指定的路径。)
+2021-01-07 08:20:02: Error: Directory 'E:\yiwu_Excel\Report\' couldn't be created (error 3: 系统找不到指定的路径。)
+2021-01-07 08:20:02: Error: Failed to copy the file 'Record\record.xls' to 'E:\yiwu_Excel\Report\record.xls' (error 3: 系统找不到指定的路径。)

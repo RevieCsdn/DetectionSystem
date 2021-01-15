@@ -72,9 +72,6 @@
     <ClInclude Include="UserInterface\VerifyDlg.h">
       <Filter>UserInterface</Filter>
     </ClInclude>
-    <ClInclude Include="Util\bumpDetector.h">
-      <Filter>Util</Filter>
-    </ClInclude>
     <ClInclude Include="Util\PreDefine.h">
       <Filter>Util</Filter>
     </ClInclude>

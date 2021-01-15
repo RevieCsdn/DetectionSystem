@@ -62,17 +62,18 @@ MainFrame::MainFrame(wxWindow* parent, wxWindowID id /* = -1 */, const wxString&
 	m_is_draw_rect = false;
 	m_hasBeenTest = nullptr;
 	m_runExe = true;
+	m_isReadOrSave = false;
 	//l_pop = nullptr;
 
  	m_gProfile = Profile::Instance();
  	m_gProfile->loadIni("Ini.ini");
+
 
 	m_gModel = NULL;
 	m_strPath = "";
 
 	CreateGUIControls();
 	Init();
-	
 	m_mutex = new wxMutex();
 
 }
@@ -224,10 +225,6 @@ void MainFrame::CreateGUIControls()
 
 	RefreshPreviousData();
 
-
-	//l_pop = new PopUpDlg(this);
-	//l_pop->Show();
-
 }
 
 bool MainFrame::Init()
@@ -253,7 +250,6 @@ bool MainFrame::Init()
 	m_gModel->SetResultWinodw(m_result_panel);
 	m_gModel->SetProfile(m_gProfile);
 	m_gModel->SetListData(m_listData);
-
 
 	wxString str = "MainFrame初始化完成";
 	MyLog::LogMessage(str.mb_str());
@@ -413,6 +409,10 @@ void MainFrame::OnLoadPhoto(wxCommandEvent &)
 	}
 	dlg.Destroy();
 	m_refresh_window->SetFocus();
+	//string sPicturePath = "D:\\PR\\test.jpg";
+	//ShellExecute(NULL, (LPCWSTR)L"open", (LPCWSTR)_(sPicturePath), (LPCWSTR)L"", (LPCWSTR)L"", SW_SHOW);
+//	ShellExecute(NULL, (LPCWSTR)L"open", (LPCWSTR)L"iexplore", (LPCWSTR)L"D:\\PR\\test.jpg", NULL, SW_SHOWNORMAL);
+//	ShellExecute(NULL, (LPCWSTR)L"open", (LPCWSTR)L"D:\\PR\\test.jpg", (LPCWSTR)L"", (LPCWSTR)L"", SW_SHOW);
 }
 //读取配方
 void MainFrame::OnReadRecipe(wxCommandEvent &event)
@@ -420,6 +420,7 @@ void MainFrame::OnReadRecipe(wxCommandEvent &event)
 	wxFileDialog dlg(this, _("选择配方"), "./recipe", "", "dat files (*.dat) | *.dat", wxFD_FILE_MUST_EXIST | wxFD_OPEN);
 	if (wxID_OK == dlg.ShowModal())
 	{
+		m_isReadOrSave = true;
 		m_recipe_name = dlg.GetFilename().c_str();
 		m_recipe_path = dlg.GetPath().c_str();
 		//msg = wxString::Format("确认配方为：%s, 路径为：%s", m_recipe_name, m_recipe_path);
@@ -582,20 +583,27 @@ void MainFrame::OnCleraHistoricalData(wxCommandEvent &)
 	int l_status = l_dlg.ShowModal();
 	if (l_status == wxID_YES)
 	{
-		m_result_panel->SetEditOK(0);
-		m_result_panel->SetEditNG(0);
-		m_result_panel->SetEditRatio(0);
+		if (_access("./listData.dat", 0) != -1)
+		{
+			m_result_panel->SetEditOK(0);
+			m_result_panel->SetEditNG(0);
+			m_result_panel->SetEditRatio(0);
 
-		m_gModel->SetPreOkNum(0);
-		m_gModel->SetPreNgNum(0);
-		m_gModel->ClearPaperFileList();
-		m_gModel->SetResultLabel(0, 0, 0);
+			m_gModel->SetPreOkNum(0);
+			m_gModel->SetPreNgNum(0);
+			m_gModel->ClearPaperFileList();
+			m_gModel->SetResultLabel(0, 0, 0);
 
-		m_listData->ClearData();
-		m_listData->ClearMapData();
-		m_listData->OnSave("listData.dat");
-		m_list_panel->SetRowIndex(0);
-		m_list_panel->ClearListData();
+			m_listData->ClearData();
+			m_listData->ClearMapData();
+			m_listData->OnSave("./listData.dat");
+			m_list_panel->SetRowIndex(0);
+			m_list_panel->ClearListData();
+
+			wxRemoveFile("./listData.dat");
+
+		}
+
 	}
 
 	else if (l_status == wxID_NO)
@@ -628,7 +636,7 @@ void MainFrame::OnDetection(wxCommandEvent &)
 	int temp_mat_width = m_gModel->GetMatWidth();
 	int temp_mat_height = m_gModel->GetMatHeight();
 
-// 	m_gModel->OnDetection(false, temp_cvSrcmat, temp_image_name1, temp_image_path, temp_mat_width, temp_mat_height);
+// m_gModel->OnDetection(false, temp_cvSrcmat, temp_image_name1, temp_image_path, temp_mat_width, temp_mat_height);
  
  	if (m_verifyDlg)
  	{
@@ -638,7 +646,6 @@ void MainFrame::OnDetection(wxCommandEvent &)
  	msg = "正在生成检测后的缺陷详细信息";
  	MyLog::LogMessage(msg.mb_str());
  
-
  	wxString wxs_now_time;
  	wxs_now_time = m_gModel->GetNowTime(1).c_str();
  
@@ -654,8 +661,6 @@ void MainFrame::OnDetection(wxCommandEvent &)
  	m_verifyDlg->SetInsTime(time(NULL));
  	m_verifyDlg->Show();
  
- 	msg = "VerifyDlg缺陷界面生成成功";
- 	MyLog::LogMessage(msg.mb_str());
 }
 void MainFrame::OnSelfMotion(wxCommandEvent &)
 {
@@ -680,22 +685,29 @@ void MainFrame::OnSelfMotion(wxCommandEvent &)
 		}
 		m_AutomaticThread = new AutomaticDetetionThread(this);
 		m_AutomaticThread->SetImageModel(m_gModel);
-		m_AutomaticThread->SetPicesName(m_recipe_name);
-
-		if (_access(m_hasBeenPath, 0) == -1)
+		if (m_isReadOrSave)
 		{
-			m_hasBeenTest = new HasBeenTest;
-			m_hasBeenTest->OnSave(m_hasBeenStr);
+			m_AutomaticThread->SetPicesName(m_recipe_name);
 		}
-
+		else
 		{
-			m_hasBeenTest = HasBeenTest::OnLoad(m_hasBeenStr);
-			m_nameList = m_hasBeenTest->GetTestNameList();
-			if (!m_nameList.empty())
-			{
-				m_AutomaticThread->SetDectionList(m_nameList);
-			}
+			m_AutomaticThread->SetPicesName(m_gModel->GetDetectPath());
 		}
+		
+		//if (_access(m_hasBeenPath, 0) == -1)
+		//{
+		//	m_hasBeenTest = new HasBeenTest;
+		//	m_hasBeenTest->OnSave(m_hasBeenStr);
+		//}
+
+		//{
+		//	m_hasBeenTest = HasBeenTest::OnLoad(m_hasBeenStr);
+		//	m_nameList = m_hasBeenTest->GetTestNameList();
+		//	if (!m_nameList.empty())
+		//	{
+		//		m_AutomaticThread->SetDectionList(m_nameList);
+		//	}
+		//}
 
 		m_AutomaticThread->Create();
 		m_AutomaticThread->Run();
@@ -842,6 +854,7 @@ void MainFrame::OnClearModel(wxCommandEvent &)
 //保存模版
 void MainFrame::OnSaveModel(wxCommandEvent &)
 {
+	m_isReadOrSave = false;
 	m_gModel->OnSaveModel();
 }
 
